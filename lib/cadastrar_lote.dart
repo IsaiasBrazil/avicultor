@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TelaCadastroLote extends StatefulWidget {
   const TelaCadastroLote({Key? key}) : super(key: key);
@@ -15,10 +16,10 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
         centerTitle: true,
         title: const Text("Cadastro de Lote"),
       ),
-      body: const Column(
+      body: Column(
         children: [
           // Primeira linha com dois pares de label+input
-          Row(
+          const Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
@@ -79,12 +80,12 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
             children: [
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Terceiro label
-                      Text(
+                      const Text(
                         'Quantidade de aves:',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -92,8 +93,13 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                         ),
                       ),
                       // Terceiro campo de input
-                      TextField(
-                        decoration: InputDecoration(
+                      // Regex sendo usado para forçar o usuário a digitar apenas números no input 
+                      TextFormField(
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           floatingLabelBehavior: FloatingLabelBehavior.never,
                         ),
@@ -102,7 +108,7 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                   ),
                 ),
               ),
-              Expanded(
+              const Expanded(
                 child: Padding(
                   padding: EdgeInsets.all(16.0),
                   child: Column(
@@ -130,7 +136,7 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
             ],
           ),
           // Terceira linha com um par de label+input
-          Row(
+          const Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
