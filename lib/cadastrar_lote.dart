@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class TelaCadastroLote extends StatefulWidget {
   const TelaCadastroLote({Key? key}) : super(key: key);
@@ -9,6 +10,8 @@ class TelaCadastroLote extends StatefulWidget {
 }
 
 class _TelaCadastroLoteState extends State<TelaCadastroLote> {
+  TextEditingController _data = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,10 +40,9 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                         ),
                       ),
                       // Primeiro campo de input
-                      TextField(
+                      TextFormField(
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
                         ),
                       ),
                     ],
@@ -63,13 +65,14 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                       ),
                       // Segundo campo de input
                       TextFormField(
-                        keyboardType: TextInputType.numberWithOptions(decimal: true),
+                        keyboardType:
+                            TextInputType.numberWithOptions(decimal: true),
                         inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'^\d+\.?\d{0,2}'))
                         ],
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
                         ),
                       ),
                     ],
@@ -97,7 +100,7 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                         ),
                       ),
                       // Terceiro campo de input
-                      // Regex sendo usado para forçar o usuário a digitar apenas números no input 
+                      // Regex sendo usado para forçar o usuário a digitar apenas números no input
                       TextFormField(
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
@@ -105,7 +108,6 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                         ],
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
                         ),
                       ),
                     ],
@@ -128,10 +130,23 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                       ),
                       // Quarto campo de input
                       TextFormField(
+                        controller: _data,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          //icon: Icon(Icons.calendar_today_rounded)
                         ),
+                        onTap: () async {
+                          DateTime? dataSelecionada = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(2000),
+                              lastDate: DateTime(2101));
+                          if (dataSelecionada != null) {
+                            setState(() {
+                              _data.text = DateFormat('dd/MM/yyyy').format(dataSelecionada);
+                            });
+                          }
+                        },
                       ),
                     ],
                   ),
@@ -158,10 +173,9 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                         ),
                       ),
                       // Quinto campo de input
-                      TextField(
+                      TextFormField(
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
                         ),
                       ),
                     ],
