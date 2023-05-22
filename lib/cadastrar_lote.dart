@@ -19,7 +19,7 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
       body: Column(
         children: [
           // Primeira linha com dois pares de label+input
-          const Row(
+          Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
@@ -30,7 +30,7 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                     children: [
                       // Primeiro label
                       Text(
-                        'Número do Lote:',
+                        'Número do lote:',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0,
@@ -62,7 +62,11 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                         ),
                       ),
                       // Segundo campo de input
-                      TextField(
+                      TextFormField(
+                        keyboardType: TextInputType.numberWithOptions(decimal: true),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
+                        ],
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -108,7 +112,7 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                   ),
                 ),
               ),
-              const Expanded(
+              Expanded(
                 child: Padding(
                   padding: EdgeInsets.all(16.0),
                   child: Column(
@@ -123,7 +127,7 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                         ),
                       ),
                       // Quarto campo de input
-                      TextField(
+                      TextFormField(
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -136,7 +140,7 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
             ],
           ),
           // Terceira linha com um par de label+input
-          const Row(
+          Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
