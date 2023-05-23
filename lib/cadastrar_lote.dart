@@ -21,11 +21,13 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Cadastro de Lote"),
+        title: const Text(
+          'Cadastro de Lote',
+          style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34, color: Colors.black),
+        ),
       ),
       body: Column(
         children: [
-          // Primeira linha com dois pares de label+input
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -43,13 +45,12 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                   keyboardType: TextInputType.numberWithOptions(decimal: true),
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(
-                        RegExp(r'^\d+\.?\d{0,2}')),
+                        RegExp(r'^\d{0,4}\.?\d{0,2}$')),
                   ],
                 ),
               ),
             ],
           ),
-          // Segunda linha com dois pares de label+input
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -59,7 +60,7 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                   controller: qtDeAves,
                   keyboardType: TextInputType.number,
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    FilteringTextInputFormatter.allow(RegExp(r'^\d{0,4}$')),
                   ],
                 ),
               ),

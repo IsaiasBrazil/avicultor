@@ -23,15 +23,15 @@ class _CampoState extends State<Campo> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(12.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             widget.nome,
             style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16.0,
+              fontSize: 22,
+              fontFamily: 'BebasNeue',
             ),
           ),
           TextFormField(
