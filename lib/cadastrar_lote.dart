@@ -20,10 +20,11 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 100,
         centerTitle: true,
         title: const Text(
           'Cadastro de Lote',
-          style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34, color: Colors.black),
+          style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34),
         ),
       ),
       body: Column(

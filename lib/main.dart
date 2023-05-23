@@ -7,6 +7,7 @@ void main() {
   runApp(
     MaterialApp(
         theme: ThemeData(primarySwatch: Colors.green),
-        home: const TelaCadastroLote()),
+        debugShowCheckedModeBanner: false,
+        home: const Home()),
   );
 }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tcc/widget_drawer.dart';
+
+import 'widget_listtile.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -6,13 +9,16 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Informações Gerais',
-          style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34),
+        appBar: AppBar(
+          toolbarHeight: 100,
+          centerTitle: true,         
+          title: const Text(
+            'Informações dos sensores',
+            style: TextStyle(
+                fontFamily: 'BebasNeue', fontSize: 32),
+          ),
         ),
-      ),
-    );
+        drawer: MenuLateral(titulo: 'AVICONTROL'),
+        );
   }
 }
