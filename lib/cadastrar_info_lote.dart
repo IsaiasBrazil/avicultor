@@ -103,7 +103,7 @@ class _TelaCadastroInfoLoteState extends State<TelaCadastroInfoLote> {
               ),
               Expanded(
                 child: Campo(
-                  nome: 'Descrição',
+                  nome: 'Descrição:',
                   controller: descricao,
                   keyboardType: TextInputType.name,
                 ),

@@ -30,14 +30,14 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
             children: [
               Expanded(
                 child: Campo(
-                  nome: 'Código',
+                  nome: 'Código:',
                   controller: codigoGalpao,
                   keyboardType: TextInputType.text,
                 ),
               ),
               Expanded(
                 child: Campo(
-                  nome: 'Descrição',
+                  nome: 'Descrição:',
                   controller: descricaoGalpao,
                   keyboardType: TextInputType.text,
                 ),
