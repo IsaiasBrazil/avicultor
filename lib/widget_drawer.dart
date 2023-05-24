@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tcc/cadastrar_galpao.dart';
 import 'package:tcc/cadastrar_lote.dart';
 import 'home.dart';
 import 'widget_listtile.dart';
@@ -33,6 +34,9 @@ class MenuLateral extends StatelessWidget {
           ),
           ListTileCustom(
             nome: 'Cadastro de galpões',
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => TelaCadastroGalpao()));
+            },
           ),
           ListTileCustom(
             nome: 'Cadastro de Lotes',
