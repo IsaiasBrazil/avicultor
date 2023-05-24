@@ -44,6 +44,7 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                 child: Campo(
                   nome: 'Código do galpão:',
                   controller: codigoDoGalpao,
+                  keyboardType: TextInputType.text,
                 ),
               )
             ],
@@ -88,6 +89,7 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                 child: Campo(
                   nome: 'Descrição:',
                   controller: descricao,
+                  keyboardType: TextInputType.text,
                 ),
               ),
             ],
