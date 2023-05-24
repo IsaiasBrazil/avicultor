@@ -23,10 +23,12 @@ class MenuLateral extends StatelessWidget {
               fontFamily: 'BebasNeue', 
               fontSize: 28, color: Colors.white),
           ))),
+          ListTileCustom(nome: 'Página inicial'),
+          ListTileCustom(nome: 'Cadastro de galpões'),
           ListTileCustom(nome: 'Cadastro de Lotes'),
           ListTileCustom(nome: 'Controle de Lotes'),
-          ListTileCustom(nome: 'Estoque de ração'),
-          ListTileCustom(nome: 'Sensor')
+          ListTileCustom(nome: 'Estoque de Ração'),
+          ListTileCustom(nome: 'Cadastro de Sensores')
         ],
       ),
     ));

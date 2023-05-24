@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tcc/cadastrar_lote.dart';
-
 import 'home.dart';
 
 void main() {
