@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tcc/cadastrar_galpao.dart';
 import 'package:tcc/cadastrar_info_lote.dart';
 import 'package:tcc/cadastrar_lote.dart';
+import 'cadastrar_sensor.dart';
 import 'home.dart';
 import 'widget_listtile.dart';
 
@@ -52,12 +53,19 @@ class MenuLateral extends StatelessWidget {
           ListTileCustom(
             nome: 'Controle de Lotes',
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => TelaCadastroInfoLote()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TelaCadastroInfoLote()));
             },
           ),
           ListTileCustom(nome: 'Estoque de Ração'),
-          ListTileCustom(nome: 'Cadastro de Sensores')
+          ListTileCustom(
+            nome: 'Cadastro de Sensores',
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => TelaCadastroSensor()));
+            },
+          )
         ],
       ),
     ));
