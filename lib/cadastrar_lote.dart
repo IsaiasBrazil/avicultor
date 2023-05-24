@@ -11,10 +11,11 @@ class TelaCadastroLote extends StatefulWidget {
 }
 
 class _TelaCadastroLoteState extends State<TelaCadastroLote> {
-  TextEditingController numeroDoLote = TextEditingController();
-  TextEditingController peso = TextEditingController();
-  TextEditingController qtDeAves = TextEditingController();
+  TextEditingController codigoDoLote = TextEditingController();
+  TextEditingController codigoDoGalpao = TextEditingController();
+  TextEditingController idade = TextEditingController();
   TextEditingController data = TextEditingController();
+  TextEditingController descricao = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,22 +35,17 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
             children: [
               Expanded(
                 child: Campo(
-                  nome: 'Número do lote:',
-                  controller: numeroDoLote,
+                  nome: 'Código do lote:',
+                  controller: codigoDoLote,
                   keyboardType: TextInputType.text,
                 ),
               ),
               Expanded(
                 child: Campo(
-                  nome: 'Peso:',
-                  controller: peso,
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(
-                        RegExp(r'^\d{0,4}\.?\d{0,2}$')),
-                  ],
+                  nome: 'Código do galpão:',
+                  controller: codigoDoGalpao,
                 ),
-              ),
+              )
             ],
           ),
           Row(
@@ -57,12 +53,10 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
             children: [
               Expanded(
                 child: Campo(
-                  nome: 'Quantidade de aves:',
-                  controller: qtDeAves,
+                  nome: 'Idade:',
+                  controller: idade,
                   keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r'^\d{0,4}$')),
-                  ],
+                  inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))],
                 ),
               ),
               Expanded(
@@ -83,6 +77,17 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                       });
                     }
                   },
+                ),
+              ),
+            ],
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Campo(
+                  nome: 'Descrição:',
+                  controller: descricao,
                 ),
               ),
             ],
