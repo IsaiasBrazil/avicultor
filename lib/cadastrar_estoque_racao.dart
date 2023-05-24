@@ -22,7 +22,7 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
       appBar: AppBar(
         toolbarHeight: 100,
         centerTitle: true,
-        title: Text('Quantidade de consumo',
+        title: Text('Estoque de ração',
             style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34)),
       ),
       body: Column(
@@ -34,14 +34,14 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                 child: Campo(
                   nome: 'Quantidade de consumo:',
                   controller: qtDeConsumo,
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.number,
                 ),
               ),
               Expanded(
                 child: Campo(
                   nome: 'Quantidade de reposição:',
                   controller: qtDeReposicao,
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.number,
                 ),
               )
             ],

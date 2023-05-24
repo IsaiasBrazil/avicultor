@@ -77,7 +77,7 @@ class MenuLateral extends StatelessWidget {
                   MaterialPageRoute(
                       builder: (context) => TelaCadastroSensor()));
             },
-          )
+          ),
         ],
       ),
     ));

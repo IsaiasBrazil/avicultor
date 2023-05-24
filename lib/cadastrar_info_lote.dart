@@ -27,7 +27,7 @@ class _TelaCadastroInfoLoteState extends State<TelaCadastroInfoLote> {
         toolbarHeight: 100,
         centerTitle: true,
         title: Text(
-          'Controle de lotes',
+          'Controle de lote',
           style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34),
         ),
       ),
