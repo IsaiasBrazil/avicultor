@@ -88,7 +88,7 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                     8.0), // Adjust the padding value as per your preference
                 child: SizedBox(
                     width: 115,
-                    height: 35,
+                    height: 40,
                     child: Botao(
                       texto: 'Cadastrar',
                       aoSerPressionado: () {},
@@ -99,7 +99,7 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                     8.0), // Adjust the padding value as per your preference
                 child: SizedBox(
                     width: 115,
-                    height: 35,
+                    height: 40,
                     child: Botao(
                       texto: 'Limpar tudo',
                       aoSerPressionado: () {
