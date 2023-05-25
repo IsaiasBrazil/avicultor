@@ -45,49 +45,23 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
                 padding: EdgeInsets.all(
                     8.0), // Adjust the padding value as per your preference
                 child: SizedBox(
-                  width: 115,
-                  height: 35,
-                  child: TextButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Color.fromRGBO(60, 179, 113, 1)),
-                    ),
-                    child: Text(
-                      'Cadastrar',
-                      style: TextStyle(
-                        fontFamily: 'BebasNeue',
-                        fontSize: 22,
-                        color: Colors.white,
-                      ),
-                    ),
-                    onPressed: () {
-                    },
-                  ),
-                ),
+                    width: 115,
+                    height: 35,
+                    child: Botao(
+                      texto: 'Cadastrar',
+                      aoSerPressionado: () {},
+                    )),
               ),
               Padding(
                 padding: EdgeInsets.all(
                     8.0), // Adjust the padding value as per your preference
                 child: SizedBox(
-                  width: 115,
-                  height: 35,
-                  child: TextButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Color.fromRGBO(60, 179, 113, 1)),
-                    ),
-                    child: Text(
-                      'Limpar tudo',
-                      style: TextStyle(
-                        fontFamily: 'BebasNeue',
-                        fontSize: 24,
-                        color: Colors.white,
-                      ),
-                    ),
-                    onPressed: () {
-                    },
-                  ),
-                ),
+                    width: 115,
+                    height: 35,
+                    child: Botao(
+                      texto: 'Limpar tudo',
+                      aoSerPressionado: () {},
+                    )),
               ),
             ],
           )
