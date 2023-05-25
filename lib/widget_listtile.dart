@@ -13,7 +13,7 @@ class ListTileCustom extends StatelessWidget {
         leading: icone != null ? Icon(icone) : null,
         title: Text(nome,
             style: TextStyle(
-                fontFamily: 'BebasNeue', fontSize: 22, color: Colors.white), textAlign: alinhamentoDoTexto),
+                fontFamily: 'BebasNeue', fontSize: 26, color: Colors.white), textAlign: alinhamentoDoTexto),
         onTap: onTap);
   }
 }
