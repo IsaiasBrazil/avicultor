@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 import 'widget_campo.dart';
@@ -35,6 +36,7 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                   nome: 'Quantidade de consumo:',
                   controller: qtDeConsumo,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))],
                 ),
               ),
               Expanded(
@@ -42,6 +44,7 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                   nome: 'Quantidade de reposição:',
                   controller: qtDeReposicao,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))],
                 ),
               )
             ],
