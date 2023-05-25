@@ -30,11 +30,16 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
             children: [
               Expanded(
                 child: Campo(
-                  nome: 'Código do sensor:',
+                  nome: 'Código:',
                   controller: codigoDoSensor,
                   keyboardType: TextInputType.text,
                 ),
               ),
+            ],
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Expanded(
                 child: Campo(
                   nome: 'Descrição:',
@@ -66,7 +71,10 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
                     height: 35,
                     child: Botao(
                       texto: 'Limpar tudo',
-                      aoSerPressionado: () {},
+                      aoSerPressionado: () {
+                        codigoDoSensor.clear();
+                        descricaoDoSensor.clear();
+                      },
                     )),
               ),
             ],

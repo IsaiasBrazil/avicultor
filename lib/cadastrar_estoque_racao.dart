@@ -37,7 +37,9 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                   nome: 'Quantidade de consumo:',
                   controller: qtDeConsumo,
                   keyboardType: TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))],
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))
+                  ],
                 ),
               ),
               Expanded(
@@ -45,7 +47,9 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                   nome: 'Quantidade de reposição:',
                   controller: qtDeReposicao,
                   keyboardType: TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))],
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))
+                  ],
                 ),
               )
             ],
@@ -98,7 +102,11 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                     height: 35,
                     child: Botao(
                       texto: 'Limpar tudo',
-                      aoSerPressionado: () {},
+                      aoSerPressionado: () {
+                        qtDeConsumo.clear();
+                        qtDeReposicao.clear();
+                        data.clear();
+                      },
                     )),
               ),
             ],

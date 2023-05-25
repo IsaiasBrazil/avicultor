@@ -31,6 +31,18 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
             children: [
               Expanded(
                 child: Campo(
+                  nome: 'Código:',
+                  controller: descricaoGalpao,
+                  keyboardType: TextInputType.text,
+                ),
+              )
+            ],
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Campo(
                   nome: 'Descrição:',
                   controller: descricaoGalpao,
                   keyboardType: TextInputType.text,
@@ -60,7 +72,10 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
                     height: 35,
                     child: Botao(
                       texto: 'Limpar tudo',
-                      aoSerPressionado: () {},
+                      aoSerPressionado: () {
+                        codigoGalpao.clear();
+                        descricaoGalpao.clear();
+                      },
                     )),
               ),
             ],

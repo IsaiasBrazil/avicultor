@@ -38,13 +38,14 @@ class _TelaCadastroInfoLoteState extends State<TelaCadastroInfoLote> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Campo(
-                  nome: 'Código de controle:',
-                  controller: codigoDeControle,
-                  keyboardType: TextInputType.text,
-                ),
-              ),
+              // AVALIAR
+              // Expanded(
+              //   child: Campo(
+              //     nome: 'Código de controle:',
+              //     controller: codigoDeControle,
+              //     keyboardType: TextInputType.text,
+              //   ),
+              // ),
               Expanded(
                 child: Campo(
                   nome: 'Código do lote:',
@@ -133,7 +134,14 @@ class _TelaCadastroInfoLoteState extends State<TelaCadastroInfoLote> {
                     height: 35,
                     child: Botao(
                       texto: 'Limpar tudo',
-                      aoSerPressionado: () {},
+                      aoSerPressionado: () {
+                        // codigoDeControle.clear();
+                        codigoDoLote.clear();
+                        peso.clear();
+                        qtDeAves.clear();
+                        data.clear();
+                        descricao.clear();
+                      },
                     )),
               ),
             ],
