@@ -35,15 +35,53 @@ class MenuLateral extends StatelessWidget {
                   context, MaterialPageRoute(builder: (context) => Home()));
             },
           ),
-          ListTileCustom(
-            nome: 'Cadastro de galpões',
-            icone: Icons.warehouse,
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => TelaCadastroGalpao()));
-            },
+          // Criação do menu 'Galpões'
+          ExpansionTile(
+            title: Text('Galpões',
+                style: TextStyle(fontFamily: 'BebasNeue', fontSize: 26, color: Colors.white)),
+            leading: Icon(Icons.warehouse),
+
+            // Criação dos submenus
+            children: [
+              ListTileCustom(
+                nome: 'Cadastro',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TelaCadastroGalpao()));
+                },
+              ),
+              ListTileCustom(
+                nome: 'Alteração',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
+              ),
+              ListTileCustom(
+                nome: 'Exclusão',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
+              ),
+              ListTileCustom(
+                nome: 'Consulta',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
+              ),
+            ],
           ),
           ListTileCustom(
             nome: 'Cadastro de Lotes',
