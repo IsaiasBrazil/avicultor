@@ -37,6 +37,7 @@ class MenuLateral extends StatelessWidget {
           ),
           ListTileCustom(
             nome: 'Cadastro de galpões',
+            icone: Icons.warehouse,
             onTap: () {
               Navigator.push(
                   context,
@@ -46,6 +47,7 @@ class MenuLateral extends StatelessWidget {
           ),
           ListTileCustom(
             nome: 'Cadastro de Lotes',
+            icone: Icons.warehouse_outlined,
             onTap: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => TelaCadastroLote()));
@@ -53,6 +55,7 @@ class MenuLateral extends StatelessWidget {
           ),
           ListTileCustom(
             nome: 'Controle de Lotes',
+            icone: Icons.warehouse_sharp,
             onTap: () {
               Navigator.push(
                   context,
@@ -62,6 +65,7 @@ class MenuLateral extends StatelessWidget {
           ),
           ListTileCustom(
             nome: 'Estoque de Ração',
+            icone: Icons.food_bank,
             onTap: () {
               Navigator.push(
                   context,
@@ -71,6 +75,7 @@ class MenuLateral extends StatelessWidget {
           ),
           ListTileCustom(
             nome: 'Cadastro de Sensores',
+            icone: Icons.sensors,
             onTap: () {
               Navigator.push(
                   context,
