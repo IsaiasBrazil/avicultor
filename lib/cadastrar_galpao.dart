@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tcc/widget_botao.dart';
 import 'widget_campo.dart';
 
 class TelaCadastroGalpao extends StatefulWidget {
@@ -30,18 +31,64 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
             children: [
               Expanded(
                 child: Campo(
-                  nome: 'Código:',
-                  controller: codigoGalpao,
-                  keyboardType: TextInputType.text,
-                ),
-              ),
-              Expanded(
-                child: Campo(
                   nome: 'Descrição:',
                   controller: descricaoGalpao,
                   keyboardType: TextInputType.text,
                 ),
               )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(
+                    8.0), // Adjust the padding value as per your preference
+                child: SizedBox(
+                  width: 115,
+                  height: 35,
+                  child: TextButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Color.fromRGBO(60, 179, 113, 1)),
+                    ),
+                    child: Text(
+                      'Cadastrar',
+                      style: TextStyle(
+                        fontFamily: 'BebasNeue',
+                        fontSize: 22,
+                        color: Colors.white,
+                      ),
+                    ),
+                    onPressed: () {
+                    },
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(
+                    8.0), // Adjust the padding value as per your preference
+                child: SizedBox(
+                  width: 115,
+                  height: 35,
+                  child: TextButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Color.fromRGBO(60, 179, 113, 1)),
+                    ),
+                    child: Text(
+                      'Limpar tudo',
+                      style: TextStyle(
+                        fontFamily: 'BebasNeue',
+                        fontSize: 24,
+                        color: Colors.white,
+                      ),
+                    ),
+                    onPressed: () {
+                    },
+                  ),
+                ),
+              ),
             ],
           )
         ],
