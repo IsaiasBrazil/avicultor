@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'widget_botao.dart';
 import 'widget_campo.dart';
 
 class TelaCadastroSensor extends StatefulWidget {
@@ -40,7 +41,34 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
                   controller: descricaoDoSensor,
                   keyboardType: TextInputType.text,
                 ),
-              )
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(
+                    8.0), // Adjust the padding value as per your preference
+                child: SizedBox(
+                    width: 115,
+                    height: 35,
+                    child: Botao(
+                      texto: 'Cadastrar',
+                      aoSerPressionado: () {},
+                    )),
+              ),
+              Padding(
+                padding: EdgeInsets.all(
+                    8.0), // Adjust the padding value as per your preference
+                child: SizedBox(
+                    width: 115,
+                    height: 35,
+                    child: Botao(
+                      texto: 'Limpar tudo',
+                      aoSerPressionado: () {},
+                    )),
+              ),
             ],
           )
         ],
