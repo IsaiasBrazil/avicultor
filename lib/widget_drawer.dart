@@ -87,6 +87,58 @@ class MenuLateral extends StatelessWidget {
               ),
             ],
           ),
+          //Criação do item menu 'Lotes'
+          ExpansionTile(
+            title: Text('Lotes',
+                style: TextStyle(
+                    fontFamily: 'BebasNeue',
+                    fontSize: 26,
+                    color: Colors.white)),
+            leading: Icon(Icons.warehouse_outlined),
+
+            // Criação dos submenus
+            children: [
+              ListTileCustom(
+                nome: 'Cadastro',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TelaCadastroLote()));
+                },
+              ),
+              ListTileCustom(
+                nome: 'Alteração',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
+              ),
+              ListTileCustom(
+                nome: 'Exclusão',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
+              ),
+              ListTileCustom(
+                nome: 'Consulta',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
+              ),
+            ],
+          ),
+
           // Criação do item menu 'Sensores'
           ExpansionTile(
             title: Text('Sensores',
