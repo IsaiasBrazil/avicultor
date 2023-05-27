@@ -1,16 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
+import 'package:uuid/uuid.dart';
+
 
 class MqttHandler with ChangeNotifier {
   final ValueNotifier<String> temperatura = ValueNotifier<String>("");
   final ValueNotifier<String> humidade = ValueNotifier<String>("");
   final ValueNotifier<String> gases = ValueNotifier<String>("");
   late MqttServerClient client;
+  final String deviceId = Uuid().v4();
 
   Future<Object> connect() async {
     client = MqttServerClient.withPort(
-        'test.mosquitto.org', 'avicontrol123', 1883);
+        'test.mosquitto.org', deviceId, 1883);
     client.logging(on: true);
     client.onConnected = onConnected;
     client.onDisconnected = onDisconnected;
