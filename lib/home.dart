@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:tcc/widget_drawer.dart';
 import 'dart:math';
 import 'dart:async';
 import 'package:intl/intl.dart';
+import 'mqtt/mqtthandler.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key});
@@ -13,6 +13,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  MqttHandler mqttHandler = MqttHandler();
+
   // Variáveis de controle
   int temperatura = 0;
   int umidade = 0;
@@ -22,6 +24,9 @@ class _HomeState extends State<Home> {
   String avisoTemperatura = '';
   String avisoUmidade = '';
   String avisoPresencaGasToxico = '';
+  String temperaturaSensor = '&';
+  String humidadeSensor  = '&';
+  String gasesSensor = '&';
 
   // Variáveis para definir a cor do texto dos avisos
   Color corAvisoTemperatura = Colors.black;
@@ -34,14 +39,17 @@ class _HomeState extends State<Home> {
   Random random = Random();
   late Timer timer;
 
+
+
   @override
   void initState() {
+    mqttHandler.connect();
     super.initState();
     iniciarAtualizacoes();
   }
 
   void iniciarAtualizacoes() {
-    timer = Timer.periodic(Duration(seconds: 2), (Timer t) {
+    timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
       gerarDadosSensores();
     });
   }
@@ -54,6 +62,10 @@ class _HomeState extends State<Home> {
       temperatura = random.nextInt(51);
       umidade = random.nextInt(101);
       presencaGasToxico = random.nextBool();
+      temperaturaSensor = mqttHandler.temperatura.value;
+      humidadeSensor = mqttHandler.humidade.value;
+      gasesSensor = mqttHandler.gases.value;
+
 
       // Mostrar mensagem de acordo com a temperatura atual
       if (temperatura <= 20) {
@@ -128,10 +140,25 @@ class _HomeState extends State<Home> {
               Text(
                   'Presença de gases tóxicos: ' +
                       (presencaGasToxico == true ? 'Sim' : 'Não'),
-                  style: TextStyle(fontFamily: 'BebasNeue', fontSize: 40))
+                  style: TextStyle(fontFamily: 'BebasNeue', fontSize: 40)),
+              _receber()
             ],
           ),
         )
+      ],
+    );
+  }
+
+  _receber() {
+    return Column(
+      children: [
+        Text('Temperatura: $temperaturaSensor',
+            style: TextStyle(color: Colors.black, fontSize: 25)),
+        Text('Humidade: $humidadeSensor',
+            style: TextStyle(color: Colors.black, fontSize: 25)),
+        Text('Gases: $gasesSensor',
+            style: TextStyle(color: Colors.black, fontSize: 25)),
+        // Resto do código...
       ],
     );
   }

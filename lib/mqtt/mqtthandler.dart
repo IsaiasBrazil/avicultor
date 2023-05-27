@@ -10,7 +10,7 @@ class MqttHandler with ChangeNotifier {
 
   Future<Object> connect() async {
     client = MqttServerClient.withPort(
-        'test.mosquitto.org', 'avicontrol', 1883);
+        'test.mosquitto.org', 'avicontrol123', 1883);
     client.logging(on: true);
     client.onConnected = onConnected;
     client.onDisconnected = onDisconnected;
