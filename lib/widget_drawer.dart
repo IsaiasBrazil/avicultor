@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tcc/alterar_galpao.dart';
+import 'package:tcc/alterar_lote.dart';
 import 'package:tcc/cadastrar_estoque_racao.dart';
 import 'package:tcc/cadastrar_galpao.dart';
 import 'package:tcc/cadastrar_info_lote.dart';
@@ -64,7 +66,7 @@ class MenuLateral extends StatelessWidget {
                 icone: null,
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
+                      context, MaterialPageRoute(builder: (context) => TelaAlteracaoGalpao()));
                 },
               ),
               ListTileCustom(
@@ -115,7 +117,7 @@ class MenuLateral extends StatelessWidget {
                 icone: null,
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
+                      context, MaterialPageRoute(builder: (context) => TelaAlteracaoLote()));
                 },
               ),
               ListTileCustom(
