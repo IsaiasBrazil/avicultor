@@ -27,7 +27,7 @@ class MenuLateral extends StatelessWidget {
               child: Center(
                   child: Text(
             titulo,
-            style: TextStyle(
+            style: const TextStyle(
                 fontFamily: 'BebasNeue', fontSize: 28, color: Colors.white),
           ))),
           ListTileCustom(
@@ -35,17 +35,17 @@ class MenuLateral extends StatelessWidget {
             icone: Icons.home,
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Home()));
+                  context, MaterialPageRoute(builder: (context) => const Home()));
             },
           ),
           // Criação do item menu 'Galpões'
           ExpansionTile(
-            title: Text('Galpões',
+            title: const Text('Galpões',
                 style: TextStyle(
                     fontFamily: 'BebasNeue',
                     fontSize: 26,
                     color: Colors.white)),
-            leading: Icon(Icons.warehouse),
+            leading: const Icon(Icons.warehouse),
 
             // Criação dos submenus
             children: [
@@ -57,7 +57,7 @@ class MenuLateral extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => TelaCadastroGalpao()));
+                          builder: (context) => const TelaCadastroGalpao()));
                 },
               ),
               ListTileCustom(
@@ -66,7 +66,7 @@ class MenuLateral extends StatelessWidget {
                 icone: null,
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => TelaAlteracaoGalpao()));
+                      context, MaterialPageRoute(builder: (context) => const TelaAlteracaoGalpao()));
                 },
               ),
               ListTileCustom(
@@ -75,7 +75,7 @@ class MenuLateral extends StatelessWidget {
                 icone: null,
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
+                      context, MaterialPageRoute(builder: (context) => const Home()));
                 },
               ),
               ListTileCustom(
@@ -84,19 +84,19 @@ class MenuLateral extends StatelessWidget {
                 icone: null,
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
+                      context, MaterialPageRoute(builder: (context) => const Home()));
                 },
               ),
             ],
           ),
           //Criação do item menu 'Lotes'
           ExpansionTile(
-            title: Text('Lotes',
+            title: const Text('Lotes',
                 style: TextStyle(
                     fontFamily: 'BebasNeue',
                     fontSize: 26,
                     color: Colors.white)),
-            leading: Icon(Icons.warehouse_outlined),
+            leading: const Icon(Icons.warehouse_outlined),
 
             // Criação dos submenus
             children: [
@@ -108,7 +108,7 @@ class MenuLateral extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => TelaCadastroLote()));
+                          builder: (context) => const TelaCadastroLote()));
                 },
               ),
               ListTileCustom(
@@ -117,7 +117,7 @@ class MenuLateral extends StatelessWidget {
                 icone: null,
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => TelaAlteracaoLote()));
+                      context, MaterialPageRoute(builder: (context) => const TelaAlteracaoLote()));
                 },
               ),
               ListTileCustom(
@@ -126,7 +126,7 @@ class MenuLateral extends StatelessWidget {
                 icone: null,
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
+                      context, MaterialPageRoute(builder: (context) => const Home()));
                 },
               ),
               ListTileCustom(
@@ -135,7 +135,7 @@ class MenuLateral extends StatelessWidget {
                 icone: null,
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
+                      context, MaterialPageRoute(builder: (context) => const Home()));
                 },
               ),
             ],
@@ -143,12 +143,12 @@ class MenuLateral extends StatelessWidget {
 
           // Criação do item menu 'Sensores'
           ExpansionTile(
-            title: Text('Sensores',
+            title: const Text('Sensores',
                 style: TextStyle(
                     fontFamily: 'BebasNeue',
                     fontSize: 26,
                     color: Colors.white)),
-            leading: Icon(Icons.sensors),
+            leading: const Icon(Icons.sensors),
 
             // Criação dos submenus
             children: [
@@ -160,7 +160,7 @@ class MenuLateral extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => TelaCadastroSensor()));
+                          builder: (context) => const TelaCadastroSensor()));
                 },
               ),
               ListTileCustom(
@@ -169,7 +169,7 @@ class MenuLateral extends StatelessWidget {
                 icone: null,
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
+                      context, MaterialPageRoute(builder: (context) => const Home()));
                 },
               ),
               ListTileCustom(
@@ -178,7 +178,7 @@ class MenuLateral extends StatelessWidget {
                 icone: null,
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
+                      context, MaterialPageRoute(builder: (context) => const Home()));
                 },
               ),
               ListTileCustom(
@@ -187,7 +187,7 @@ class MenuLateral extends StatelessWidget {
                 icone: null,
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
+                      context, MaterialPageRoute(builder: (context) => const Home()));
                 },
               ),
             ],
@@ -201,7 +201,7 @@ class MenuLateral extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => TelaCadastroInfoLote()));
+                      builder: (context) => const TelaCadastroInfoLote()));
             },
           ),
 
@@ -213,7 +213,7 @@ class MenuLateral extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => TelaCadastroEstoqueRacao()));
+                      builder: (context) => const TelaCadastroEstoqueRacao()));
             },
           ),
         ],

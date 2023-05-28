@@ -24,7 +24,7 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
       appBar: AppBar(
         toolbarHeight: 100,
         centerTitle: true,
-        title: Text('Estoque de ração',
+        title: const Text('Estoque de ração',
             style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34)),
       ),
       body: Column(
@@ -84,7 +84,7 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.all(
+                padding: const EdgeInsets.all(
                     8.0), // Adjust the padding value as per your preference
                 child: SizedBox(
                     width: 115,
@@ -95,7 +95,7 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                     )),
               ),
               Padding(
-                padding: EdgeInsets.all(
+                padding: const EdgeInsets.all(
                     8.0), // Adjust the padding value as per your preference
                 child: SizedBox(
                     width: 115,

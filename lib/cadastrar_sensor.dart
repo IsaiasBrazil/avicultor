@@ -22,7 +22,7 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
       appBar: AppBar(
         toolbarHeight: 100,
         centerTitle: true,
-        title: Text('Cadastro de sensor',
+        title: const Text('Cadastro de sensor',
             style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34)),
       ),
       body: Column(
@@ -69,7 +69,7 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.all(
+                padding: const EdgeInsets.all(
                     8.0), // Adjust the padding value as per your preference
                 child: SizedBox(
                     width: 115,
@@ -80,7 +80,7 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
                     )),
               ),
               Padding(
-                padding: EdgeInsets.all(
+                padding: const EdgeInsets.all(
                     8.0), // Adjust the padding value as per your preference
                 child: SizedBox(
                     width: 115,

@@ -101,7 +101,7 @@ class _TelaAlteracaoLoteState extends State<TelaAlteracaoLote> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.all(
+                padding: const EdgeInsets.all(
                     8.0), // Adjust the padding value as per your preference
                 child: SizedBox(
                     width: 115,
@@ -114,7 +114,7 @@ class _TelaAlteracaoLoteState extends State<TelaAlteracaoLote> {
                     )),
               ),
               Padding(
-                padding: EdgeInsets.all(
+                padding: const EdgeInsets.all(
                     8.0), // Adjust the padding value as per your preference
                 child: SizedBox(
                     width: 115,

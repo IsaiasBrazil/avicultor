@@ -14,12 +14,12 @@ class Botao extends StatelessWidget {
     return TextButton(
       style: ButtonStyle(
         backgroundColor:
-            MaterialStateProperty.all(Color.fromRGBO(60, 179, 113, 1)),
+            MaterialStateProperty.all(const Color.fromRGBO(60, 179, 113, 1)),
       ),
       onPressed: aoSerPressionado,
       child: Text(
         texto,
-        style: TextStyle(
+        style: const TextStyle(
           fontFamily: 'BebasNeue',
           fontSize: 22,
           color: Colors.white,

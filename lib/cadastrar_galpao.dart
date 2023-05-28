@@ -19,7 +19,7 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
       appBar: AppBar(
         toolbarHeight: 100,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Cadastro de Galpão',
           style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34),
         ),
@@ -32,7 +32,7 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
               Expanded(
                 child: Campo(
                   nome: 'Código:',
-                  controller: descricaoGalpao,
+                  controller: codigoGalpao,
                   keyboardType: TextInputType.text,
                 ),
               )
@@ -54,7 +54,7 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.all(
+                padding: const EdgeInsets.all(
                     8.0), // Adjust the padding value as per your preference
                 child: SizedBox(
                     width: 115,
@@ -65,7 +65,7 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
                     )),
               ),
               Padding(
-                padding: EdgeInsets.all(
+                padding: const EdgeInsets.all(
                     8.0), // Adjust the padding value as per your preference
                 child: SizedBox(
                     width: 115,

@@ -49,7 +49,7 @@ class _HomeState extends State<Home> {
   }
 
   void iniciarAtualizacoes() {
-    timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+    timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
       gerarDadosSensores();
     });
   }
@@ -110,7 +110,7 @@ class _HomeState extends State<Home> {
           style: TextStyle(fontFamily: 'BebasNeue', fontSize: 32),
         ),
       ),
-      drawer: MenuLateral(titulo: 'AVICONTROL'),
+      drawer: const MenuLateral(titulo: 'AVICONTROL'),
       body: corpo(),
     );
   }
@@ -122,16 +122,16 @@ class _HomeState extends State<Home> {
           child: Column(
             children: [
               Text('$dataAtual - $horarioAtual',
-                  style: TextStyle(fontFamily: 'BebasNeue', fontSize: 40)),
+                  style: const TextStyle(fontFamily: 'BebasNeue', fontSize: 40)),
               Text('Temperatura: $temperatura°C',
-                  style: TextStyle(fontFamily: 'BebasNeue', fontSize: 40)),
+                  style: const TextStyle(fontFamily: 'BebasNeue', fontSize: 40)),
               Text('$avisoTemperatura',
                   style: TextStyle(
                       fontFamily: 'BebasNeue',
                       fontSize: 40,
                       color: corAvisoTemperatura)),
               Text('Umidade: $umidade %',
-                  style: TextStyle(fontFamily: 'BebasNeue', fontSize: 40)),
+                  style: const TextStyle(fontFamily: 'BebasNeue', fontSize: 40)),
               Text('$avisoUmidade',
                   style: TextStyle(
                       fontFamily: 'BebasNeue',
@@ -140,7 +140,7 @@ class _HomeState extends State<Home> {
               Text(
                   'Presença de gases tóxicos: ' +
                       (presencaGasToxico == true ? 'Sim' : 'Não'),
-                  style: TextStyle(fontFamily: 'BebasNeue', fontSize: 40)),
+                  style: const TextStyle(fontFamily: 'BebasNeue', fontSize: 40)),
               _receber()
             ],
           ),
@@ -153,11 +153,11 @@ class _HomeState extends State<Home> {
     return Column(
       children: [
         Text('Temperatura: $temperaturaSensor',
-            style: TextStyle(color: Colors.black, fontSize: 25)),
+            style: const TextStyle(color: Colors.black, fontSize: 25)),
         Text('Humidade: $humidadeSensor',
-            style: TextStyle(color: Colors.black, fontSize: 25)),
+            style: const TextStyle(color: Colors.black, fontSize: 25)),
         Text('Gases: $gasesSensor',
-            style: TextStyle(color: Colors.black, fontSize: 25)),
+            style: const TextStyle(color: Colors.black, fontSize: 25)),
         // Resto do código...
       ],
     );

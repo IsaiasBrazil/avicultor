@@ -27,12 +27,12 @@ class _TelaCadastroInfoLoteState extends State<TelaCadastroInfoLote> {
       appBar: AppBar(
         toolbarHeight: 100,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Diário de produção',
           style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34),
         ),
       ),
-      drawer: MenuLateral(titulo: 'Avicontrol'),
+      drawer: const MenuLateral(titulo: 'Avicontrol'),
       body: Column(
         children: [
           Row(
@@ -105,7 +105,7 @@ class _TelaCadastroInfoLoteState extends State<TelaCadastroInfoLote> {
               ),
               Expanded(
                 child: Campo(
-                  nome: 'Descrição:',
+                  nome: 'Observação:',
                   controller: descricao,
                   keyboardType: TextInputType.name,
                 ),
@@ -116,7 +116,7 @@ class _TelaCadastroInfoLoteState extends State<TelaCadastroInfoLote> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.all(
+                padding: const EdgeInsets.all(
                     8.0), // Adjust the padding value as per your preference
                 child: SizedBox(
                     width: 115,
@@ -127,7 +127,7 @@ class _TelaCadastroInfoLoteState extends State<TelaCadastroInfoLote> {
                     )),
               ),
               Padding(
-                padding: EdgeInsets.all(
+                padding: const EdgeInsets.all(
                     8.0), // Adjust the padding value as per your preference
                 child: SizedBox(
                     width: 115,
