@@ -12,6 +12,8 @@ class TelaCadastroSensor extends StatefulWidget {
 
 class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
   TextEditingController codigoDoSensor = TextEditingController();
+  TextEditingController codigoDoGalpao = TextEditingController();
+  TextEditingController tipoDeSensor = TextEditingController();
   TextEditingController descricaoDoSensor = TextEditingController();
 
   @override
@@ -30,11 +32,18 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
             children: [
               Expanded(
                 child: Campo(
-                  nome: 'Código:',
+                  nome: 'Código do sensor:',
                   controller: codigoDoSensor,
                   keyboardType: TextInputType.text,
                 ),
               ),
+              Expanded(
+                child: Campo(
+                  nome: 'Código do galpão:',
+                  controller: codigoDoGalpao,
+                  keyboardType: TextInputType.text,
+                ),
+              )
             ],
           ),
           Row(
@@ -42,11 +51,18 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
             children: [
               Expanded(
                 child: Campo(
-                  nome: 'Descrição:',
-                  controller: descricaoDoSensor,
+                  nome: 'Tipo:',
+                  controller: tipoDeSensor,
                   keyboardType: TextInputType.text,
                 ),
               ),
+              Expanded(
+                child: Campo(
+                  nome: 'Descrição do sensor:',
+                  controller: descricaoDoSensor,
+                  keyboardType: TextInputType.text,
+                ),
+              )
             ],
           ),
           Row(
@@ -73,12 +89,14 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
                       texto: 'Limpar tudo',
                       aoSerPressionado: () {
                         codigoDoSensor.clear();
+                        codigoDoGalpao.clear();
+                        tipoDeSensor.clear();
                         descricaoDoSensor.clear();
                       },
                     )),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
