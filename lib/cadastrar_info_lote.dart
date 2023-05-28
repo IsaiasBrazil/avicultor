@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
+import 'widget_botao.dart';
 import 'widget_campo.dart';
 import 'widget_drawer.dart';
 
@@ -27,7 +28,7 @@ class _TelaCadastroInfoLoteState extends State<TelaCadastroInfoLote> {
         toolbarHeight: 100,
         centerTitle: true,
         title: Text(
-          'Controle de lote',
+          'Diário de produção',
           style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34),
         ),
       ),
@@ -37,13 +38,14 @@ class _TelaCadastroInfoLoteState extends State<TelaCadastroInfoLote> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Campo(
-                  nome: 'Código de controle:',
-                  controller: codigoDeControle,
-                  keyboardType: TextInputType.text,
-                ),
-              ),
+              // AVALIAR
+              // Expanded(
+              //   child: Campo(
+              //     nome: 'Código de controle:',
+              //     controller: codigoDeControle,
+              //     keyboardType: TextInputType.text,
+              //   ),
+              // ),
               Expanded(
                 child: Campo(
                   nome: 'Código do lote:',
@@ -108,6 +110,40 @@ class _TelaCadastroInfoLoteState extends State<TelaCadastroInfoLote> {
                   keyboardType: TextInputType.name,
                 ),
               )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(
+                    8.0), // Adjust the padding value as per your preference
+                child: SizedBox(
+                    width: 115,
+                    height: 40,
+                    child: Botao(
+                      texto: 'Cadastrar',
+                      aoSerPressionado: () {},
+                    )),
+              ),
+              Padding(
+                padding: EdgeInsets.all(
+                    8.0), // Adjust the padding value as per your preference
+                child: SizedBox(
+                    width: 115,
+                    height: 40,
+                    child: Botao(
+                      texto: 'Limpar tudo',
+                      aoSerPressionado: () {
+                        // codigoDeControle.clear();
+                        codigoDoLote.clear();
+                        peso.clear();
+                        qtDeAves.clear();
+                        data.clear();
+                        descricao.clear();
+                      },
+                    )),
+              ),
             ],
           )
         ],

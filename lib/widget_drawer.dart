@@ -30,32 +30,171 @@ class MenuLateral extends StatelessWidget {
           ))),
           ListTileCustom(
             nome: 'Página inicial',
+            icone: Icons.home,
             onTap: () {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Home()));
             },
           ),
-          ListTileCustom(
-            nome: 'Cadastro de galpões',
-            icone: Icons.warehouse,
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => TelaCadastroGalpao()));
-            },
+          // Criação do item menu 'Galpões'
+          ExpansionTile(
+            title: Text('Galpões',
+                style: TextStyle(
+                    fontFamily: 'BebasNeue',
+                    fontSize: 26,
+                    color: Colors.white)),
+            leading: Icon(Icons.warehouse),
+
+            // Criação dos submenus
+            children: [
+              ListTileCustom(
+                nome: 'Cadastro',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TelaCadastroGalpao()));
+                },
+              ),
+              ListTileCustom(
+                nome: 'Alteração',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
+              ),
+              ListTileCustom(
+                nome: 'Exclusão',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
+              ),
+              ListTileCustom(
+                nome: 'Consulta',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
+              ),
+            ],
           ),
-          ListTileCustom(
-            nome: 'Cadastro de Lotes',
-            icone: Icons.warehouse_outlined,
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => TelaCadastroLote()));
-            },
+          //Criação do item menu 'Lotes'
+          ExpansionTile(
+            title: Text('Lotes',
+                style: TextStyle(
+                    fontFamily: 'BebasNeue',
+                    fontSize: 26,
+                    color: Colors.white)),
+            leading: Icon(Icons.warehouse_outlined),
+
+            // Criação dos submenus
+            children: [
+              ListTileCustom(
+                nome: 'Cadastro',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TelaCadastroLote()));
+                },
+              ),
+              ListTileCustom(
+                nome: 'Alteração',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
+              ),
+              ListTileCustom(
+                nome: 'Exclusão',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
+              ),
+              ListTileCustom(
+                nome: 'Consulta',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
+              ),
+            ],
           ),
+
+          // Criação do item menu 'Sensores'
+          ExpansionTile(
+            title: Text('Sensores',
+                style: TextStyle(
+                    fontFamily: 'BebasNeue',
+                    fontSize: 26,
+                    color: Colors.white)),
+            leading: Icon(Icons.sensors),
+
+            // Criação dos submenus
+            children: [
+              ListTileCustom(
+                nome: 'Cadastro',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TelaCadastroSensor()));
+                },
+              ),
+              ListTileCustom(
+                nome: 'Alteração',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
+              ),
+              ListTileCustom(
+                nome: 'Exclusão',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
+              ),
+              ListTileCustom(
+                nome: 'Consulta',
+                alinhamentoDoTexto: TextAlign.center,
+                icone: null,
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
+              ),
+            ],
+          ),
+
+          // Criação do item menu 'Diário de produção'
           ListTileCustom(
-            nome: 'Controle de Lotes',
-            icone: Icons.warehouse_sharp,
+            nome: 'Diário de produção',
+            icone: Icons.note_add,
             onTap: () {
               Navigator.push(
                   context,
@@ -63,24 +202,16 @@ class MenuLateral extends StatelessWidget {
                       builder: (context) => TelaCadastroInfoLote()));
             },
           ),
+
+          // Criação do item menu 'Ração'
           ListTileCustom(
-            nome: 'Estoque de Ração',
+            nome: 'Ração',
             icone: Icons.food_bank,
             onTap: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => TelaCadastroEstoqueRacao()));
-            },
-          ),
-          ListTileCustom(
-            nome: 'Cadastro de Sensores',
-            icone: Icons.sensors,
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => TelaCadastroSensor()));
             },
           ),
         ],

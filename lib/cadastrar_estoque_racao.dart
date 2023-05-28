@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
+import 'widget_botao.dart';
 import 'widget_campo.dart';
 
 class TelaCadastroEstoqueRacao extends StatefulWidget {
@@ -35,6 +37,9 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                   nome: 'Quantidade de consumo:',
                   controller: qtDeConsumo,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))
+                  ],
                 ),
               ),
               Expanded(
@@ -42,6 +47,9 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                   nome: 'Quantidade de reposição:',
                   controller: qtDeReposicao,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))
+                  ],
                 ),
               )
             ],
@@ -72,6 +80,37 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
               )
             ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(
+                    8.0), // Adjust the padding value as per your preference
+                child: SizedBox(
+                    width: 115,
+                    height: 40,
+                    child: Botao(
+                      texto: 'Cadastrar',
+                      aoSerPressionado: () {},
+                    )),
+              ),
+              Padding(
+                padding: EdgeInsets.all(
+                    8.0), // Adjust the padding value as per your preference
+                child: SizedBox(
+                    width: 115,
+                    height: 40,
+                    child: Botao(
+                      texto: 'Limpar tudo',
+                      aoSerPressionado: () {
+                        qtDeConsumo.clear();
+                        qtDeReposicao.clear();
+                        data.clear();
+                      },
+                    )),
+              ),
+            ],
+          )
         ],
       ),
     );

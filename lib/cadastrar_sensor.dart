@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'widget_botao.dart';
 import 'widget_campo.dart';
 
 class TelaCadastroSensor extends StatefulWidget {
@@ -29,18 +30,53 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
             children: [
               Expanded(
                 child: Campo(
-                  nome: 'Código do sensor:',
+                  nome: 'Código:',
                   controller: codigoDoSensor,
                   keyboardType: TextInputType.text,
                 ),
               ),
+            ],
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Expanded(
                 child: Campo(
                   nome: 'Descrição:',
                   controller: descricaoDoSensor,
                   keyboardType: TextInputType.text,
                 ),
-              )
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(
+                    8.0), // Adjust the padding value as per your preference
+                child: SizedBox(
+                    width: 115,
+                    height: 40,
+                    child: Botao(
+                      texto: 'Cadastrar',
+                      aoSerPressionado: () {},
+                    )),
+              ),
+              Padding(
+                padding: EdgeInsets.all(
+                    8.0), // Adjust the padding value as per your preference
+                child: SizedBox(
+                    width: 115,
+                    height: 40,
+                    child: Botao(
+                      texto: 'Limpar tudo',
+                      aoSerPressionado: () {
+                        codigoDoSensor.clear();
+                        descricaoDoSensor.clear();
+                      },
+                    )),
+              ),
             ],
           )
         ],

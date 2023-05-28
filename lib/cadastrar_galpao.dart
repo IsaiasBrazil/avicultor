@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tcc/widget_botao.dart';
 import 'widget_campo.dart';
 
 class TelaCadastroGalpao extends StatefulWidget {
@@ -31,10 +32,15 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
               Expanded(
                 child: Campo(
                   nome: 'Código:',
-                  controller: codigoGalpao,
+                  controller: descricaoGalpao,
                   keyboardType: TextInputType.text,
                 ),
-              ),
+              )
+            ],
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Expanded(
                 child: Campo(
                   nome: 'Descrição:',
@@ -42,6 +48,36 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
                   keyboardType: TextInputType.text,
                 ),
               )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(
+                    8.0), // Adjust the padding value as per your preference
+                child: SizedBox(
+                    width: 115,
+                    height: 40,
+                    child: Botao(
+                      texto: 'Cadastrar',
+                      aoSerPressionado: () {},
+                    )),
+              ),
+              Padding(
+                padding: EdgeInsets.all(
+                    8.0), // Adjust the padding value as per your preference
+                child: SizedBox(
+                    width: 115,
+                    height: 40,
+                    child: Botao(
+                      texto: 'Limpar tudo',
+                      aoSerPressionado: () {
+                        codigoGalpao.clear();
+                        descricaoGalpao.clear();
+                      },
+                    )),
+              ),
             ],
           )
         ],

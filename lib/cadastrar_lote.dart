@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'widget_botao.dart';
 import 'widget_campo.dart';
 
 class TelaCadastroLote extends StatefulWidget {
@@ -57,7 +58,9 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                   nome: 'Idade:',
                   controller: idade,
                   keyboardType: TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))],
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))
+                  ],
                 ),
               ),
               Expanded(
@@ -94,6 +97,41 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
               ),
             ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(
+                    8.0), // Adjust the padding value as per your preference
+                child: SizedBox(
+                    width: 115,
+                    height: 40,
+                    child: Botao(
+                      texto: 'Cadastrar',
+                      aoSerPressionado: () {
+                        debugPrint(codigoDoLote.text);
+                      },
+                    )),
+              ),
+              Padding(
+                padding: EdgeInsets.all(
+                    8.0), // Adjust the padding value as per your preference
+                child: SizedBox(
+                    width: 115,
+                    height: 40,
+                    child: Botao(
+                      texto: 'Limpar tudo',
+                      aoSerPressionado: () {
+                        codigoDoLote.clear();
+                        codigoDoGalpao.clear();
+                        idade.clear();
+                        data.clear();
+                        descricao.clear();
+                      },
+                    )),
+              ),
+            ],
+          )
         ],
       ),
     );
