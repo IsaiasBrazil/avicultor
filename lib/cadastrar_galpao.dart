@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tcc/banco_dados/bd.dart';
+import 'package:tcc/classes/galpao.dart';
 import 'package:tcc/widget_botao.dart';
 import 'widget_campo.dart';
 
@@ -61,7 +63,14 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
                     height: 40,
                     child: Botao(
                       texto: 'Cadastrar',
-                      aoSerPressionado: () {},
+                      aoSerPressionado: () {
+                        int codigo = int.parse(codigoGalpao.text);
+                        String descricao = descricaoGalpao.text;
+
+                        Galpao galpao = Galpao(codigo: codigo, descricao: descricao);
+                        BancoDados bd = BancoDados.instance;
+                        bd.inserirGalpao(galpao);
+                      },
                     )),
               ),
               Padding(
