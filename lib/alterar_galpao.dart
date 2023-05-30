@@ -21,7 +21,7 @@ class _TelaAlteracaoGalpaoState extends State<TelaAlteracaoGalpao> {
         centerTitle: true,
         title: const Text(
           'Alteração de Galpão',
-          style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34),
+          style: TextStyle(fontSize: 34),
         ),
       ),
       body: Column(

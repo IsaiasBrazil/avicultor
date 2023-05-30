@@ -9,6 +9,9 @@ class Galpao {
     return 'Galpao{codigo: $codigo, descricao: $descricao}';
   }
 
+  factory Galpao.fromMap(Map<String, dynamic> json) =>
+      Galpao(codigo: json['codigo'], descricao: json['descricao']);
+
   Map<String, dynamic> toMap() {
     return {
       'codigo': codigo,

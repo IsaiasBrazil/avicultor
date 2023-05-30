@@ -25,7 +25,7 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
         toolbarHeight: 100,
         centerTitle: true,
         title: const Text('Estoque de ração',
-            style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34)),
+            style: TextStyle(fontSize: 34)),
       ),
       body: Column(
         children: [

@@ -5,6 +5,7 @@ import 'package:tcc/cadastrar_estoque_racao.dart';
 import 'package:tcc/cadastrar_galpao.dart';
 import 'package:tcc/cadastrar_info_lote.dart';
 import 'package:tcc/cadastrar_lote.dart';
+import 'package:tcc/consultar_galpao.dart';
 import 'cadastrar_sensor.dart';
 import 'home.dart';
 import 'widget_listtile.dart';
@@ -84,7 +85,7 @@ class MenuLateral extends StatelessWidget {
                 icone: null,
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => const Home()));
+                      context, MaterialPageRoute(builder: (context) => const TelaConsultaGalpao()));
                 },
               ),
             ],

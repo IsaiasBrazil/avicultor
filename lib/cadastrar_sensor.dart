@@ -23,7 +23,7 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
         toolbarHeight: 100,
         centerTitle: true,
         title: const Text('Cadastro de sensor',
-            style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34)),
+            style: TextStyle(fontSize: 34)),
       ),
       body: Column(
         children: [

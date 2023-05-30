@@ -32,7 +32,7 @@ class BancoDados {
   }
 
   String get _createGalpaoTable => '''
-    CREATE TABLE galpao (
+    CREATE TABLE galpoes (
       codigo INTEGER PRIMARY KEY,
       descricao TEXT
     );
@@ -40,7 +40,7 @@ class BancoDados {
 
   Future<void> inserirGalpao(Galpao galpao) async {
     final db = await database;
-    final resultado = await db.insert('galpao', galpao.toMap(),
+    final resultado = await db.insert('galpoes', galpao.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
 
     if (resultado != -1) {
@@ -49,5 +49,15 @@ class BancoDados {
       debugPrint('Falha ao inserir galpão!');
     }
     debugPrint(galpao.toString());
+  }
+
+  Future<List<Galpao>> obterGalpoes() async {
+    Database db = await instance.database;
+    var galpoes = await db.query('galpoes');
+
+    List<Galpao> listaGalpoes = galpoes.isNotEmpty
+        ? galpoes.map((c) => Galpao.fromMap(c)).toList()
+        : [];
+    return listaGalpoes;
   }
 }

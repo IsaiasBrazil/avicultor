@@ -29,7 +29,7 @@ class _TelaCadastroInfoLoteState extends State<TelaCadastroInfoLote> {
         centerTitle: true,
         title: const Text(
           'Diário de produção',
-          style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34),
+          style: TextStyle(fontSize: 34),
         ),
       ),
       drawer: const MenuLateral(titulo: 'Avicontrol'),

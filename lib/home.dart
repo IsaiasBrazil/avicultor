@@ -107,7 +107,7 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         title: const Text(
           'Informações dos sensores',
-          style: TextStyle(fontFamily: 'BebasNeue', fontSize: 32),
+          style: TextStyle(fontSize: 32),
         ),
       ),
       drawer: const MenuLateral(titulo: 'AVICONTROL'),
@@ -122,16 +122,16 @@ class _HomeState extends State<Home> {
           child: Column(
             children: [
               Text('$dataAtual - $horarioAtual',
-                  style: const TextStyle(fontFamily: 'BebasNeue', fontSize: 40)),
+                  style: const TextStyle(fontSize: 40)),
               Text('Temperatura: $temperatura°C',
-                  style: const TextStyle(fontFamily: 'BebasNeue', fontSize: 40)),
+                  style: const TextStyle(fontSize: 40)),
               Text('$avisoTemperatura',
                   style: TextStyle(
                       fontFamily: 'BebasNeue',
                       fontSize: 40,
                       color: corAvisoTemperatura)),
               Text('Umidade: $umidade %',
-                  style: const TextStyle(fontFamily: 'BebasNeue', fontSize: 40)),
+                  style: const TextStyle(fontSize: 40)),
               Text('$avisoUmidade',
                   style: TextStyle(
                       fontFamily: 'BebasNeue',
@@ -140,7 +140,7 @@ class _HomeState extends State<Home> {
               Text(
                   'Presença de gases tóxicos: ' +
                       (presencaGasToxico == true ? 'Sim' : 'Não'),
-                  style: const TextStyle(fontFamily: 'BebasNeue', fontSize: 40)),
+                  style: const TextStyle(fontSize: 40)),
               _receber()
             ],
           ),

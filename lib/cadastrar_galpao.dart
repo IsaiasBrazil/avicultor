@@ -23,7 +23,7 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
         centerTitle: true,
         title: const Text(
           'Cadastro de Galpão',
-          style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34),
+          style: TextStyle(fontSize: 34),
         ),
       ),
       body: Column(

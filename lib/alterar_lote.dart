@@ -26,7 +26,7 @@ class _TelaAlteracaoLoteState extends State<TelaAlteracaoLote> {
         centerTitle: true,
         title: const Text(
           'Alteração de Lote',
-          style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34),
+          style: TextStyle(fontSize: 34),
         ),
       ),
       body: Column(

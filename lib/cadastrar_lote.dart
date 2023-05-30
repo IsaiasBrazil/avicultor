@@ -26,7 +26,7 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
         centerTitle: true,
         title: const Text(
           'Cadastro de Lote',
-          style: TextStyle(fontFamily: 'BebasNeue', fontSize: 34),
+          style: TextStyle(fontSize: 34),
         ),
       ),
       body: Column(
