@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -40,18 +39,10 @@ class BancoDados {
 
   Future<bool> inserirGalpao(Galpao galpao) async {
     final db = await database;
-    final resultado = await db.insert('galpoes', galpao.toMap(),
+    final resultadoInsercao = await db.insert('galpoes', galpao.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
 
-    debugPrint('Código do galpão: ${galpao.codigo}');
-    debugPrint('Descrição do galpão: ${galpao.descricao}');
-    if (resultado != -1) {
-      debugPrint('Galpão inserido com sucesso!');
-      return true;
-    } else {
-      debugPrint('Falha ao inserir galpão!');
-      return false;
-    }
+    return resultadoInsercao != -1 ? true : false;
   }
 
   Future<List<Galpao>> obterGalpoes() async {
@@ -62,5 +53,12 @@ class BancoDados {
         ? galpoes.map((c) => Galpao.fromMap(c)).toList()
         : [];
     return listaGalpoes;
+  }
+
+  Future<bool> excluirGalpao(String codigo) async {
+    Database db = await instance.database;
+    var resultadoExclusao = await db.delete('galpoes', where: 'codigo = ?', whereArgs: [codigo]);
+
+    return resultadoExclusao == 1 ? true : false;
   }
 }

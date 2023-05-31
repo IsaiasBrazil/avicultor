@@ -5,6 +5,7 @@ class Botao extends StatelessWidget {
   final VoidCallback aoSerPressionado;
 
   const Botao({
+    super.key,
     required this.texto,
     required this.aoSerPressionado,
   });

@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'mqtt/mqtthandler.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key});
+  const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
   String avisoUmidade = '';
   String avisoPresencaGasToxico = '';
   String temperaturaSensor = '&';
-  String humidadeSensor  = '&';
+  String humidadeSensor = '&';
   String gasesSensor = '&';
 
   // Variáveis para definir a cor do texto dos avisos
@@ -38,8 +38,6 @@ class _HomeState extends State<Home> {
 
   Random random = Random();
   late Timer timer;
-
-
 
   @override
   void initState() {
@@ -65,7 +63,6 @@ class _HomeState extends State<Home> {
       temperaturaSensor = mqttHandler.temperatura.value;
       humidadeSensor = mqttHandler.humidade.value;
       gasesSensor = mqttHandler.gases.value;
-
 
       // Mostrar mensagem de acordo com a temperatura atual
       if (temperatura <= 20) {
@@ -125,14 +122,13 @@ class _HomeState extends State<Home> {
                   style: const TextStyle(fontSize: 40)),
               Text('Temperatura: $temperatura°C',
                   style: const TextStyle(fontSize: 40)),
-              Text('$avisoTemperatura',
+              Text(avisoTemperatura,
                   style: TextStyle(
                       fontFamily: 'BebasNeue',
                       fontSize: 40,
                       color: corAvisoTemperatura)),
-              Text('Umidade: $umidade %',
-                  style: const TextStyle(fontSize: 40)),
-              Text('$avisoUmidade',
+              Text('Umidade: $umidade %', style: const TextStyle(fontSize: 40)),
+              Text(avisoUmidade,
                   style: TextStyle(
                       fontFamily: 'BebasNeue',
                       fontSize: 40,

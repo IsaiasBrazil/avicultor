@@ -4,16 +4,15 @@ import 'package:tcc/classes/galpao.dart';
 import 'package:tcc/widget_botao.dart';
 import 'widget_campo.dart';
 
-class TelaCadastroGalpao extends StatefulWidget {
-  const TelaCadastroGalpao({super.key});
+class TelaExclusaoGalpao extends StatefulWidget {
+  const TelaExclusaoGalpao({super.key});
 
   @override
-  State<TelaCadastroGalpao> createState() => _TelaCadastroGalpaoState();
+  State<TelaExclusaoGalpao> createState() => _TelaExclusaoGalpaoState();
 }
 
-class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
+class _TelaExclusaoGalpaoState extends State<TelaExclusaoGalpao> {
   TextEditingController codigoGalpao = TextEditingController();
-  TextEditingController descricaoGalpao = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +21,7 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
         toolbarHeight: 100,
         centerTitle: true,
         title: const Text(
-          'Cadastro de Galpão',
+          'Exclusão de Galpão',
           style: TextStyle(fontSize: 34),
         ),
       ),
@@ -41,18 +40,6 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
             ],
           ),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Campo(
-                  nome: 'Descrição:',
-                  controller: descricaoGalpao,
-                  keyboardType: TextInputType.text,
-                ),
-              )
-            ],
-          ),
-          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
@@ -61,17 +48,16 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
                     width: 115,
                     height: 40,
                     child: Botao(
-                      texto: 'Cadastrar',
+                      texto: 'Excluir',
                       aoSerPressionado: () async {
                         String codigo = codigoGalpao.text;
-                        String descricao = descricaoGalpao.text;
 
-                        Galpao galpao = Galpao(codigo: codigo, descricao: descricao);
+                        Galpao galpao = Galpao(codigo: codigo);
                         BancoDados bd = BancoDados.instance;
 
-                        bool resultadoCadastro = await bd.inserirGalpao(galpao);
+                        bool resultadoExclusao = await bd.excluirGalpao(galpao.codigo);
 
-                        mostrarResultado(context, resultadoCadastro);
+                        mostrarResultado(context, resultadoExclusao);
                       },
                     )),
               ),
@@ -84,7 +70,6 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
                       texto: 'Limpar tudo',
                       aoSerPressionado: () {
                         codigoGalpao.clear();
-                        descricaoGalpao.clear();
                       },
                     )),
               ),
@@ -96,14 +81,15 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
   }
 }
 
-void mostrarResultado(BuildContext context, bool conseguiuCadastrar) {
-  String mensagem = conseguiuCadastrar ? 'Galpão cadastrado!' : 'Falha ao cadastrar galpão!';
+void mostrarResultado(BuildContext context, bool conseguiuExcluir) {
+  String mensagem =
+      conseguiuExcluir ? 'Galpão excluído!' : 'Falha ao excluir galpão!';
 
   showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: conseguiuCadastrar
+          title: conseguiuExcluir
               ? const Text('Sucesso',
                   style: TextStyle(fontSize: 32, color: Colors.white))
               : const Text('Erro',
@@ -119,7 +105,7 @@ void mostrarResultado(BuildContext context, bool conseguiuCadastrar) {
                   style: TextStyle(fontSize: 24, color: Colors.white)),
             )
           ],
-          backgroundColor: conseguiuCadastrar ? const Color.fromRGBO(60, 179, 113, 1) : const Color.fromRGBO(210, 43, 43, 1)
+          backgroundColor: conseguiuExcluir ? const Color.fromRGBO(60, 179, 113, 1) : const Color.fromRGBO(210, 43, 43, 1)
         );
       });
 }
