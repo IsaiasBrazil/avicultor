@@ -33,22 +33,25 @@ class BancoDados {
 
   String get _createGalpaoTable => '''
     CREATE TABLE galpoes (
-      codigo INTEGER PRIMARY KEY,
+      codigo TEXT PRIMARY KEY,
       descricao TEXT
     );
   ''';
 
-  Future<void> inserirGalpao(Galpao galpao) async {
+  Future<bool> inserirGalpao(Galpao galpao) async {
     final db = await database;
     final resultado = await db.insert('galpoes', galpao.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
 
+    debugPrint('Código do galpão: ${galpao.codigo}');
+    debugPrint('Descrição do galpão: ${galpao.descricao}');
     if (resultado != -1) {
       debugPrint('Galpão inserido com sucesso!');
+      return true;
     } else {
       debugPrint('Falha ao inserir galpão!');
+      return false;
     }
-    debugPrint(galpao.toString());
   }
 
   Future<List<Galpao>> obterGalpoes() async {

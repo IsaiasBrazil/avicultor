@@ -25,16 +25,19 @@ class _TelaConsultaGalpaoState extends State<TelaConsultaGalpao> {
           builder:
               (BuildContext context, AsyncSnapshot<List<Galpao>> snapshot) {
             if (!snapshot.hasData) {
-              return const Center(child: Text('Carregando...', style: TextStyle(fontSize: 24)));
+              return const Center(child: Text('Carregando...', style: TextStyle(fontSize: 30)));
             }
             return snapshot.data!.isEmpty
-                ? const Center(child: Text('Não há galpões para consultar', style: TextStyle(fontSize: 24),))
+                ? const Center(child: Text('Não há galpões para consultar', style: TextStyle(fontSize: 30)))
                 : ListView(
                     children: snapshot.data!.map((galpao) {
                     return Center(
-                      child: ListTile(
-                        title: Text('Galpão ${galpao.codigo}', style: const TextStyle(fontSize: 28)),
-                        subtitle: Text(galpao.descricao, style: const TextStyle(fontSize: 22, color: Color.fromARGB(255, 188, 188, 188))),
+                      child: Card(
+                        margin: const EdgeInsets.all(10.0),
+                        child: ListTile(
+                          title: Text('Galpão ${galpao.codigo}', style: const TextStyle(fontSize: 28)),
+                          subtitle: Text(galpao.descricao, style: const TextStyle(fontSize: 22, color: Color.fromARGB(255, 188, 188, 188))),
+                        ),
                       ),
                     );
                   }).toList());

@@ -1,5 +1,5 @@
 class Galpao {
-  final int codigo;
+  final String codigo;
   final String descricao;
 
   const Galpao({required this.codigo, required this.descricao});

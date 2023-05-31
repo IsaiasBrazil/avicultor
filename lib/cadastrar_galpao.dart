@@ -56,26 +56,27 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.all(
-                    8.0), // Adjust the padding value as per your preference
+                padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
                     width: 115,
                     height: 40,
                     child: Botao(
                       texto: 'Cadastrar',
-                      aoSerPressionado: () {
-                        int codigo = int.parse(codigoGalpao.text);
+                      aoSerPressionado: () async {
+                        String codigo = codigoGalpao.text;
                         String descricao = descricaoGalpao.text;
 
-                        Galpao galpao = Galpao(codigo: codigo, descricao: descricao);
+                        Galpao galpao =
+                            Galpao(codigo: codigo, descricao: descricao);
                         BancoDados bd = BancoDados.instance;
-                        bd.inserirGalpao(galpao);
+                        bool resultadoCadastro = await bd.inserirGalpao(galpao);
+
+                        mostrarResultado(context, resultadoCadastro);
                       },
                     )),
               ),
               Padding(
-                padding: const EdgeInsets.all(
-                    8.0), // Adjust the padding value as per your preference
+                padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
                     width: 115,
                     height: 40,
@@ -93,4 +94,33 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
       ),
     );
   }
+}
+
+void mostrarResultado(BuildContext context, bool conseguiuCadastrar) {
+  String mensagem =
+      conseguiuCadastrar ? 'Galpão cadastrado!' : 'Falha ao cadastrar galpão!';
+
+  showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: conseguiuCadastrar
+              ? const Text('Sucesso',
+                  style: TextStyle(fontSize: 32, color: Colors.white))
+              : const Text('Erro',
+                  style: TextStyle(fontSize: 32, color: Colors.white)),
+          content: Text(mensagem,
+              style: const TextStyle(fontSize: 24, color: Colors.white)),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+              child: const Text('OK',
+                  style: TextStyle(fontSize: 24, color: Colors.white)),
+            )
+          ],
+          backgroundColor: const Color.fromRGBO(60, 179, 113, 1),
+        );
+      });
 }
