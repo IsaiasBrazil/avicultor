@@ -51,9 +51,9 @@ class MqttHandler with ChangeNotifier {
       client.disconnect();
       return -1;
     }
-   receiveMessage("temperatura");
-    receiveMessage("humidade");
-    receiveMessage("gases");
+   receiveMessage("av1c0ntr0lz2er0/temperatura");
+    receiveMessage("av1c0ntr0lz2er0/humidade");
+    receiveMessage("av1c0ntr0lz2er0/gases");
     return client;
   }
 
@@ -66,15 +66,15 @@ class MqttHandler with ChangeNotifier {
       final recMess = c![0].payload as MqttPublishMessage;
       final pt =
       MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
-      if(c[0].topic=="temperatura"){
+      if(c[0].topic=="av1c0ntr0lz2er0/temperatura"){
       temperatura.value = pt;
       notifyListeners();
       }
-      else if(c[0].topic=="humidade"){
+      else if(c[0].topic=="av1c0ntr0lz2er0/humidade"){
         humidade.value = pt;
         notifyListeners();
       }
-      else if(c[0].topic=="gases"){
+      else if(c[0].topic=="av1c0ntr0lz2er0/gases"){
         gases.value = pt;
         notifyListeners();
       }
