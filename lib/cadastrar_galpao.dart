@@ -97,29 +97,31 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
 }
 
 void mostrarResultado(BuildContext context, bool conseguiuCadastrar) {
-  String mensagem = conseguiuCadastrar ? 'Galpão cadastrado!' : 'Falha ao cadastrar galpão!';
+  String mensagem =
+      conseguiuCadastrar ? 'Galpão cadastrado!' : 'Falha ao cadastrar galpão!';
 
   showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: conseguiuCadastrar
-              ? const Text('Sucesso',
-                  style: TextStyle(fontSize: 32, color: Colors.white))
-              : const Text('Erro',
-                  style: TextStyle(fontSize: 32, color: Colors.white)),
-          content: Text(mensagem,
-              style: const TextStyle(fontSize: 24, color: Colors.white)),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(dialogContext).pop();
-              },
-              child: const Text('OK',
-                  style: TextStyle(fontSize: 24, color: Colors.white)),
-            )
-          ],
-          backgroundColor: conseguiuCadastrar ? const Color.fromRGBO(60, 179, 113, 1) : const Color.fromRGBO(210, 43, 43, 1)
-        );
+            title: conseguiuCadastrar
+                ? const Text('Sucesso',
+                    style: TextStyle(fontSize: 32, color: Colors.white))
+                : const Text('Erro',
+                    style: TextStyle(fontSize: 32, color: Colors.white)),
+            content: Text(mensagem,
+                style: const TextStyle(fontSize: 24, color: Colors.white)),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(dialogContext).pop();
+                },
+                child: const Text('OK',
+                    style: TextStyle(fontSize: 24, color: Colors.white)),
+              )
+            ],
+            backgroundColor: conseguiuCadastrar
+                ? const Color.fromRGBO(60, 179, 113, 1)
+                : const Color.fromRGBO(210, 43, 43, 1));
       });
 }

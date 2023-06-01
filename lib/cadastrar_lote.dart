@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'banco_dados/bd.dart';
+import 'classes/lote.dart';
 import 'widget_botao.dart';
+import 'widget_caixa_dialog.dart';
 import 'widget_campo.dart';
 
 class TelaCadastroLote extends StatefulWidget {
-  const TelaCadastroLote({Key? key}) : super(key: key);
+  const TelaCadastroLote({super.key});
 
   @override
   State<TelaCadastroLote> createState() => _TelaCadastroLoteState();
@@ -101,21 +104,75 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.all(
-                    8.0), // Adjust the padding value as per your preference
+                padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
                     width: 115,
                     height: 40,
                     child: Botao(
-                      texto: 'Cadastrar',
-                      aoSerPressionado: () {
-                        debugPrint(codigoDoLote.text);
-                      },
-                    )),
+                        texto: 'Cadastrar',
+                        aoSerPressionado: () async {
+                          String codLote = codigoDoLote.text;
+                          String codGalpao = codigoDoGalpao.text;
+                          int idadeLote =
+                              idade.text.isNotEmpty ? int.parse(idade.text) : 0;
+                          String dataLote = data.text;
+                          String descLote = descricao.text;
+                          BancoDados bd = BancoDados.instance;
+                          bool galpaoEncontrado =
+                              await bd.galpaoExiste(codGalpao);
+
+
+                          if (!galpaoEncontrado && codLote.isNotEmpty) {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    const CaixaDialog(
+                                        titulo: 'Aviso',
+                                        mensagem:
+                                            'Insira um código de galpão existente para realizar o cadastro!',
+                                        tituloBotao: 'OK',
+                                        corFundo:
+                                            Color.fromRGBO(227, 200, 18, 1),
+                                        corTexto: Colors.white));
+                          } else if (!galpaoEncontrado && codLote.isEmpty) {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    const CaixaDialog(
+                                        titulo: 'Aviso',
+                                        mensagem:
+                                            'Insira um código de galpão existente e preencha o campo código do lote para realizar o cadastro!',
+                                        tituloBotao: 'OK',
+                                        corFundo:
+                                            Color.fromRGBO(227, 200, 18, 1),
+                                        corTexto: Colors.white));
+                          } else if (galpaoEncontrado && codLote.isEmpty) {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    const CaixaDialog(
+                                      titulo: 'Aviso',
+                                      mensagem:
+                                          'Preencha o campo código do lote para realizar o cadastro!',
+                                      tituloBotao: 'OK',
+                                      corFundo: Color.fromRGBO(227, 200, 18, 1),
+                                      corTexto: Colors.white,
+                                    ));
+                          } else {
+                            Lote lote = Lote(
+                                codigoLote: codLote,
+                                descricao: descLote,
+                                idade: idadeLote,
+                                dataChegada: dataLote,
+                                codigoGalpao: codGalpao);
+
+                            bool resultadoCadastro = await bd.inserirLote(lote);
+                            mostrarResultado(context, resultadoCadastro);
+                          }
+                        })),
               ),
               Padding(
-                padding: const EdgeInsets.all(
-                    8.0), // Adjust the padding value as per your preference
+                padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
                     width: 115,
                     height: 40,
@@ -136,4 +193,34 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
       ),
     );
   }
+}
+
+void mostrarResultado(BuildContext context, bool conseguiuCadastrar) {
+  String mensagem =
+      conseguiuCadastrar ? 'Lote cadastrado!' : 'Falha ao cadastrar lote!';
+
+  showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+            title: conseguiuCadastrar
+                ? const Text('Sucesso',
+                    style: TextStyle(fontSize: 32, color: Colors.white))
+                : const Text('Erro',
+                    style: TextStyle(fontSize: 32, color: Colors.white)),
+            content: Text(mensagem,
+                style: const TextStyle(fontSize: 24, color: Colors.white)),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(dialogContext).pop();
+                },
+                child: const Text('OK',
+                    style: TextStyle(fontSize: 24, color: Colors.white)),
+              )
+            ],
+            backgroundColor: conseguiuCadastrar
+                ? const Color.fromRGBO(60, 179, 113, 1)
+                : const Color.fromRGBO(210, 43, 43, 1));
+      });
 }

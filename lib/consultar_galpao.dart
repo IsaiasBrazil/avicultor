@@ -38,19 +38,9 @@ class _TelaConsultaGalpaoState extends State<TelaConsultaGalpao> {
                       child: Card(
                         margin: const EdgeInsets.all(10.0),
                         child: ListTile(
-                            title: Text('Galpão ${galpao.codigo}',
+                            title: Text('Galpão: ${galpao.codigo}',
                                 style: const TextStyle(fontSize: 28)),
-                            subtitle: galpao.descricao != null
-                                ? Text(galpao.descricao!,
-                                    style: const TextStyle(
-                                        fontSize: 22,
-                                        color:
-                                            Color.fromARGB(255, 188, 188, 188)))
-                                : const Text('',
-                                    style: TextStyle(
-                                        fontSize: 22,
-                                        color:
-                                            Color.fromARGB(255, 188, 188, 188)))
+                            subtitle: Text('Descrição do galpão: ${galpao.descricao.toString()}')
                             ),
                       ),
                     );

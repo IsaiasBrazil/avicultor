@@ -2,6 +2,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../classes/galpao.dart';
+import '../classes/lote.dart';
 
 class BancoDados {
   BancoDados._();
@@ -27,16 +28,29 @@ class BancoDados {
   }
 
   Future<void> _onCreate(Database db, int version) async {
-    await db.execute(_createGalpaoTable);
+    await db.execute(_criarTabelaGalpao);
+    await db.execute(_criarTabelaLote);
   }
 
-  String get _createGalpaoTable => '''
+  String get _criarTabelaGalpao => '''
     CREATE TABLE galpoes (
       codigo TEXT PRIMARY KEY,
       descricao TEXT
     );
   ''';
 
+  String get _criarTabelaLote => '''
+    CREATE TABLE lotes (
+      codigo TEXT PRIMARY KEY,
+      descricao TEXT,
+      idade INTEGER,
+      data_chegada TEXT,
+      fk_cod_galpao TEXT,
+      FOREIGN KEY (fk_cod_galpao) REFERENCES galpoes (codigo)
+    );
+  ''';
+
+  // Queries dos galpões
   Future<bool> inserirGalpao(Galpao galpao) async {
     final db = await database;
     final resultadoInsercao = await db.insert('galpoes', galpao.toMap(),
@@ -50,14 +64,50 @@ class BancoDados {
     var galpoes = await db.query('galpoes');
 
     List<Galpao> listaGalpoes = galpoes.isNotEmpty
-        ? galpoes.map((c) => Galpao.fromMap(c)).toList()
+        ? galpoes.map((g) => Galpao.fromMap(g)).toList()
         : [];
     return listaGalpoes;
   }
 
+  Future<bool> galpaoExiste(String codigo) async {
+    Database db = await instance.database;
+    var resultado =
+        await db.query('galpoes', where: 'codigo = ?', whereArgs: [codigo]);
+
+    return resultado.isNotEmpty ? true : false;
+  }
+
   Future<bool> excluirGalpao(String codigo) async {
     Database db = await instance.database;
-    var resultadoExclusao = await db.delete('galpoes', where: 'codigo = ?', whereArgs: [codigo]);
+    var resultadoExclusao =
+        await db.delete('galpoes', where: 'codigo = ?', whereArgs: [codigo]);
+
+    return resultadoExclusao == 1 ? true : false;
+  }
+
+
+  // Queries dos lotes
+  Future<bool> inserirLote(Lote lote) async {
+    final db = await database;
+    final resultadoInsercao = await db.insert('lotes', lote.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+
+    return resultadoInsercao != -1 ? true : false;
+  }
+
+  Future<List<Lote>> obterLotes() async {
+    Database db = await instance.database;
+    var lotes = await db.query('lotes');
+
+    List<Lote> listaLotes =
+        lotes.isNotEmpty ? lotes.map((l) => Lote.fromMap(l)).toList() : [];
+    return listaLotes;
+  }
+
+  Future<bool> excluirLote(String codigo) async {
+    Database db = await instance.database;
+    var resultadoExclusao =
+        await db.delete('lotes', where: 'codigo = ?', whereArgs: [codigo]);
 
     return resultadoExclusao == 1 ? true : false;
   }
