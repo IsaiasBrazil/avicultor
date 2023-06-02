@@ -3,7 +3,6 @@ import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:uuid/uuid.dart';
 
-
 class MqttHandler with ChangeNotifier {
   final ValueNotifier<String> temperatura = ValueNotifier<String>("");
   final ValueNotifier<String> humidade = ValueNotifier<String>("");
