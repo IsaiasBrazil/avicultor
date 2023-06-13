@@ -86,7 +86,7 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
                         BancoDados bd = BancoDados.instance;
                         bool galpaoEncontrado = await bd.galpaoExiste(codGalpao);
 
-                        if (!galpaoEncontrado) {
+                        if (!galpaoEncontrado && codSensor.isNotEmpty) {
                           showDialog(
                               context: context,
                               builder: (BuildContext context) => const CaixaDialog(
@@ -95,7 +95,26 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
                                   tituloBotao: 'OK',
                                   corFundo: Color.fromRGBO(227, 200, 18, 1),
                                   corTexto: Colors.white));
-                        } else {
+                        } else if (!galpaoEncontrado && codSensor.isEmpty) {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) => const CaixaDialog(
+                                  titulo: 'Aviso',
+                                  mensagem: 'Insira um código de galpão existente e preencha o campo código do sensor para realizar o cadastro!',
+                                  tituloBotao: 'OK',
+                                  corFundo: Color.fromRGBO(227, 200, 18, 1),
+                                  corTexto: Colors.white));
+                        } else if (galpaoEncontrado && codSensor.isEmpty) {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) => const CaixaDialog(
+                                  titulo: 'Aviso',
+                                  mensagem: 'Preencha o campo código do sensor para realizar o cadastro!',
+                                  tituloBotao: 'OK',
+                                  corFundo: Color.fromRGBO(227, 200, 18, 1),
+                                  corTexto: Colors.white));
+                        }
+                        else {
                           Sensor sensor =
                               Sensor(codigo: codSensor, descricao: descSensor, codigoGalpao: codGalpao, tipo: tipoSensor);
 
