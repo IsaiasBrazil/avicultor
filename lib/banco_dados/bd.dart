@@ -129,4 +129,11 @@ class BancoDados {
     List<Sensor> listaSensores = sensores.isNotEmpty ? sensores.map((s) => Sensor.fromMap(s)).toList() : [];
     return listaSensores;
   }
+
+  Future<bool> excluirSensor(String codigo) async {
+    Database db = await instance.database;
+    var resultadoExclusao = await db.delete('sensores', where: 'codigo = ?', whereArgs: [codigo]);
+
+    return resultadoExclusao == 1 ? true : false;
+  }
 }

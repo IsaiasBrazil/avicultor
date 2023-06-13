@@ -1,10 +1,10 @@
 class Sensor {
-  final String? codigo;
-  final String codigoGalpao;
+  final String codigo;
+  final String? codigoGalpao;
   final String? tipo;
   final String? descricao;
 
-  const Sensor({this.codigo, required this.codigoGalpao, this.tipo, this.descricao});
+  const Sensor({required this.codigo, this.codigoGalpao, this.tipo, this.descricao});
 
   @override
   String toString() {

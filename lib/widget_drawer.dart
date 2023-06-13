@@ -8,6 +8,7 @@ import 'package:tcc/cadastrar_lote.dart';
 import 'package:tcc/consultar_galpao.dart';
 import 'package:tcc/consultar_sensor.dart';
 import 'package:tcc/excluir_galpao.dart';
+import 'package:tcc/excluir_sensor.dart';
 import 'cadastrar_sensor.dart';
 import 'consultar_lote.dart';
 import 'excluir_lote.dart';
@@ -183,7 +184,7 @@ class MenuLateral extends StatelessWidget {
                 icone: null,
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => const Home()));
+                      context, MaterialPageRoute(builder: (context) => const TelaExclusaoSensor()));
                 },
               ),
               ListTileCustom(
