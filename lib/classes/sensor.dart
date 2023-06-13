@@ -8,7 +8,7 @@ class Sensor {
 
   @override
   String toString() {
-    return 'Sensor{Código: $codigo, codigoGalpao: $codigoGalpao, tipo: $tipo, descricao: $descricao}';
+    return 'Sensor{Código: $codigo, Código do Galpão: $codigoGalpao, tipo: $tipo, descricao: $descricao}';
   }
 
   factory Sensor.fromMap(Map<String, dynamic> json) =>
@@ -16,7 +16,7 @@ class Sensor {
         codigo: json['codigo'],
         descricao: json['descricao'], 
         codigoGalpao: json['fk_cod_galpao'],
-        tipo: json['idade']
+        tipo: json['tipo']
         );
 
   Map<String, dynamic> toMap() {

@@ -121,4 +121,12 @@ class BancoDados {
 
     return resultadoInsercao != -1 ? true : false;
   }
+
+  Future<List<Sensor>> obterSensores() async {
+    Database db = await instance.database;
+    var sensores = await db.query('sensores');
+
+    List<Sensor> listaSensores = sensores.isNotEmpty ? sensores.map((s) => Sensor.fromMap(s)).toList() : [];
+    return listaSensores;
+  }
 }
