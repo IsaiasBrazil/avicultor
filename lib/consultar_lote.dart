@@ -43,25 +43,12 @@ class _TelaConsultaLoteState extends State<TelaConsultaLote> {
                             ),
                             subtitle:  Column(
                               children: [
-                                Text('Código do galpão: ${lote.codigoGalpao.toString()}'),
-                                Text('Idade: ${lote.idade.toString()}'),
-                                Text('Data de chegada: ${lote.dataChegada.toString()}'),
-                                Text('Descrição: ${lote.descricao.toString()}')
+                                Text('Código do galpão: ${lote.codigoGalpao}', style: const TextStyle(fontSize: 24)),
+                                Text('Idade: ${lote.idade}', style: const TextStyle(fontSize: 24)),
+                                Text('Data de chegada: ${lote.dataChegada}', style: const TextStyle(fontSize: 24)),
+                                Text('Descrição: ${lote.descricao}', style: const TextStyle(fontSize: 24))
                               ],
                             )
-                            //Text('Código do galpão: ${lote.codigoGalpao.toString()}'),
-                                       //Text('Idade do lote: ${lote.idade.toString()}'),
-                            // subtitle: lote.descricao != null
-                            //     ? Text(lote.descricao!,
-                            //         style: const TextStyle(
-                            //             fontSize: 22,
-                            //             color:
-                            //                 Color.fromARGB(255, 188, 188, 188)))
-                            //     : const Text('',
-                            //         style: TextStyle(
-                            //             fontSize: 22,
-                            //             color: Color.fromARGB(
-                            //                 255, 188, 188, 188)))),
                         )
                       ),
                     );

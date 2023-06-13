@@ -38,9 +38,9 @@ class _TelaConsultaSensorState extends State<TelaConsultaSensor> {
                               ),
                               subtitle: Column(
                                 children: [
-                                  Text('Código do galpão: ${sensor.codigoGalpao}'),
-                                  Text('Tipo: ${sensor.tipo}'),
-                                  Text('Descrição: ${sensor.descricao}')
+                                  Text('Código do galpão: ${sensor.codigoGalpao}', style: const TextStyle(fontSize: 24)),
+                                  Text('Tipo: ${sensor.tipo}', style: const TextStyle(fontSize: 24)),
+                                  Text('Descrição: ${sensor.descricao}', style: const TextStyle(fontSize: 24))
                                 ],
                               ))),
                     );

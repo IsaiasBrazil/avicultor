@@ -22,28 +22,29 @@ class _TelaConsultaGalpaoState extends State<TelaConsultaGalpao> {
       body: Center(
         child: FutureBuilder<List<Galpao>>(
           future: BancoDados.instance.obterGalpoes(),
-          builder:
-              (BuildContext context, AsyncSnapshot<List<Galpao>> snapshot) {
+          builder: (BuildContext context, AsyncSnapshot<List<Galpao>> snapshot) {
             if (!snapshot.hasData) {
-              return const Center(
-                  child: Text('Carregando...', style: TextStyle(fontSize: 30)));
+              return const Center(child: Text('Carregando...', style: TextStyle(fontSize: 30)));
             }
             return snapshot.data!.isEmpty
                 ? const Center(
-                    child: Text('Não há galpões para consultar',
-                        style: TextStyle(fontSize: 30)))
+                  child: Text('Não há galpões para consultar', style: TextStyle(fontSize: 30)))
                 : ListView(
                     children: snapshot.data!.map((galpao) {
                     return Center(
                       child: Card(
                         margin: const EdgeInsets.all(10.0),
                         child: ListTile(
-                            title: Text('Galpão: ${galpao.codigo}',
-                                style: const TextStyle(fontSize: 28)),
-                            subtitle: Text('Descrição do galpão: ${galpao.descricao.toString()}')
-                            ),
+                          title: Center(
+                            child: Text('Galpão ${galpao.codigo}', style: const TextStyle(fontSize: 28)),
+                          ),
+                          subtitle: Column(
+                            children: [
+                              Text('Descrição do galpão: ${galpao.descricao}', style: const TextStyle(fontSize: 24))
+                            ],
+                          ),
                       ),
-                    );
+                    ));
                   }).toList());
           },
         ),
