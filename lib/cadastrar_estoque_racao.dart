@@ -38,7 +38,7 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                   controller: qtDeConsumo,
                   keyboardType: TextInputType.number,
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))
+                    FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}$'))
                   ],
                 ),
               ),
@@ -48,7 +48,7 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                   controller: qtDeReposicao,
                   keyboardType: TextInputType.number,
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))
+                    FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}$'))
                   ],
                 ),
               )

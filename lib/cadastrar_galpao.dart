@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tcc/banco_dados/bd.dart';
 import 'package:tcc/classes/galpao.dart';
 import 'package:tcc/widget_botao.dart';
+import 'package:tcc/widget_caixa_dialog.dart';
 import 'widget_campo.dart';
 
 class TelaCadastroGalpao extends StatefulWidget {
@@ -66,12 +67,25 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
                         String codigo = codigoGalpao.text;
                         String descricao = descricaoGalpao.text;
 
-                        Galpao galpao = Galpao(codigo: codigo, descricao: descricao);
-                        BancoDados bd = BancoDados.instance;
+                        if (codigo.isEmpty) {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) => const CaixaDialog(
+                                  titulo: 'Aviso',
+                                  mensagem: 'Preencha o campo código do galpão para realizar o cadastro!',
+                                  tituloBotao: 'OK',
+                                  corFundo: Color.fromRGBO(227, 200, 18, 1),
+                                  corTexto: Colors.white));
+                        } 
+                        else {
+                          Galpao galpao =
+                              Galpao(codigo: codigo, descricao: descricao);
+                          BancoDados bd = BancoDados.instance;
 
-                        bool resultadoCadastro = await bd.inserirGalpao(galpao);
-
-                        mostrarResultado(context, resultadoCadastro);
+                          bool resultadoCadastro =
+                              await bd.inserirGalpao(galpao);
+                          mostrarResultado(context, resultadoCadastro);
+                        }
                       },
                     )),
               ),

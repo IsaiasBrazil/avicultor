@@ -74,7 +74,7 @@ class _TelaCadastroInfoLoteState extends State<TelaCadastroInfoLote> {
                   controller: peso,
                   keyboardType: TextInputType.number,
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))
+                    FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}$'))
                   ],
                 ),
               ),
