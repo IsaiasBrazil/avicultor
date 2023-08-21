@@ -1,6 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../classes/producao.dart';
 import '../classes/galpao.dart';
 import '../classes/lote.dart';
 import '../classes/sensor.dart';
@@ -32,6 +33,7 @@ class BancoDados {
     await db.execute(_criarTabelaGalpao);
     await db.execute(_criarTabelaLote);
     await db.execute(_criarTabelaSensor);
+    await db.execute(_criarTabelaProducao);
   }
 
   String get _criarTabelaGalpao => '''
@@ -61,10 +63,23 @@ class BancoDados {
     )
   ''';
 
+  String get _criarTabelaProducao => '''
+    CREATE TABLE IF NOT EXISTS producoes (
+      codigo TEXT PRIMARY KEY,
+      fk_cod_lote TEXT,
+      quantidade_aves INTEGER,
+      peso REAL,
+      data TEXT,
+      observacao TEXT,
+      FOREIGN KEY (fk_cod_lote) REFERENCES lotes (codigo)
+    )
+  ''';
+
   // Queries dos galpões
   Future<bool> inserirGalpao(Galpao galpao) async {
     final db = await database;
-    final resultadoInsercao = await db.insert('galpoes', galpao.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+    final resultadoInsercao = await db.insert('galpoes', galpao.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
 
     return resultadoInsercao != -1 ? true : false;
   }
@@ -73,20 +88,24 @@ class BancoDados {
     Database db = await instance.database;
     var galpoes = await db.query('galpoes');
 
-    List<Galpao> listaGalpoes = galpoes.isNotEmpty ? galpoes.map((g) => Galpao.fromMap(g)).toList() : [];
+    List<Galpao> listaGalpoes = galpoes.isNotEmpty
+        ? galpoes.map((g) => Galpao.fromMap(g)).toList()
+        : [];
     return listaGalpoes;
   }
 
   Future<bool> galpaoExiste(String codigo) async {
     Database db = await instance.database;
-    var resultado = await db.query('galpoes', where: 'codigo = ?', whereArgs: [codigo]);
+    var resultado =
+        await db.query('galpoes', where: 'codigo = ?', whereArgs: [codigo]);
 
     return resultado.isNotEmpty ? true : false;
   }
 
   Future<bool> excluirGalpao(String codigo) async {
     Database db = await instance.database;
-    var resultadoExclusao = await db.delete('galpoes', where: 'codigo = ?', whereArgs: [codigo]);
+    var resultadoExclusao =
+        await db.delete('galpoes', where: 'codigo = ?', whereArgs: [codigo]);
 
     return resultadoExclusao == 1 ? true : false;
   }
@@ -94,7 +113,8 @@ class BancoDados {
   // Queries dos lotes
   Future<bool> inserirLote(Lote lote) async {
     final db = await database;
-    final resultadoInsercao = await db.insert('lotes', lote.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+    final resultadoInsercao = await db.insert('lotes', lote.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
 
     return resultadoInsercao != -1 ? true : false;
   }
@@ -103,13 +123,23 @@ class BancoDados {
     Database db = await instance.database;
     var lotes = await db.query('lotes');
 
-    List<Lote> listaLotes = lotes.isNotEmpty ? lotes.map((l) => Lote.fromMap(l)).toList() : [];
+    List<Lote> listaLotes =
+        lotes.isNotEmpty ? lotes.map((l) => Lote.fromMap(l)).toList() : [];
     return listaLotes;
+  }
+
+  Future<bool> loteExiste(String codigo) async {
+    Database db = await instance.database;
+    var resultado =
+        await db.query('lotes', where: 'codigo = ?', whereArgs: [codigo]);
+
+    return resultado.isNotEmpty ? true : false;
   }
 
   Future<bool> excluirLote(String codigo) async {
     Database db = await instance.database;
-    var resultadoExclusao = await db.delete('lotes', where: 'codigo = ?', whereArgs: [codigo]);
+    var resultadoExclusao =
+        await db.delete('lotes', where: 'codigo = ?', whereArgs: [codigo]);
 
     return resultadoExclusao == 1 ? true : false;
   }
@@ -117,7 +147,8 @@ class BancoDados {
   // Queries dos sensores
   Future<bool> inserirSensor(Sensor sensor) async {
     final db = await database;
-    final resultadoInsercao = await db.insert('sensores', sensor.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+    final resultadoInsercao = await db.insert('sensores', sensor.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
 
     return resultadoInsercao != -1 ? true : false;
   }
@@ -126,14 +157,36 @@ class BancoDados {
     Database db = await instance.database;
     var sensores = await db.query('sensores');
 
-    List<Sensor> listaSensores = sensores.isNotEmpty ? sensores.map((s) => Sensor.fromMap(s)).toList() : [];
+    List<Sensor> listaSensores = sensores.isNotEmpty
+        ? sensores.map((s) => Sensor.fromMap(s)).toList()
+        : [];
     return listaSensores;
   }
 
   Future<bool> excluirSensor(String codigo) async {
     Database db = await instance.database;
-    var resultadoExclusao = await db.delete('sensores', where: 'codigo = ?', whereArgs: [codigo]);
+    var resultadoExclusao =
+        await db.delete('sensores', where: 'codigo = ?', whereArgs: [codigo]);
 
     return resultadoExclusao == 1 ? true : false;
+  }
+
+  // Queries das produções
+  Future<bool> inserirProducao(Producao p) async {
+    final db = await database;
+    final resultadoInsercao = await db.insert('producoes', p.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+
+    return resultadoInsercao != -1 ? true : false;
+  }
+
+  Future<List<Producao>> obterProducoes() async {
+    Database db = await instance.database;
+    var producoes = await db.query('producoes');
+
+    List<Producao> listaProducoes = producoes.isNotEmpty
+        ? producoes.map((p) => Producao.fromMap(p)).toList()
+        : [];
+    return listaProducoes;
   }
 }
