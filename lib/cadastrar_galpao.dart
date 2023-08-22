@@ -72,18 +72,19 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
                               context: context,
                               builder: (BuildContext context) => const CaixaDialog(
                                   titulo: 'Aviso',
-                                  mensagem: 'Preencha o campo código do galpão para realizar o cadastro!',
+                                  mensagem:
+                                      'Preencha o campo código do galpão para realizar o cadastro!',
                                   tituloBotao: 'OK',
                                   corFundo: Color.fromRGBO(227, 200, 18, 1),
                                   corTexto: Colors.white));
-                        } 
-                        else {
+                        } else {
                           Galpao galpao =
                               Galpao(codigo: codigo, descricao: descricao);
                           BancoDados bd = BancoDados.instance;
 
                           bool resultadoCadastro =
                               await bd.inserirGalpao(galpao);
+                          if (!mounted) return;
                           mostrarResultado(context, resultadoCadastro);
                         }
                       },

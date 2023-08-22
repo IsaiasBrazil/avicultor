@@ -55,8 +55,9 @@ class _TelaExclusaoLoteState extends State<TelaExclusaoLote> {
                         Lote lote = Lote(codigoLote: codigo);
                         BancoDados bd = BancoDados.instance;
 
-                        bool resultadoExclusao = await bd.excluirLote(lote.codigoLote);
-
+                        bool resultadoExclusao =
+                            await bd.excluirLote(lote.codigoLote);
+                        if (!mounted) return;
                         mostrarResultado(context, resultadoExclusao);
                       },
                     )),
@@ -89,23 +90,24 @@ void mostrarResultado(BuildContext context, bool conseguiuExcluir) {
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: conseguiuExcluir
-              ? const Text('Sucesso',
-                  style: TextStyle(fontSize: 32, color: Colors.white))
-              : const Text('Erro',
-                  style: TextStyle(fontSize: 32, color: Colors.white)),
-          content: Text(mensagem,
-              style: const TextStyle(fontSize: 24, color: Colors.white)),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(dialogContext).pop();
-              },
-              child: const Text('OK',
-                  style: TextStyle(fontSize: 24, color: Colors.white)),
-            )
-          ],
-          backgroundColor: conseguiuExcluir ? const Color.fromRGBO(60, 179, 113, 1) : const Color.fromRGBO(210, 43, 43, 1)
-        );
+            title: conseguiuExcluir
+                ? const Text('Sucesso',
+                    style: TextStyle(fontSize: 32, color: Colors.white))
+                : const Text('Erro',
+                    style: TextStyle(fontSize: 32, color: Colors.white)),
+            content: Text(mensagem,
+                style: const TextStyle(fontSize: 24, color: Colors.white)),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(dialogContext).pop();
+                },
+                child: const Text('OK',
+                    style: TextStyle(fontSize: 24, color: Colors.white)),
+              )
+            ],
+            backgroundColor: conseguiuExcluir
+                ? const Color.fromRGBO(60, 179, 113, 1)
+                : const Color.fromRGBO(210, 43, 43, 1));
       });
 }

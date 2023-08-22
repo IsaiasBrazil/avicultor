@@ -55,8 +55,9 @@ class _TelaExclusaoSensorState extends State<TelaExclusaoSensor> {
                         Sensor sensor = Sensor(codigo: codSensor);
                         BancoDados bd = BancoDados.instance;
 
-                        bool resultadoExclusao = await bd.excluirSensor(sensor.codigo);
-
+                        bool resultadoExclusao =
+                            await bd.excluirSensor(sensor.codigo);
+                        if (!mounted) return;
                         mostrarResultado(context, resultadoExclusao);
                       },
                     )),
@@ -82,24 +83,31 @@ class _TelaExclusaoSensorState extends State<TelaExclusaoSensor> {
 }
 
 void mostrarResultado(BuildContext context, bool conseguiuExcluir) {
-  String mensagem = conseguiuExcluir ? 'Sensor excluído!' : 'Falha ao excluir sensor!';
+  String mensagem =
+      conseguiuExcluir ? 'Sensor excluído!' : 'Falha ao excluir sensor!';
 
   showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
             title: conseguiuExcluir
-                ? const Text('Sucesso', style: TextStyle(fontSize: 32, color: Colors.white))
-                : const Text('Erro', style: TextStyle(fontSize: 32, color: Colors.white)),
-            content: Text(mensagem, style: const TextStyle(fontSize: 24, color: Colors.white)),
+                ? const Text('Sucesso',
+                    style: TextStyle(fontSize: 32, color: Colors.white))
+                : const Text('Erro',
+                    style: TextStyle(fontSize: 32, color: Colors.white)),
+            content: Text(mensagem,
+                style: const TextStyle(fontSize: 24, color: Colors.white)),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(dialogContext).pop();
                 },
-                child: const Text('OK', style: TextStyle(fontSize: 24, color: Colors.white)),
+                child: const Text('OK',
+                    style: TextStyle(fontSize: 24, color: Colors.white)),
               )
             ],
-            backgroundColor: conseguiuExcluir ? const Color.fromRGBO(60, 179, 113, 1) : const Color.fromRGBO(210, 43, 43, 1));
+            backgroundColor: conseguiuExcluir
+                ? const Color.fromRGBO(60, 179, 113, 1)
+                : const Color.fromRGBO(210, 43, 43, 1));
       });
 }

@@ -121,6 +121,7 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                           bool galpaoEncontrado =
                               await bd.galpaoExiste(codGalpao);
 
+                          if (!mounted) return;
 
                           if (!galpaoEncontrado && codLote.isNotEmpty) {
                             showDialog(
@@ -167,6 +168,7 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                                 codigoGalpao: codGalpao);
 
                             bool resultadoCadastro = await bd.inserirLote(lote);
+                            if (!mounted) return;
                             mostrarResultado(context, resultadoCadastro);
                           }
                         })),

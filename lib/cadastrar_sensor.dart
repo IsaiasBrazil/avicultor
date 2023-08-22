@@ -84,41 +84,51 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
                         String descSensor = descricaoDoSensor.text;
 
                         BancoDados bd = BancoDados.instance;
-                        bool galpaoEncontrado = await bd.galpaoExiste(codGalpao);
+                        bool galpaoEncontrado =
+                            await bd.galpaoExiste(codGalpao);
+
+                        if (!mounted) return;
 
                         if (!galpaoEncontrado && codSensor.isNotEmpty) {
                           showDialog(
                               context: context,
                               builder: (BuildContext context) => const CaixaDialog(
                                   titulo: 'Aviso',
-                                  mensagem: 'Insira um código de galpão existente para realizar o cadastro!',
+                                  mensagem:
+                                      'Insira um código de galpão existente para realizar o cadastro!',
                                   tituloBotao: 'OK',
                                   corFundo: Color.fromRGBO(227, 200, 18, 1),
                                   corTexto: Colors.white));
                         } else if (!galpaoEncontrado && codSensor.isEmpty) {
-                            showDialog(
+                          showDialog(
                               context: context,
                               builder: (BuildContext context) => const CaixaDialog(
                                   titulo: 'Aviso',
-                                  mensagem: 'Insira um código de galpão existente e preencha o campo código do sensor para realizar o cadastro!',
+                                  mensagem:
+                                      'Insira um código de galpão existente e preencha o campo código do sensor para realizar o cadastro!',
                                   tituloBotao: 'OK',
                                   corFundo: Color.fromRGBO(227, 200, 18, 1),
                                   corTexto: Colors.white));
                         } else if (galpaoEncontrado && codSensor.isEmpty) {
-                            showDialog(
+                          showDialog(
                               context: context,
                               builder: (BuildContext context) => const CaixaDialog(
                                   titulo: 'Aviso',
-                                  mensagem: 'Preencha o campo código do sensor para realizar o cadastro!',
+                                  mensagem:
+                                      'Preencha o campo código do sensor para realizar o cadastro!',
                                   tituloBotao: 'OK',
                                   corFundo: Color.fromRGBO(227, 200, 18, 1),
                                   corTexto: Colors.white));
-                        }
-                        else {
-                          Sensor sensor =
-                              Sensor(codigo: codSensor, descricao: descSensor, codigoGalpao: codGalpao, tipo: tipoSensor);
+                        } else {
+                          Sensor sensor = Sensor(
+                              codigo: codSensor,
+                              descricao: descSensor,
+                              codigoGalpao: codGalpao,
+                              tipo: tipoSensor);
 
-                          bool resultadoCadastro = await bd.inserirSensor(sensor);
+                          bool resultadoCadastro =
+                              await bd.inserirSensor(sensor);
+                          if (!mounted) return;
                           mostrarResultado(context, resultadoCadastro);
                         }
                       },
@@ -148,24 +158,31 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
 }
 
 void mostrarResultado(BuildContext context, bool conseguiuCadastrar) {
-  String mensagem = conseguiuCadastrar ? 'Sensor cadastrado!' : 'Falha ao cadastrar sensor!';
+  String mensagem =
+      conseguiuCadastrar ? 'Sensor cadastrado!' : 'Falha ao cadastrar sensor!';
 
   showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
             title: conseguiuCadastrar
-                ? const Text('Sucesso', style: TextStyle(fontSize: 32, color: Colors.white))
-                : const Text('Erro', style: TextStyle(fontSize: 32, color: Colors.white)),
-            content: Text(mensagem, style: const TextStyle(fontSize: 24, color: Colors.white)),
+                ? const Text('Sucesso',
+                    style: TextStyle(fontSize: 32, color: Colors.white))
+                : const Text('Erro',
+                    style: TextStyle(fontSize: 32, color: Colors.white)),
+            content: Text(mensagem,
+                style: const TextStyle(fontSize: 24, color: Colors.white)),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(dialogContext).pop();
                 },
-                child: const Text('OK', style: TextStyle(fontSize: 24, color: Colors.white)),
+                child: const Text('OK',
+                    style: TextStyle(fontSize: 24, color: Colors.white)),
               )
             ],
-            backgroundColor: conseguiuCadastrar ? const Color.fromRGBO(60, 179, 113, 1) : const Color.fromRGBO(210, 43, 43, 1));
+            backgroundColor: conseguiuCadastrar
+                ? const Color.fromRGBO(60, 179, 113, 1)
+                : const Color.fromRGBO(210, 43, 43, 1));
       });
 }
