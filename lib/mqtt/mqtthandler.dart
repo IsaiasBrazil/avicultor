@@ -8,7 +8,7 @@ class MqttHandler with ChangeNotifier {
   final ValueNotifier<String> humidade = ValueNotifier<String>("");
   final ValueNotifier<String> gases = ValueNotifier<String>("");
   late MqttServerClient client;
-  final String deviceId = Uuid().v4()+" Avicontrol";
+  final String deviceId = "${const Uuid().v4()} Avicontrol";
 
   Future<Object> connect() async {
     client = MqttServerClient.withPort(

@@ -19,6 +19,10 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
   TextEditingController codigoDoGalpao = TextEditingController();
   TextEditingController tipoDeSensor = TextEditingController();
   TextEditingController descricaoDoSensor = TextEditingController();
+  String selecionado = "Temperatura";
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,12 +67,15 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(style: const TextStyle(
                         fontSize: 22,
-                        fontFamily: 'BebasNeue',),"Tipo:"),
+                        fontFamily: 'BebasNeue',),"Tipo: $selecionado"),
                       Dropdown(
-                        options: ["Temperatura","Umidade","Gases"],
+                        options: const ["Temperatura","Umidade","Gases"],
+                        selectedOption: selecionado,
+                        onChanged: trocarValor,
                       ),
                     ],
                   ),
@@ -163,6 +170,11 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
         ],
       ),
     );
+  }
+  void  trocarValor(newValue) {
+    setState((){
+      selecionado= newValue;
+    });
   }
 }
 

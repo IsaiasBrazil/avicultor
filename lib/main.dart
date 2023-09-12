@@ -13,12 +13,12 @@ void main() {
         theme: ThemeData(primarySwatch: Colors.green, fontFamily: 'BebasNeue'),
         debugShowCheckedModeBanner: false,
         home: const Home(),
-        localizationsDelegates: [
+        localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
-        supportedLocales: [
-          const Locale('pt', 'BR')
+        supportedLocales: const [
+          Locale('pt', 'BR')
         ]),
   );
 }
