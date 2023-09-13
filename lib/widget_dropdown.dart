@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 class Dropdown extends StatefulWidget {
   List<String> options;
-  String selectedOption;
   void  onChanged;
-  Dropdown({Key? key,required this.options,required this.selectedOption,required this.onChanged}) : super(key: key);
+  Dropdown({Key? key,required this.options, required this.onChanged}) : super(key: key);
 
   @override
   State<Dropdown> createState() => _DropdownState();
@@ -15,8 +14,8 @@ class _DropdownState extends State<Dropdown> {
   @override
   Widget build(BuildContext context) {
     List<String> options = widget.options;
-    String selectedOption = widget.selectedOption;
-    selectedOption = selectedOption.isEmpty? options[0]:selectedOption;
+    String selectedOption = "";
+    selectedOption = selectedOption.isEmpty ? options[0] : selectedOption;
     return DropdownButton<String>(
           value: selectedOption,
           onChanged: onChanged,

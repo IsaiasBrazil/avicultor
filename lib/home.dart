@@ -25,9 +25,9 @@ class _HomeState extends State<Home> {
   String avisoTemperatura = '';
   String avisoUmidade = '';
   String avisoPresencaGasToxico = '';
-  String temperaturaSensor = '&';
-  String humidadeSensor = '&';
-  String gasesSensor = '&';
+  String temperaturaSensor = '';
+  String humidadeSensor = '';
+  String gasesSensor = '';
 
   // Variáveis para definir a cor do texto dos avisos
   Color corAvisoTemperatura = Colors.black;

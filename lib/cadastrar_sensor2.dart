@@ -74,7 +74,6 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
                         fontFamily: 'BebasNeue',),"Tipo: $selecionado"),
                       Dropdown(
                         options: const ["Temperatura","Umidade","Gases"],
-                        selectedOption: selecionado,
                         onChanged: trocarValor,
                       ),
                     ],

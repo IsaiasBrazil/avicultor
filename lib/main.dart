@@ -15,10 +15,8 @@ void main() {
         home: const Home(),
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate
+          GlobalWidgetsLocalizations.delegate,
         ],
-        supportedLocales: const [
-          Locale('pt', 'BR')
-        ]),
+    )
   );
 }
