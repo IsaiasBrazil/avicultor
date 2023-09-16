@@ -19,10 +19,8 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
   TextEditingController codigoDoGalpao = TextEditingController();
   TextEditingController tipoDeSensor = TextEditingController();
   TextEditingController descricaoDoSensor = TextEditingController();
-  String selecionado = "Temperatura";
-
-
-
+  String tipoDoSensor = "Temperatura";
+  String codigoDeGalpao = "abc";
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +43,23 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
                 ),
               ),
               Expanded(
-                child: Campo(
+                /*child: Campo(
                   nome: 'Código do galpão:',
                   controller: codigoDoGalpao,
                   keyboardType: TextInputType.text,
+                ),*/
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(style: const TextStyle(
+                      fontSize: 22,
+                      fontFamily: 'BebasNeue',),"Código do galpão:"),
+                    Dropdown(
+                      selectedOption: codigoDeGalpao,
+                      options: const ['abc','2b','3'],
+                      onChanged: trocarGalpao,
+                    ),
+                  ],
                 ),
               )
             ],
@@ -71,10 +82,11 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
                     children: [
                       Text(style: const TextStyle(
                         fontSize: 22,
-                        fontFamily: 'BebasNeue',),"Tipo: $selecionado"),
+                        fontFamily: 'BebasNeue',),"Tipo:"),
                       Dropdown(
+                        selectedOption: tipoDoSensor,
                         options: const ["Temperatura","Umidade","Gases"],
-                        onChanged: trocarValor,
+                        onChanged: trocarTipo,
                       ),
                     ],
                   ),
@@ -170,9 +182,15 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
       ),
     );
   }
-  void  trocarValor(newValue) {
+  void  trocarTipo(newValue) {
     setState((){
-      selecionado= newValue;
+      tipoDoSensor= newValue;
+    });
+  }
+
+  void  trocarGalpao(newValue) {
+    setState((){
+      codigoDeGalpao= newValue;
     });
   }
 }
