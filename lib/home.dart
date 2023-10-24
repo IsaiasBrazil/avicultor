@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
   MqttHandler mqttHandler = MqttHandler();
 
   // Variáveis de controle
-  int temperatura = 0;
+  String temperatura = '0';
   int umidade = 0;
   int presencaGasToxico = 0;
 
@@ -65,17 +65,19 @@ class _HomeState extends State<Home> {
 
       // Mostrar mensagem de acordo com a temperatura atual
       if(temperaturaSensor.isNotEmpty){
-        temperatura = int.parse(temperaturaSensor);
-        if (temperatura <= 18) {
-          avisoTemperatura = 'Temperatura baixa!';
-          corAvisoTemperatura = Colors.blue;
-        } else if (temperatura >= 24) {
-          avisoTemperatura = 'Temperatura acima do ideal!';
-          corAvisoTemperatura = Colors.red;
-        } else {
-          avisoTemperatura = 'Temperatura ideal!';
-          corAvisoTemperatura = Colors.green;
-        }
+        print(temperaturaSensor);
+        //
+        // temperatura = int.parse(temperaturaSensor);
+        // if (temperatura <= 18) {
+        //   avisoTemperatura = 'Temperatura baixa!';
+        //   corAvisoTemperatura = Colors.blue;
+        // } else if (temperatura >= 24) {
+        //   avisoTemperatura = 'Temperatura acima do ideal!';
+        //   corAvisoTemperatura = Colors.red;
+        // } else {
+        //   avisoTemperatura = 'Temperatura ideal!';
+        //   corAvisoTemperatura = Colors.green;
+        // }
       }else{
         avisoTemperatura = 'Temperatura sem leitura!';
         corAvisoTemperatura = Colors.black;
@@ -192,7 +194,9 @@ class _HomeState extends State<Home> {
 
   bool _temperaturaBoa(String temperatura){
     if(temperatura!='') {
-      int vumid = int.parse(temperatura);
+      int vumid = 0;
+
+      //int.parse(temperatura);
 
       if (vumid >= 18 && vumid <= 24)
         return true;

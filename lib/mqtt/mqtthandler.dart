@@ -27,7 +27,7 @@ class MqttHandler with ChangeNotifier {
     client.setProtocolV311();
 
     final connMessage = MqttConnectMessage()
-        .withWillTopic('willtopic')
+        .withWillTopic('av1c0ontr0lz2er0')
         .withWillMessage('Will message')
         .startClean()
         .withWillQos(MqttQos.atLeastOnce);
@@ -50,7 +50,7 @@ class MqttHandler with ChangeNotifier {
       client.disconnect();
       return -1;
     }
-   receiveMessage("av1c0ntr0lz2er0/temperatura");
+   receiveMessage("av1c0ntr0lz2er0");
     receiveMessage("av1c0ntr0lz2er0/humidade");
     receiveMessage("av1c0ntr0lz2er0/gases");
     return client;
@@ -65,7 +65,7 @@ class MqttHandler with ChangeNotifier {
       final recMess = c![0].payload as MqttPublishMessage;
       final pt =
       MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
-      if(c[0].topic=="av1c0ntr0lz2er0/temperatura"){
+      if(c[0].topic=="av1c0ntr0lz2er0"){
       temperatura.value = pt;
       notifyListeners();
       }
