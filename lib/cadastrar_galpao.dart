@@ -3,52 +3,91 @@ import 'package:tcc/banco_dados/bd.dart';
 import 'package:tcc/classes/galpao.dart';
 import 'package:tcc/widget_botao.dart';
 import 'package:tcc/widget_caixa_dialog.dart';
-import 'widget_campo.dart';
+import 'package:tcc/widget_campo_texto.dart';
 
-class TelaCadastroGalpao extends StatefulWidget {
-  const TelaCadastroGalpao({super.key});
+class CadastrarGalpao extends StatefulWidget {
+  const CadastrarGalpao({super.key});
 
   @override
-  State<TelaCadastroGalpao> createState() => _TelaCadastroGalpaoState();
+  State<CadastrarGalpao> createState() => _CadastrarGalpaoState();
 }
 
-class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
+class _CadastrarGalpaoState extends State<CadastrarGalpao> {
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 600) {
+          return _construirTelaMobile();
+        } else {
+          return _construirTelaDesktop();
+        }
+      },
+    );
+  }
+}
+
+Widget _construirTelaMobile() {
   TextEditingController codigoGalpao = TextEditingController();
   TextEditingController descricaoGalpao = TextEditingController();
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
         centerTitle: true,
-        title: const Text(
-          'Cadastro de Galpão',
-          style: TextStyle(fontSize: 34),
-        ),
+        title:
+            const Text('Cadastro de galpão', style: TextStyle(fontSize: 34.0)),
       ),
       body: Column(
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          const Row(
             children: [
-              Expanded(
-                child: Campo(
-                  nome: 'Código:',
-                  controller: codigoGalpao,
-                  keyboardType: TextInputType.text,
+              Padding(
+                padding: EdgeInsets.only(
+                    top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
+                child: Text(
+                  'Código',
+                  style: TextStyle(fontSize: 24.0),
                 ),
               )
             ],
           ),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: Campo(
-                  nome: 'Descrição:',
-                  controller: descricaoGalpao,
-                  keyboardType: TextInputType.text,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      bottom: 18.0, left: 16.0, right: 16.0),
+                  child: CampoTexto(
+                    controller: codigoGalpao,
+                    keyboardType: TextInputType.text,
+                  ),
+                ),
+              )
+            ],
+          ),
+          const Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                    top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
+                child: Text(
+                  'Descrição:',
+                  style: TextStyle(fontSize: 24.0),
+                ),
+              )
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      bottom: 18.0, left: 16.0, right: 16.0),
+                  child: CampoTexto(
+                    controller: descricaoGalpao,
+                    keyboardType: TextInputType.text,
+                  ),
                 ),
               )
             ],
@@ -59,56 +98,137 @@ class _TelaCadastroGalpaoState extends State<TelaCadastroGalpao> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                    width: 115,
-                    height: 40,
-                    child: Botao(
-                      texto: 'Cadastrar',
-                      aoSerPressionado: () async {
-                        String codigo = codigoGalpao.text;
-                        String descricao = descricaoGalpao.text;
-
-                        if (codigo.isEmpty) {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) => const CaixaDialog(
-                                  titulo: 'Aviso',
-                                  mensagem:
-                                      'Preencha o campo código do galpão para realizar o cadastro!',
-                                  tituloBotao: 'OK',
-                                  corFundo: Color.fromRGBO(227, 200, 18, 1),
-                                  corTexto: Colors.white));
-                        } else {
-                          Galpao galpao =
-                              Galpao(codigo: codigo, descricao: descricao);
-                          BancoDados bd = BancoDados.instance;
-
-                          bool resultadoCadastro =
-                              await bd.inserirGalpao(galpao);
-                          if (!mounted) return;
-                          mostrarResultado(context, resultadoCadastro);
-                        }
-                      },
-                    )),
+                  width: 135,
+                  height: 40,
+                  child: Botao(
+                    texto: 'Cadastrar',
+                    tamanhoFonte: 20.0,
+                    corFundo: const Color.fromRGBO(60, 179, 113, 1),
+                    corTexto: const Color.fromRGBO(255, 255, 255, 1),
+                    aoSerPressionado: () {},
+                  ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                    width: 115,
-                    height: 40,
-                    child: Botao(
-                      texto: 'Limpar tudo',
-                      aoSerPressionado: () {
-                        codigoGalpao.clear();
-                        descricaoGalpao.clear();
-                      },
-                    )),
-              ),
+                  width: 135,
+                  height: 40,
+                  child: Botao(
+                    texto: 'Limpar tudo',
+                    tamanhoFonte: 20.0,
+                    corFundo: const Color.fromRGBO(60, 179, 113, 1),
+                    corTexto: const Color.fromRGBO(255, 255, 255, 1),
+                    aoSerPressionado: () {},
+                  ),
+                ),
+              )
             ],
           )
         ],
+      ));
+}
+
+Widget _construirTelaDesktop() {
+  TextEditingController codigoGalpao = TextEditingController();
+  TextEditingController descricaoGalpao = TextEditingController();
+
+  return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 100,
+        centerTitle: true,
+        title:
+            const Text('Cadastro de galpão', style: TextStyle(fontSize: 46.0)),
       ),
-    );
-  }
+      body: Column(
+        children: [
+          const Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                    top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
+                child: Text(
+                  'Código',
+                  style: TextStyle(fontSize: 32.0),
+                ),
+              )
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      bottom: 18.0, left: 16.0, right: 16.0),
+                  child: CampoTexto(
+                    controller: codigoGalpao,
+                    keyboardType: TextInputType.text,
+                  ),
+                ),
+              )
+            ],
+          ),
+          const Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                    top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
+                child: Text(
+                  'Descrição:',
+                  style: TextStyle(fontSize: 32.0),
+                ),
+              )
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      bottom: 18.0, left: 16.0, right: 16.0),
+                  child: CampoTexto(
+                    controller: descricaoGalpao,
+                    keyboardType: TextInputType.text,
+                  ),
+                ),
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: 135,
+                  height: 40,
+                  child: Botao(
+                    texto: 'Cadastrar',
+                    tamanhoFonte: 26.0,
+                    corFundo: const Color.fromRGBO(60, 179, 113, 1),
+                    corTexto: const Color.fromRGBO(255, 255, 255, 1),
+                    aoSerPressionado: () {},
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: 135,
+                  height: 40,
+                  child: Botao(
+                    texto: 'Limpar tudo',
+                    tamanhoFonte: 26.0,
+                    corFundo: const Color.fromRGBO(60, 179, 113, 1),
+                    corTexto: const Color.fromRGBO(255, 255, 255, 1),
+                    aoSerPressionado: () {},
+                  ),
+                ),
+              )
+            ],
+          )
+        ],
+      ));
 }
 
 void mostrarResultado(BuildContext context, bool conseguiuCadastrar) {
