@@ -170,20 +170,42 @@ class _HomeState extends State<Home> {
     return ListView(
       children: sensorData.entries.map((entry) {
         String sensorName = entry.key;
-        return  Card(
-          child: ListTile(
-            title: Text('$tempo Sensor: $sensorName'),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('Temperatura: ${sensorData[sensorName]['temperature']}°C'),
-                Text('Umidade: ${sensorData[sensorName]['humidity']}%'),
-              ],
-            ),
-          ),
-        );
+        if (sensorData[sensorName] is Map<String, dynamic>) {
+          if (sensorData[sensorName].containsKey('temperature') &&
+              sensorData[sensorName].containsKey('humidity')) {
+            // Sensor de temperatura e umidade
+            return Card(
+              child: ListTile(
+                title: Text('Sensor: $sensorName'),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(style:TextStyle(fontFamily: "Bebas",fontWeight: FontWeight.bold),'Temperatura: ${sensorData[sensorName]['temperature']}°C'),
+                    Text(style:TextStyle(fontFamily: "Bebas",fontWeight: FontWeight.bold),'Umidade: ${sensorData[sensorName]['humidity']}%'),
+                  ],
+                ),
+              ),
+            );
+          } else if (sensorData[sensorName].containsKey('NH4')) {
+            // Sensor MQ135
+            return Card(
+              child: ListTile(
+                title: Text(style:TextStyle(fontFamily: "BebasNeue"),'Sensor: $sensorName'),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text( style:TextStyle(fontFamily: "Bebas",fontWeight: FontWeight.bold),'NH4: ${sensorData[sensorName]['NH4']} ${'ppm'.toLowerCase()}'),
+                  ],
+                ),
+              ),
+            );
+          }
+        }
+        return SizedBox(); // Lidando com qualquer outro formato de dados
       }).toList(),
     );
+
+
   }
 
   Widget corpo() {
