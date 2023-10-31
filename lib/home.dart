@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 
 import 'package:flutter/material.dart';
 import 'package:tcc/widget_drawer.dart';
@@ -15,6 +17,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   MqttHandler mqttHandler = MqttHandler();
+  dynamic dados;
 
   // Variáveis de controle
   String temperatura = '0';
@@ -38,6 +41,9 @@ class _HomeState extends State<Home> {
   String horarioAtual = '';
   String dataAtual = '';
 
+  //Variável para controlar o tempo
+  String tempo = "";
+
   Random random = Random();
   late Timer timer;
 
@@ -55,14 +61,18 @@ class _HomeState extends State<Home> {
   }
 
   void gerarDadosSensores() {
+    try {
+      jsonDecode(dados);
+      tempo = horarioAtual.toString();
+    }
+    catch(e){
+    }
     setState(() {
       DateTime instanteAtual = DateTime.now();
       horarioAtual = DateFormat('HH:mm:ss').format(instanteAtual);
       dataAtual = DateFormat('dd/MM/yyyy').format(instanteAtual);
-      temperaturaSensor = mqttHandler.temperatura.value;
-      humidadeSensor = mqttHandler.humidade.value;
-      gasesSensor = mqttHandler.gases.value;
-
+      dados = mqttHandler.dados.value;
+      tempo = mqttHandler.tempo.value;
       // Mostrar mensagem de acordo com a temperatura atual
       if(temperaturaSensor.isNotEmpty){
         print(temperaturaSensor);
@@ -144,6 +154,38 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Widget listaDadosSensores(dynamic dados){
+    // Os dados dos sensores
+    // dynamic dados=mqttHandler.temperatura.value;
+    Map<String, dynamic> sensorData;
+    try {
+      sensorData= jsonDecode(dados);
+      print("decode ok");
+      // Você pode agora trabalhar com o objeto jsonData normalmente.
+    } catch (e) {
+      dados ="{\"Aguardando dados do sensor\":{\"temperature\":0.00,\"humidity\":0.00}}";
+      sensorData = jsonDecode(dados);
+      print("falhou decode");
+    }
+    return ListView(
+      children: sensorData.entries.map((entry) {
+        String sensorName = entry.key;
+        return  Card(
+          child: ListTile(
+            title: Text('$tempo Sensor: $sensorName'),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('Temperatura: ${sensorData[sensorName]['temperature']}°C'),
+                Text('Umidade: ${sensorData[sensorName]['humidity']}%'),
+              ],
+            ),
+          ),
+        );
+      }).toList(),
+    );
+  }
+
   Widget corpo() {
     return Row(
       children: <Widget>[
@@ -152,25 +194,24 @@ class _HomeState extends State<Home> {
             children: [
               Text('$dataAtual - $horarioAtual',
                   style: const TextStyle(fontSize: 40)),
-              _receber(),
-              Container(height: 20,),
-
-              Text(avisoTemperatura,
-                  style: TextStyle(
-                      fontFamily: 'BebasNeue',
-                      fontSize: 20,
-                      color: corAvisoTemperatura)),
-              Text(avisoUmidade,
-                  style: TextStyle(
-                      fontFamily: 'BebasNeue',
-                      fontSize: 20,
-                      color: corAvisoUmidade)),
-              Text(
-                  avisoPresencaGasToxico,style: TextStyle(
-                  fontFamily: 'BebasNeue',
-                  fontSize: 20,
-                  color: corGasesToxicos)),
-
+              Container(height: 200,
+                  child: listaDadosSensores(dados)),
+              //     Text(avisoTemperatura,
+              //         style: TextStyle(
+              //             fontFamily: 'BebasNeue',
+              //             fontSize: 20,
+              //             color: corAvisoTemperatura)),
+              //     Text(avisoUmidade,
+              //         style: TextStyle(
+              //             fontFamily: 'BebasNeue',
+              //             fontSize: 20,
+              //             color: corAvisoUmidade)),
+              //     Text(
+              //         avisoPresencaGasToxico,style: TextStyle(
+              //         fontFamily: 'BebasNeue',
+              //         fontSize: 20,
+              //         color: corGasesToxicos)),
+              //
             ],
           ),
         )
@@ -224,3 +265,4 @@ class _HomeState extends State<Home> {
   }
 
 }
+ 

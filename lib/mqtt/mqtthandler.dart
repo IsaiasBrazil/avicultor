@@ -4,9 +4,9 @@ import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:uuid/uuid.dart';
 
 class MqttHandler with ChangeNotifier {
-  final ValueNotifier<String> temperatura = ValueNotifier<String>("");
-  final ValueNotifier<String> humidade = ValueNotifier<String>("");
-  final ValueNotifier<String> gases = ValueNotifier<String>("");
+  final ValueNotifier<String> dados = ValueNotifier<String>("");
+  final ValueNotifier<String> tempo = ValueNotifier<String>("");
+  // final ValueNotifier<String> gases = ValueNotifier<String>("");
   late MqttServerClient client;
   final String deviceId = "${const Uuid().v4()} Avicontrol";
 
@@ -27,7 +27,7 @@ class MqttHandler with ChangeNotifier {
     client.setProtocolV311();
 
     final connMessage = MqttConnectMessage()
-        .withWillTopic('av1c0ontr0lz2er0')
+        .withWillTopic('av1c0ntr0lz2er0')
         .withWillMessage('Will message')
         .startClean()
         .withWillQos(MqttQos.atLeastOnce);
@@ -50,43 +50,39 @@ class MqttHandler with ChangeNotifier {
       client.disconnect();
       return -1;
     }
-   receiveMessage("av1c0ntr0lz2er0");
-    receiveMessage("av1c0ntr0lz2er0/humidade");
-    receiveMessage("av1c0ntr0lz2er0/gases");
+    receiveMessage("av1c0ntr0lz2er0");
+    receiveMessage("av1c0ntr0lz2er0/time");
+    // receiveMessage("av1c0ntr0lz2er0/gases");
     return client;
   }
 
   void receiveMessage(topic){
-    print('MQTT_LOGS::Subscribing to the topic');
-
+    //print('MQTT_LOGS::Subscribing to the topic');
     client.subscribe(topic, MqttQos.atMostOnce);
-
     client.updates!.listen((List<MqttReceivedMessage<MqttMessage?>>? c) {
       final recMess = c![0].payload as MqttPublishMessage;
       final pt =
       MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
       if(c[0].topic=="av1c0ntr0lz2er0"){
-      temperatura.value = pt;
+        dados.value = pt;
+        notifyListeners();
+      }
+      else if(c[0].topic=="av1c0ntr0lz2er0/time") {
+        tempo.value = pt;
+      }
+      //   notifyListeners();
+      // }
+      // else if(c[0].topic=="av1c0ntr0lz2er0/gases"){
+      //   gases.value = pt;
+      //   notifyListeners();
+      // }
       notifyListeners();
-      }
-      else if(c[0].topic=="av1c0ntr0lz2er0/humidade"){
-        humidade.value = pt;
-        notifyListeners();
-      }
-      else if(c[0].topic=="av1c0ntr0lz2er0/gases"){
-        gases.value = pt;
-        notifyListeners();
-      }
-      //notifyListeners();
-      print(
-          'MQTT_LOGS:: New data arrived: topic is <${c[0].topic}>, payload is $pt');
-      print('');
     });
 
   }
 
   void onConnected() {
-    print('MQTT_LOGS:: Connected');
+    // print('MQTT_LOGS:: Connected');
   }
 
   void onDisconnected() {
@@ -94,19 +90,19 @@ class MqttHandler with ChangeNotifier {
   }
 
   void onSubscribed(String topic) {
-    print('MQTT_LOGS:: Subscribed topic: $topic');
+    // print('MQTT_LOGS:: Subscribed topic: $topic');
   }
 
   void onSubscribeFail(String topic) {
-    print('MQTT_LOGS:: Failed to subscribe $topic');
+    // print('MQTT_LOGS:: Failed to subscribe $topic');
   }
 
   void onUnsubscribed(String? topic) {
-    print('MQTT_LOGS:: Unsubscribed topic: $topic');
+    //print('MQTT_LOGS:: Unsubscribed topic: $topic');
   }
 
   void pong() {
-    print('MQTT_LOGS:: Ping response client callback invoked');
+    //print('MQTT_LOGS:: Ping response client callback invoked');
   }
 
   void publishMessage(String message,pubTopic) {
