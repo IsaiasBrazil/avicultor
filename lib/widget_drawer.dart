@@ -63,7 +63,7 @@ class MenuLateral extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const TelaCadastroGalpao()));
+                          builder: (context) => ViewGalpao(tituloView: 'Cadastro de galpão')));
                 },
               ),
               ListTileCustom(

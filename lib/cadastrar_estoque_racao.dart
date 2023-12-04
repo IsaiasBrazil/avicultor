@@ -91,6 +91,9 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                     height: 40,
                     child: Botao(
                       texto: 'Cadastrar',
+                      tamanhoFonte: 20.0,
+                      corFundo: const Color.fromRGBO(60, 179, 113, 1),
+                      corTexto: const Color.fromRGBO(255, 255, 255, 1),
                       aoSerPressionado: () {},
                     )),
               ),
@@ -102,6 +105,9 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                     height: 40,
                     child: Botao(
                       texto: 'Limpar tudo',
+                      tamanhoFonte: 20.0,
+                      corFundo: const Color.fromRGBO(60, 179, 113, 1),
+                      corTexto: const Color.fromRGBO(255, 255, 255, 1),
                       aoSerPressionado: () {
                         qtDeConsumo.clear();
                         qtDeReposicao.clear();

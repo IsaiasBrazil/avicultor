@@ -3,29 +3,24 @@ import 'package:flutter/material.dart';
 class Botao extends StatelessWidget {
   final String texto;
   final VoidCallback aoSerPressionado;
+  final Color corFundo;
+  final Color corTexto;
+  final double tamanhoFonte;
 
-  const Botao({
-    super.key,
-    required this.texto,
-    required this.aoSerPressionado,
-  });
+  const Botao(
+      {super.key,
+      required this.texto,
+      required this.aoSerPressionado,
+      required this.corFundo,
+      required this.corTexto,
+      required this.tamanhoFonte});
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      style: ButtonStyle(
-        backgroundColor:
-            MaterialStateProperty.all(const Color.fromRGBO(60, 179, 113, 1)),
-      ),
       onPressed: aoSerPressionado,
-      child: Text(
-        texto,
-        style: const TextStyle(
-          fontFamily: 'BebasNeue',
-          fontSize: 22,
-          color: Colors.white,
-        ),
-      ),
+      style: ButtonStyle(backgroundColor: MaterialStateProperty.all(corFundo)),
+      child: Text(texto, style: TextStyle(fontSize: tamanhoFonte, color: corTexto)),
     );
   }
 }

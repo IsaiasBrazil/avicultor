@@ -61,6 +61,9 @@ class _TelaAlteracaoGalpaoState extends State<TelaAlteracaoGalpao> {
                     height: 40,
                     child: Botao(
                       texto: 'Alterar',
+                      tamanhoFonte: 20.0,
+                      corFundo: const Color.fromRGBO(60, 179, 113, 1),
+                      corTexto: const Color.fromRGBO(255, 255, 255, 1),
                       aoSerPressionado: () {},
                     )),
               ),
@@ -72,6 +75,9 @@ class _TelaAlteracaoGalpaoState extends State<TelaAlteracaoGalpao> {
                     height: 40,
                     child: Botao(
                       texto: 'Limpar tudo',
+                      tamanhoFonte: 20.0,
+                      corFundo: const Color.fromRGBO(60, 179, 113, 1),
+                      corTexto: const Color.fromRGBO(255, 255, 255, 1),
                       aoSerPressionado: () {
                         codigoGalpao.clear();
                         descricaoGalpao.clear();

@@ -104,6 +104,9 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
                     height: 40,
                     child: Botao(
                       texto: 'Cadastrar',
+                      tamanhoFonte: 20.0,
+                      corFundo: const Color.fromRGBO(60, 179, 113, 1),
+                      corTexto: const Color.fromRGBO(255, 255, 255, 1),
                       aoSerPressionado: () async {
                         String codSensor = codigoDoSensor.text;
                         String codGalpao = codigoDoGalpao.text;
@@ -168,6 +171,9 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
                     height: 40,
                     child: Botao(
                       texto: 'Limpar tudo',
+                      tamanhoFonte: 20.0,
+                      corFundo: const Color.fromRGBO(60, 179, 113, 1),
+                      corTexto: const Color.fromRGBO(255, 255, 255, 1),
                       aoSerPressionado: () {
                         codigoDoSensor.clear();
                         codigoDoGalpao.clear();

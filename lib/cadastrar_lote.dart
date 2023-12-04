@@ -110,6 +110,9 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                     height: 40,
                     child: Botao(
                         texto: 'Cadastrar',
+                        tamanhoFonte: 20.0,
+                        corFundo: const Color.fromRGBO(60, 179, 113, 1),
+                        corTexto: const Color.fromRGBO(255, 255, 255, 1),
                         aoSerPressionado: () async {
                           String codLote = codigoDoLote.text;
                           String codGalpao = codigoDoGalpao.text;
@@ -180,6 +183,9 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                     height: 40,
                     child: Botao(
                       texto: 'Limpar tudo',
+                      tamanhoFonte: 20.0,
+                      corFundo: const Color.fromRGBO(60, 179, 113, 1),
+                      corTexto: const Color.fromRGBO(255, 255, 255, 1),
                       aoSerPressionado: () {
                         codigoDoLote.clear();
                         codigoDoGalpao.clear();
