@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tcc/banco_dados/bd.dart';
 import 'package:tcc/widget_botao.dart';
 import 'classes/lote.dart';
+import 'widget_caixa_dialog.dart';
 import 'widget_campo.dart';
 
 class TelaExclusaoLote extends StatefulWidget {
@@ -55,13 +56,25 @@ class _TelaExclusaoLoteState extends State<TelaExclusaoLote> {
                       aoSerPressionado: () async {
                         String codigo = codigoLote.text;
 
-                        Lote lote = Lote(codigoLote: codigo);
-                        BancoDados bd = BancoDados.instance;
+                        if (codigo.isEmpty) {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) => const CaixaDialog(
+                                titulo: 'Aviso',
+                                mensagem:
+                                    'Preencha o campo código do lote para realizar uma exclusão!',
+                                tituloBotao: 'OK',
+                                corFundo: Color.fromRGBO(227, 200, 18, 1),
+                                corTexto: Colors.white));
+                        } else {
+                          Lote lote = Lote(codigoLote: codigo);
+                          BancoDados bd = BancoDados.instance;
 
-                        bool resultadoExclusao =
-                            await bd.excluirLote(lote.codigoLote);
-                        if (!mounted) return;
-                        mostrarResultado(context, resultadoExclusao);
+                          bool resultadoExclusao =
+                              await bd.excluirLote(lote.codigoLote);
+                          if (!mounted) return;
+                          mostrarResultado(context, resultadoExclusao);
+                        }                        
                       },
                     )),
               ),
