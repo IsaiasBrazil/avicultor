@@ -65,17 +65,10 @@ class MqttHandler with ChangeNotifier {
       MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
       if(c[0].topic=="av1c0ntr0lz2er0"){
         dados.value = pt;
-        notifyListeners();
       }
       else if(c[0].topic=="av1c0ntr0lz2er0/time") {
         tempo.value = pt;
       }
-      //   notifyListeners();
-      // }
-      // else if(c[0].topic=="av1c0ntr0lz2er0/gases"){
-      //   gases.value = pt;
-      //   notifyListeners();
-      // }
       notifyListeners();
     });
 
@@ -106,10 +99,12 @@ class MqttHandler with ChangeNotifier {
   }
 
   void publishMessage(String message,pubTopic) {
-    final builder = MqttClientPayloadBuilder();
-    builder.addString(message);
     if (client.connectionStatus?.state == MqttConnectionState.connected) {
+      final builder = MqttClientPayloadBuilder();
+      builder.addString(message);
       client.publishMessage(pubTopic, MqttQos.atMostOnce, builder.payload!);
+    } else {
+      print('MQTT_LOGS:: Client not connected. Message not published.');
     }
   }
 }
