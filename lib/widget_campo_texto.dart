@@ -6,6 +6,7 @@ class CampoTexto extends StatefulWidget {
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final VoidCallback? onTap;
+
   const CampoTexto(
       {super.key,
       required this.controller,

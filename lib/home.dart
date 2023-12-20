@@ -75,7 +75,7 @@ class _HomeState extends State<Home> {
       tempo = mqttHandler.tempo.value;
       // Mostrar mensagem de acordo com a temperatura atual
       if(temperaturaSensor.isNotEmpty){
-        print(temperaturaSensor);
+        debugPrint(temperaturaSensor);
         //
         // temperatura = int.parse(temperaturaSensor);
         // if (temperatura <= 18) {
@@ -160,14 +160,14 @@ class _HomeState extends State<Home> {
     Map<String, dynamic> sensorData;
     try {
       sensorData= jsonDecode(dados);
-      print("decode ok");
+      debugPrint("decode ok");
       // Você pode agora trabalhar com o objeto jsonData normalmente.
     } catch (e) {
       dados ="{\"Aguardando dados do sensor\":{\"temperature\":0.00,\"humidity\":0.00}}";
       sensorData = jsonDecode(dados);
-      print("falhou decode");
+      debugPrint("falhou decode");
     }
-    print("sensorData $sensorData");
+    debugPrint("sensorData $sensorData");
     return ListView(
       children: sensorData.entries.map((entry) {
         String sensorName = entry.key;
@@ -193,7 +193,7 @@ class _HomeState extends State<Home> {
             );
           }
           if (sensorData[sensorName].containsKey('NH4')) {
-            print("linha 192");
+            debugPrint("linha 192");
             // Sensor MQ135
             return Card(
               child: ListTile(

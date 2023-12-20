@@ -34,6 +34,7 @@ class BancoDados {
     await db.execute(_criarTabelaLote);
     await db.execute(_criarTabelaSensor);
     await db.execute(_criarTabelaProducao);
+    await db.execute(_seed);
   }
 
   String get _criarTabelaGalpao => '''
@@ -75,6 +76,11 @@ class BancoDados {
     )
   ''';
 
+  String get _seed => '''
+    INSERT INTO galpoes (codigo, descricao) 
+    VALUES ('asd1', 'aa'), ('asd2', 'bb'), ('asd3', 'cc'), ('asd4', 'dd'), ('asd5', 'ee'), ('asd6', 'ff'), ('asd7', 'gg'), ('asd8', 'hh'), ('asd9', 'ii'), ('asd10', 'jj')  
+  ''';
+
   // Queries dos galpões
   Future<bool> inserirGalpao(Galpao galpao) async {
     final db = await database;
@@ -82,6 +88,14 @@ class BancoDados {
         conflictAlgorithm: ConflictAlgorithm.replace);
 
     return resultadoInsercao != -1 ? true : false;
+  }
+
+  Future<int> atualizarGalpao(Galpao galpao) async {
+    final db = await database;
+    final resultadoAtualizacao = await db.update('galpoes', galpao.toMap(),
+        where: 'codigo = ?', whereArgs: [galpao.codigo]);
+
+    return resultadoAtualizacao;
   }
 
   Future<List<Galpao>> obterGalpoes() async {
