@@ -1,37 +1,35 @@
 import 'package:flutter/material.dart';
 
 class Dropdown extends StatefulWidget {
-  List<String> options;
-  String selectedOption;
-  void  onChanged;
-  Dropdown({Key? key,required this.options,required this.selectedOption, required this.onChanged}) : super(key: key);
+  final List<String> opcoes;
+  final String? itemSelecionado;
+  final double tamanhoIcone;
+  final ValueChanged<String?> aoSerSelecionado;
+
+  const Dropdown(
+      {super.key,
+      required this.opcoes,
+      required this.itemSelecionado,
+      required this.tamanhoIcone,
+      required this.aoSerSelecionado});
 
   @override
   State<Dropdown> createState() => _DropdownState();
 }
 
 class _DropdownState extends State<Dropdown> {
-  get onChanged => widget.onChanged;
   @override
   Widget build(BuildContext context) {
-    List<String> options = widget.options;
-    String selectedOption = widget.selectedOption;
-    selectedOption = selectedOption.isEmpty ? options[0] : selectedOption;
     return DropdownButton<String>(
-          value: selectedOption,
-          onChanged: onChanged,
-          items: options.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: SizedBox(
-                width: 157,
-                  child: Text(style: const TextStyle(
-                    fontSize: 22,
-                    fontFamily: 'BebasNeue',),
-                      value)
-              ),
-            );
-          }).toList(),
-        );
+      iconSize: widget.tamanhoIcone,
+      value: widget.itemSelecionado ?? widget.opcoes.first,
+      items: widget.opcoes
+          .map((item) => DropdownMenuItem<String>(
+                value: item,
+                child: Text(item, style: const TextStyle(fontSize: 20.0)),
+              ))
+          .toList(),
+      onChanged: widget.aoSerSelecionado,
+    );
   }
 }

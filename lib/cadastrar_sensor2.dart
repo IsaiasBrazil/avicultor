@@ -54,11 +54,11 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
                     Text(style: const TextStyle(
                       fontSize: 22,
                       fontFamily: 'BebasNeue',),"Código do galpão:"),
-                    Dropdown(
-                      selectedOption: codigoDeGalpao,
-                      options: const ['abc','2b','3'],
-                      onChanged: trocarGalpao,
-                    ),
+                    // Dropdown(
+                    //   selectedOption: codigoDeGalpao,
+                    //   options: const ['abc','2b','3'],
+                    //   onChanged: trocarGalpao,
+                    // ),
                   ],
                 ),
               )
@@ -83,11 +83,11 @@ class _TelaCadastroSensorState extends State<TelaCadastroSensor> {
                       Text(style: const TextStyle(
                         fontSize: 22,
                         fontFamily: 'BebasNeue',),"Tipo:"),
-                      Dropdown(
-                        selectedOption: tipoDoSensor,
-                        options: const ["Temperatura","Umidade","Gases"],
-                        onChanged: trocarTipo,
-                      ),
+                      // Dropdown(
+                      //   selectedOption: tipoDoSensor,
+                      //   options: const ["Temperatura","Umidade","Gases"],
+                      //   onChanged: trocarTipo,
+                      // ),
                     ],
                   ),
                 ),

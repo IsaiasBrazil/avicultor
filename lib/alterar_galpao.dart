@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tcc/banco_dados/bd.dart';
 import 'package:tcc/widget_botao.dart';
+import 'package:tcc/widget_dropdown.dart';
 import 'classes/galpao.dart';
 import 'widget_campo_texto.dart';
 
@@ -29,27 +30,26 @@ class _TelaAlteracaoGalpaoState extends State<TelaAlteracaoGalpao> {
         ),
         body: FutureBuilder<List<Galpao>>(
           future: BancoDados.instance.obterGalpoes(),
-          builder:
-            (BuildContext context, AsyncSnapshot<List<Galpao>> snapshot) {
-
+          builder: (BuildContext context, AsyncSnapshot<List<Galpao>> snapshot) {
+            
             // o banco de dados está carregando
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
-            } 
-            
+            }
+
             // ou teve algum erro
             else if (snapshot.hasError) {
               return Center(child: Text('Erro: ${snapshot.error}'));
-            } 
-            
+            }
+
             // ou não teve dados no banco de dados
             else if (!snapshot.hasData || snapshot.data!.isEmpty) {
               return const Center(
                   child: Text('Não há galpões para alterar',
                       style: TextStyle(fontSize: 30)));
-            } 
-            
-            // ou os dados foram carregados com sucesso 
+            }
+
+            // ou os dados foram carregados com sucesso
             else {
               List<Galpao> galpoes = snapshot.data!;
               List<String> opcoes = [];
@@ -81,32 +81,21 @@ class _TelaAlteracaoGalpaoState extends State<TelaAlteracaoGalpao> {
                           padding: const EdgeInsets.only(
                               bottom: 8.0, left: 16.0, right: 16.0),
                           child: SizedBox(
-                            width: 80,
-                            child: DropdownButton<String>(
-                              iconSize: 30.0,
-                              value: itemSelecionado ?? opcoes.first,
-                              items: opcoes
-                                  .map((item) => DropdownMenuItem<String>(
-                                        value: item,
-                                        child: Text(item,
-                                            style: const TextStyle(
-                                                fontSize: 20.0)),
-                                      ))
-                                  .toList(),
-                              onChanged: (item) => setState(() {
-                                setState(() {
-                                  itemSelecionado = item;
-                                  atual = opcoes.indexOf(item!);
-                                  descricaoGalpao.text =
+                              width: 80,
+                              child: Dropdown(
+                                  tamanhoIcone: 30.0,
+                                  itemSelecionado: itemSelecionado,
+                                  opcoes: opcoes,
+                                  aoSerSelecionado: (opcao) => setState(() {
+                                      itemSelecionado = opcao;
+                                      atual = opcoes.indexOf(itemSelecionado!);
+                                      descricaoGalpao.text =
                                       galpoes[atual].descricao.toString();
-                                  // debugPrint(
-                                  //     'descricaoGalpao: ${descricaoGalpao.text.toString()} - atual $atual');
-                                  // debugPrint('Item selecionado: $itemSelecionado');
-                                });
-                              }),
-                            ),
-                          ))
-                    ],
+                                  })
+                              )
+                            )
+                          )
+                      ],
                   ),
                   const Row(
                     children: [
