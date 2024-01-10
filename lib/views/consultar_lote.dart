@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tcc/banco_dados/bd.dart';
-import 'classes/lote.dart';
+import 'package:tcc/models/bd.dart';
+import '../models/lote.dart';
 
 class TelaConsultaLote extends StatefulWidget {
   const TelaConsultaLote({super.key});

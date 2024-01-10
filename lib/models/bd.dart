@@ -1,10 +1,10 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../classes/producao.dart';
-import '../classes/galpao.dart';
-import '../classes/lote.dart';
-import '../classes/sensor.dart';
+import 'producao.dart';
+import 'galpao.dart';
+import 'lote.dart';
+import 'sensor.dart';
 
 class BancoDados {
   BancoDados._();
@@ -78,8 +78,10 @@ class BancoDados {
 
   String get _seed => '''
     INSERT INTO galpoes (codigo, descricao) 
-    VALUES ('asd1', 'aa'), ('asd2', 'bb'), ('asd3', 'cc'), ('asd4', 'dd'), ('asd5', 'ee'), ('asd6', 'ff'), ('asd7', 'gg'), ('asd8', 'hh'), ('asd9', 'ii'), ('asd10', 'jj')  
+    VALUES ('asd1', 'dve'), ('asd2', 'ugb'), ('asd3', 'kvr'), ('asd4', 'vbk'), ('asd5', 'qrw'), ('asd6', 'bjx'), ('asd7', 'xwp'), ('asd8', 'dtr'), ('asd9', 'uvd'), ('asd10', 'drr'), ('asd11', 'flz'), ('asd12', 'dte'), ('asd13', 'jxp'), ('asd14', 'yvm'), ('asd15', 'por'), ('asd16', 'kgy'), ('asd17', 'awh'), ('asd18', 'two'), ('asd19', 'qri'), ('asd20', 'xwt'), ('asd21', 'iuc'), ('asd22', 'cdf'), ('asd23', 'agm'), ('asd24', 'wev'), ('asd25', 'jri'), ('asd26', 'kyp'), ('asd27', 'kvl'), ('asd28', 'wwt'), ('asd29', 'xns'), ('asd30', 'qqp')
   ''';
+
+  //, ('asd31', 'dzi'), ('asd32', 'afq'), ('asd33', 'eys'), ('asd34', 'hwj'), ('asd35', 'kxo'), ('asd36', 'zte'), ('asd37', 'dxu'), ('asd38', 'ksu'), ('asd39', 'vyq'), ('asd40', 'afi'), ('asd41', 'jdx'), ('asd42', 'qxv'), ('asd43', 'qfd'), ('asd44', 'bfn'), ('asd45', 'oya'), ('asd46', 'hob'), ('asd47', 'ilu'), ('asd48', 'ymx'), ('asd49', 'pod'), ('asd50', 'rlf'), ('asd51', 'nlb'), ('asd52', 'hnb'), ('asd53', 'bfj'), ('asd54', 'mla'), ('asd55', 'vwt'), ('asd56', 'kur'), ('asd57', 'yrw'), ('asd58', 'mzq'), ('asd59', 'hrv'), ('asd60', 'tlm'), ('asd61', 'zhh'), ('asd62', 'lda'), ('asd63', 'hpl'), ('asd64', 'tew'), ('asd65', 'dop'), ('asd66', 'yhv'), ('asd67', 'oym'), ('asd68', 'bsm'), ('asd69', 'ajv'), ('asd70', 'koj'), ('asd71', 'rxi'), ('asd72', 'fmr'), ('asd73', 'ttd'), ('asd74', 'eix'), ('asd75', 'cnl'), ('asd76', 'fhs'), ('asd77', 'efh'), ('asd78', 'nee'), ('asd79', 'rve'), ('asd80', 'ovh'), ('asd81', 'hdm'), ('asd82', 'kxw'), ('asd83', 'pmb'), ('asd84', 'oxy'), ('asd85', 'qqm'), ('asd86', 'gsg'), ('asd87', 'vft'), ('asd88', 'sxd'), ('asd89', 'flz'), ('asd90', 'xqe'), ('asd91', 'sos'), ('asd92', 'lva'), ('asd93', 'nvh'), ('asd94', 'yvz'), ('asd95', 'kxx'), ('asd96', 'rmt'), ('asd97', 'diu'), ('asd98', 'ext'), ('asd99', 'pfz'), ('asd100', 'fnx')  
 
   // Queries dos galpões
   Future<bool> inserirGalpao(Galpao galpao) async {
@@ -116,12 +118,12 @@ class BancoDados {
     return resultado.isNotEmpty ? true : false;
   }
 
-  Future<bool> excluirGalpao(String codigo) async {
+  Future<int> excluirGalpao(Galpao galpao) async {
     Database db = await instance.database;
     var resultadoExclusao =
-        await db.delete('galpoes', where: 'codigo = ?', whereArgs: [codigo]);
+        await db.delete('galpoes', where: 'codigo = ?', whereArgs: [galpao.codigo]);
 
-    return resultadoExclusao == 1 ? true : false;
+    return resultadoExclusao;
   }
 
   // Queries dos lotes

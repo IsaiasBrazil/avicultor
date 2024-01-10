@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'widget_botao.dart';
-import 'widget_campo.dart';
+import '../widgets/widget_botao.dart';
+import '../widgets/widget_campo.dart';
 
-class TelaAlteracaoLote extends StatefulWidget {
-  const TelaAlteracaoLote({Key? key}) : super(key: key);
+class TelaCadastroEstoqueRacao extends StatefulWidget {
+  const TelaCadastroEstoqueRacao({super.key});
 
   @override
-  State<TelaAlteracaoLote> createState() => _TelaAlteracaoLoteState();
+  State<TelaCadastroEstoqueRacao> createState() =>
+      _TelaCadastroEstoqueRacaoState();
 }
 
-class _TelaAlteracaoLoteState extends State<TelaAlteracaoLote> {
-  TextEditingController codigoDoLote = TextEditingController();
-  TextEditingController codigoDoGalpao = TextEditingController();
-  TextEditingController idade = TextEditingController();
+class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
+  TextEditingController qtDeConsumo = TextEditingController();
+  TextEditingController qtDeReposicao = TextEditingController();
   TextEditingController data = TextEditingController();
-  TextEditingController descricao = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +23,8 @@ class _TelaAlteracaoLoteState extends State<TelaAlteracaoLote> {
       appBar: AppBar(
         toolbarHeight: 100,
         centerTitle: true,
-        title: const Text(
-          'Alteração de Lote',
-          style: TextStyle(fontSize: 34),
-        ),
+        title: const Text('Estoque de ração',
+            style: TextStyle(fontSize: 34)),
       ),
       body: Column(
         children: [
@@ -36,16 +33,22 @@ class _TelaAlteracaoLoteState extends State<TelaAlteracaoLote> {
             children: [
               Expanded(
                 child: Campo(
-                  nome: 'Código do lote:',
-                  controller: codigoDoLote,
-                  keyboardType: TextInputType.text,
+                  nome: 'Quantidade de consumo:',
+                  controller: qtDeConsumo,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}$'))
+                  ],
                 ),
               ),
               Expanded(
                 child: Campo(
-                  nome: 'Código do galpão:',
-                  controller: codigoDoGalpao,
-                  keyboardType: TextInputType.text,
+                  nome: 'Quantidade de reposição:',
+                  controller: qtDeReposicao,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}$'))
+                  ],
                 ),
               )
             ],
@@ -55,18 +58,9 @@ class _TelaAlteracaoLoteState extends State<TelaAlteracaoLote> {
             children: [
               Expanded(
                 child: Campo(
-                  nome: 'Idade:',
-                  controller: idade,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Campo(
-                  nome: 'Data de chegada:',
+                  nome: 'Data:',
                   controller: data,
+                  keyboardType: TextInputType.text,
                   onTap: () async {
                     DateTime? dataSelecionada = await showDatePicker(
                       context: context,
@@ -82,19 +76,7 @@ class _TelaAlteracaoLoteState extends State<TelaAlteracaoLote> {
                     }
                   },
                 ),
-              ),
-            ],
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Campo(
-                  nome: 'Descrição:',
-                  controller: descricao,
-                  keyboardType: TextInputType.text,
-                ),
-              ),
+              )
             ],
           ),
           Row(
@@ -107,13 +89,11 @@ class _TelaAlteracaoLoteState extends State<TelaAlteracaoLote> {
                     width: 115,
                     height: 40,
                     child: Botao(
-                      texto: 'Alterar',
+                      texto: 'Cadastrar',
                       tamanhoFonte: 20.0,
                       corFundo: const Color.fromRGBO(60, 179, 113, 1),
                       corTexto: const Color.fromRGBO(255, 255, 255, 1),
-                      aoSerPressionado: () {
-                        debugPrint(codigoDoLote.text);
-                      },
+                      aoSerPressionado: () {},
                     )),
               ),
               Padding(
@@ -128,11 +108,9 @@ class _TelaAlteracaoLoteState extends State<TelaAlteracaoLote> {
                       corFundo: const Color.fromRGBO(60, 179, 113, 1),
                       corTexto: const Color.fromRGBO(255, 255, 255, 1),
                       aoSerPressionado: () {
-                        codigoDoLote.clear();
-                        codigoDoGalpao.clear();
-                        idade.clear();
+                        qtDeConsumo.clear();
+                        qtDeReposicao.clear();
                         data.clear();
-                        descricao.clear();
                       },
                     )),
               ),

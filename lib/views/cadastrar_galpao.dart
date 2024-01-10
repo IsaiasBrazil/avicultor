@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tcc/banco_dados/bd.dart';
-import 'package:tcc/classes/galpao.dart';
-import 'package:tcc/widget_botao.dart';
-import 'package:tcc/widget_caixa_dialog.dart';
-import 'package:tcc/widget_campo_texto.dart';
+import 'package:tcc/models/bd.dart';
+import 'package:tcc/models/galpao.dart';
+import 'package:tcc/widgets/widget_botao.dart';
+import 'package:tcc/widgets/widget_caixa_dialog.dart';
+import 'package:tcc/widgets/widget_campo_texto.dart';
 
 class ViewGalpao extends StatefulWidget {
   final String tituloView;

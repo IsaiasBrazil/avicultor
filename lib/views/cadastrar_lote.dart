@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'banco_dados/bd.dart';
-import 'classes/lote.dart';
-import 'widget_botao.dart';
-import 'widget_caixa_dialog.dart';
-import 'widget_campo.dart';
+import '../models/bd.dart';
+import '../models/lote.dart';
+import '../widgets/widget_botao.dart';
+import '../widgets/widget_caixa_dialog.dart';
+import '../widgets/widget_campo.dart';
 
 class TelaCadastroLote extends StatefulWidget {
   const TelaCadastroLote({super.key});

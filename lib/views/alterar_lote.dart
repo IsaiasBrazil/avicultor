@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import '../widgets/widget_botao.dart';
+import '../widgets/widget_campo.dart';
 
-import 'widget_botao.dart';
-import 'widget_campo.dart';
-
-class TelaCadastroEstoqueRacao extends StatefulWidget {
-  const TelaCadastroEstoqueRacao({super.key});
+class TelaAlteracaoLote extends StatefulWidget {
+  const TelaAlteracaoLote({Key? key}) : super(key: key);
 
   @override
-  State<TelaCadastroEstoqueRacao> createState() =>
-      _TelaCadastroEstoqueRacaoState();
+  State<TelaAlteracaoLote> createState() => _TelaAlteracaoLoteState();
 }
 
-class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
-  TextEditingController qtDeConsumo = TextEditingController();
-  TextEditingController qtDeReposicao = TextEditingController();
+class _TelaAlteracaoLoteState extends State<TelaAlteracaoLote> {
+  TextEditingController codigoDoLote = TextEditingController();
+  TextEditingController codigoDoGalpao = TextEditingController();
+  TextEditingController idade = TextEditingController();
   TextEditingController data = TextEditingController();
+  TextEditingController descricao = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,10 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
       appBar: AppBar(
         toolbarHeight: 100,
         centerTitle: true,
-        title: const Text('Estoque de ração',
-            style: TextStyle(fontSize: 34)),
+        title: const Text(
+          'Alteração de Lote',
+          style: TextStyle(fontSize: 34),
+        ),
       ),
       body: Column(
         children: [
@@ -34,22 +36,16 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
             children: [
               Expanded(
                 child: Campo(
-                  nome: 'Quantidade de consumo:',
-                  controller: qtDeConsumo,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}$'))
-                  ],
+                  nome: 'Código do lote:',
+                  controller: codigoDoLote,
+                  keyboardType: TextInputType.text,
                 ),
               ),
               Expanded(
                 child: Campo(
-                  nome: 'Quantidade de reposição:',
-                  controller: qtDeReposicao,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}$'))
-                  ],
+                  nome: 'Código do galpão:',
+                  controller: codigoDoGalpao,
+                  keyboardType: TextInputType.text,
                 ),
               )
             ],
@@ -59,9 +55,18 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
             children: [
               Expanded(
                 child: Campo(
-                  nome: 'Data:',
+                  nome: 'Idade:',
+                  controller: idade,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Campo(
+                  nome: 'Data de chegada:',
                   controller: data,
-                  keyboardType: TextInputType.text,
                   onTap: () async {
                     DateTime? dataSelecionada = await showDatePicker(
                       context: context,
@@ -77,7 +82,19 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                     }
                   },
                 ),
-              )
+              ),
+            ],
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Campo(
+                  nome: 'Descrição:',
+                  controller: descricao,
+                  keyboardType: TextInputType.text,
+                ),
+              ),
             ],
           ),
           Row(
@@ -90,11 +107,13 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                     width: 115,
                     height: 40,
                     child: Botao(
-                      texto: 'Cadastrar',
+                      texto: 'Alterar',
                       tamanhoFonte: 20.0,
                       corFundo: const Color.fromRGBO(60, 179, 113, 1),
                       corTexto: const Color.fromRGBO(255, 255, 255, 1),
-                      aoSerPressionado: () {},
+                      aoSerPressionado: () {
+                        debugPrint(codigoDoLote.text);
+                      },
                     )),
               ),
               Padding(
@@ -109,9 +128,11 @@ class _TelaCadastroEstoqueRacaoState extends State<TelaCadastroEstoqueRacao> {
                       corFundo: const Color.fromRGBO(60, 179, 113, 1),
                       corTexto: const Color.fromRGBO(255, 255, 255, 1),
                       aoSerPressionado: () {
-                        qtDeConsumo.clear();
-                        qtDeReposicao.clear();
+                        codigoDoLote.clear();
+                        codigoDoGalpao.clear();
+                        idade.clear();
                         data.clear();
+                        descricao.clear();
                       },
                     )),
               ),

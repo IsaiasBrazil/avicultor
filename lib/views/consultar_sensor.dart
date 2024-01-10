@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tcc/banco_dados/bd.dart';
-import 'classes/sensor.dart';
+import 'package:tcc/models/bd.dart';
+import '../models/sensor.dart';
 
 class TelaConsultaSensor extends StatefulWidget {
   const TelaConsultaSensor({super.key});

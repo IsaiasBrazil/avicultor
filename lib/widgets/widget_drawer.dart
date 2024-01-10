@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:tcc/alterar_galpao.dart';
-import 'package:tcc/alterar_lote.dart';
-import 'package:tcc/cadastrar_estoque_racao.dart';
-import 'package:tcc/cadastrar_galpao.dart';
-import 'package:tcc/cadastrar_info_lote.dart';
-import 'package:tcc/cadastrar_lote.dart';
-import 'package:tcc/consultar_galpao.dart';
-import 'package:tcc/consultar_sensor.dart';
-import 'package:tcc/excluir_galpao.dart';
-import 'package:tcc/excluir_sensor.dart';
-import 'cadastrar_sensor2.dart';
-import 'consultar_lote.dart';
-import 'excluir_lote.dart';
-import 'home.dart';
+import 'package:tcc/views/alterar_galpao.dart';
+import 'package:tcc/views/alterar_lote.dart';
+import 'package:tcc/views/cadastrar_estoque_racao.dart';
+import 'package:tcc/views/cadastrar_galpao.dart';
+import 'package:tcc/views/cadastrar_info_lote.dart';
+import 'package:tcc/views/cadastrar_lote.dart';
+import 'package:tcc/views/consultar_galpao.dart';
+import 'package:tcc/views/consultar_sensor.dart';
+import 'package:tcc/views/excluir_galpao.dart';
+import 'package:tcc/views/excluir_sensor.dart';
+import '../views/cadastrar_sensor2.dart';
+import '../views/consultar_lote.dart';
+import '../views/excluir_lote.dart';
+import '../home.dart';
 import 'widget_listtile.dart';
 
 class MenuLateral extends StatelessWidget {

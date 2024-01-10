@@ -3,13 +3,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:tcc/banco_dados/bd.dart';
-
-import 'classes/producao.dart';
-import 'widget_botao.dart';
-import 'widget_caixa_dialog.dart';
-import 'widget_campo.dart';
-import 'widget_drawer.dart';
+import 'package:tcc/models/bd.dart';
+import '../models/producao.dart';
+import '../widgets/widget_botao.dart';
+import '../widgets/widget_caixa_dialog.dart';
+import '../widgets/widget_campo.dart';
+import '../widgets/widget_drawer.dart';
 
 class TelaCadastroInfoLote extends StatefulWidget {
   const TelaCadastroInfoLote({super.key});

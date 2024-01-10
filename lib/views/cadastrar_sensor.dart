@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tcc/banco_dados/bd.dart';
-
-import 'classes/sensor.dart';
-import 'widget_botao.dart';
-import 'widget_caixa_dialog.dart';
-import 'widget_campo.dart';
+import 'package:tcc/models/bd.dart';
+import '../models/sensor.dart';
+import '../widgets/widget_botao.dart';
+import '../widgets/widget_caixa_dialog.dart';
+import '../widgets/widget_campo.dart';
 
 class TelaCadastroSensor extends StatefulWidget {
   const TelaCadastroSensor({super.key});

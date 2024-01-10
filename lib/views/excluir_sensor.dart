@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'banco_dados/bd.dart';
-import 'widget_botao.dart';
-import 'classes/sensor.dart';
-import 'widget_campo.dart';
+import '../models/bd.dart';
+import '../widgets/widget_botao.dart';
+import '../models/sensor.dart';
+import '../widgets/widget_campo.dart';
 
 class TelaExclusaoSensor extends StatefulWidget {
   const TelaExclusaoSensor({super.key});
