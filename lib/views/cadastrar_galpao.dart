@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tcc/models/galpao.dart';
 import 'package:tcc/widgets/widget_botao.dart';
-import 'package:tcc/widgets/widget_caixa_dialog.dart';
 import 'package:tcc/widgets/widget_campo_texto.dart';
 import 'package:tcc/controllers/galpao_controller.dart';
+
+import '../utils/mostrar_dialog.dart';
 
 class ViewGalpao extends StatefulWidget {
   final String tituloView;
@@ -117,36 +118,13 @@ Widget _construirTelaMobile(String tituloView, BuildContext context) {
                       if (!context.mounted) return;
 
                       if (sucessoNoCadastro) {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) => const CaixaDialog(
-                            titulo: 'Sucesso', 
-                            mensagem: 'Galpão cadastrado!', 
-                            tituloBotao: 'Ok',
-                            corFundo: Color.fromRGBO(60, 179, 113, 1),
-                            corTexto: Colors.white)
-                        );
+                        mostrarDialog(context, 'Sucesso', 'Galpão cadastrado!', 'Ok', const Color.fromRGBO(60, 179, 113, 1), Colors.white);
                       }
                       else if (!sucessoNoCadastro && !controller.galpaoValido(galp)) {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) => const CaixaDialog(
-                            titulo: 'Aviso', 
-                            mensagem: 'Preencha o campo código do galpão para realizar o cadastro!', 
-                            tituloBotao: 'Ok',
-                            corFundo: Color.fromRGBO(227, 200, 18, 1),
-                            corTexto: Colors.white)
-                        );
+                        mostrarDialog(context, 'Aviso', 'Preencha o campo código do galpão para realizar o cadastro!', 'Ok', const Color.fromRGBO(227, 200, 18, 1), Colors.white);
                       }
                       else {
-                        showDialog(
-                          context: context, 
-                          builder: (BuildContext context) => const CaixaDialog(
-                            titulo: 'Erro', 
-                            mensagem: 'Falha ao cadastrar galpão!', 
-                            tituloBotao: 'Ok',
-                            corFundo: Color.fromRGBO(227, 200, 18, 1),
-                            corTexto: Colors.white));
+                        mostrarDialog(context, 'Erro', 'Falha ao cadastrar galpão!', 'Ok', const Color.fromRGBO(210, 43, 43, 1), Colors.white);
                       }
                     },
                   ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tcc/models/bd.dart';
 import 'package:tcc/widgets/widget_botao.dart';
 import 'package:tcc/widgets/widget_dropdown.dart';
+import '../controllers/galpao_controller.dart';
 import '../models/galpao.dart';
+import '../utils/mostrar_dialog.dart';
 import '../widgets/widget_campo_texto.dart';
 
 class TelaAlteracaoGalpao extends StatefulWidget {
@@ -16,7 +17,8 @@ class _TelaAlteracaoGalpaoState extends State<TelaAlteracaoGalpao> {
   TextEditingController descricaoGalpao = TextEditingController();
   String? itemSelecionado;
   late int atual;
-
+  final GalpaoController controller = GalpaoController();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +31,7 @@ class _TelaAlteracaoGalpaoState extends State<TelaAlteracaoGalpao> {
           ),
         ),
         body: FutureBuilder<List<Galpao>>(
-          future: BancoDados.instance.obterGalpoes(),
+          future: controller.obterGalpoes(),
           builder: (BuildContext context, AsyncSnapshot<List<Galpao>> snapshot) {
             
             // o banco de dados está carregando
@@ -136,24 +138,21 @@ class _TelaAlteracaoGalpaoState extends State<TelaAlteracaoGalpao> {
                             corFundo: const Color.fromRGBO(60, 179, 113, 1),
                             corTexto: const Color.fromRGBO(255, 255, 255, 1),
                             aoSerPressionado: () async {
-                              String codigo = opcoes[atual];
-                              String descricao = descricaoGalpao.text;
+                              Galpao galp = Galpao(
+                                codigo: opcoes[atual], 
+                                descricao: descricaoGalpao.text
+                              );
 
-                              Galpao galpao =
-                                  Galpao(codigo: codigo, descricao: descricao);
-                              BancoDados bd = BancoDados.instance;
-
-                              // debugPrint('codigo: ${galpao.codigo}');
-                              // debugPrint('descricao: ${galpao.descricao}');
-                              int resultadoAtualizacao =
-                                  await bd.atualizarGalpao(galpao);
+                              bool sucessoNaAtualizacao = await controller.atualizarGalpao(galp);
 
                               if (!context.mounted) return;
-                              resultadoAtualizacao > 0
-                                  ? mostrarResultado(context, true)
-                                  : mostrarResultado(context, false);
-                              // debugPrint(
-                              //     'Return do resultado da atualização: $resultadoAtualizacao');
+
+                              if (sucessoNaAtualizacao) {
+                                mostrarDialog(context, 'Sucesso', 'Galpão alterado!', 'Ok', const Color.fromRGBO(60, 179, 113, 1), Colors.white);
+                              }
+                              else {
+                                mostrarDialog(context, 'Erro', 'Falha ao alterar galpão!', 'Ok', const Color.fromRGBO(210, 43, 43, 1), Colors.white);
+                              }
                             },
                           ),
                         ),
@@ -182,34 +181,4 @@ class _TelaAlteracaoGalpaoState extends State<TelaAlteracaoGalpao> {
           },
         ));
   }
-}
-
-void mostrarResultado(BuildContext context, bool conseguiuCadastrar) {
-  String mensagem =
-      conseguiuCadastrar ? 'Galpão alterado!' : 'Falha ao alterar galpão!';
-
-  showDialog(
-      context: context,
-      builder: (BuildContext dialogContext) {
-        return AlertDialog(
-            title: conseguiuCadastrar
-                ? const Text('Sucesso',
-                    style: TextStyle(fontSize: 32, color: Colors.white))
-                : const Text('Erro',
-                    style: TextStyle(fontSize: 32, color: Colors.white)),
-            content: Text(mensagem,
-                style: const TextStyle(fontSize: 24, color: Colors.white)),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(dialogContext).pop();
-                },
-                child: const Text('OK',
-                    style: TextStyle(fontSize: 24, color: Colors.white)),
-              )
-            ],
-            backgroundColor: conseguiuCadastrar
-                ? const Color.fromRGBO(60, 179, 113, 1)
-                : const Color.fromRGBO(210, 43, 43, 1));
-      });
 }
