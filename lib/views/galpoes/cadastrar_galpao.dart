@@ -3,8 +3,7 @@ import 'package:tcc/models/galpao.dart';
 import 'package:tcc/widgets/widget_botao.dart';
 import 'package:tcc/widgets/widget_campo_texto.dart';
 import 'package:tcc/controllers/galpao_controller.dart';
-
-import '../utils/mostrar_dialog.dart';
+import '../../utils/mostrar_dialog.dart';
 
 class ViewGalpao extends StatefulWidget {
   final String tituloView;

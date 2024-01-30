@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tcc/models/bd.dart';
 import 'package:tcc/models/galpao.dart';
 import 'package:tcc/widgets/widget_botao.dart';
-import '../widgets/widget_campo_texto.dart';
-import '../widgets/widget_dropdown.dart';
+import '../../widgets/widget_campo_texto.dart';
+import '../../widgets/widget_dropdown.dart';
 
 class TelaExclusaoGalpao extends StatefulWidget {
   const TelaExclusaoGalpao({super.key});

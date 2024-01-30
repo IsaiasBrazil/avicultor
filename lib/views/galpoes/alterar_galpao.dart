@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tcc/widgets/widget_botao.dart';
 import 'package:tcc/widgets/widget_dropdown.dart';
-import '../controllers/galpao_controller.dart';
-import '../models/galpao.dart';
-import '../utils/mostrar_dialog.dart';
-import '../widgets/widget_campo_texto.dart';
+import '../../controllers/galpao_controller.dart';
+import '../../models/galpao.dart';
+import '../../utils/mostrar_dialog.dart';
+import '../../widgets/widget_campo_texto.dart';
 
 class TelaAlteracaoGalpao extends StatefulWidget {
   const TelaAlteracaoGalpao({super.key});

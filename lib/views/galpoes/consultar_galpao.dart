@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tcc/models/bd.dart';
-
-import '../models/galpao.dart';
+import '../../models/galpao.dart';
 
 class TelaConsultaGalpao extends StatefulWidget {
   const TelaConsultaGalpao({super.key});
