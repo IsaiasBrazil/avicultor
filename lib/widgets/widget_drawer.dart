@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:tcc/views/galpoes/alterar_galpao.dart';
-import 'package:tcc/views/alterar_lote.dart';
+import 'package:tcc/views/lotes/alterar_lote.dart';
 import 'package:tcc/views/cadastrar_estoque_racao.dart';
 import 'package:tcc/views/galpoes/cadastrar_galpao.dart';
 import 'package:tcc/views/cadastrar_info_lote.dart';
-import 'package:tcc/views/cadastrar_lote.dart';
+import 'package:tcc/views/lotes/cadastrar_lote.dart';
 import 'package:tcc/views/galpoes/consultar_galpao.dart';
 import 'package:tcc/views/consultar_sensor.dart';
 import 'package:tcc/views/galpoes/excluir_galpao.dart';
 import 'package:tcc/views/excluir_sensor.dart';
 import '../views/cadastrar_sensor2.dart';
-import '../views/consultar_lote.dart';
-import '../views/excluir_lote.dart';
+import '../views/lotes/consultar_lote.dart';
+import '../views/lotes/excluir_lote.dart';
 import '../home.dart';
 import 'widget_listtile.dart';
 

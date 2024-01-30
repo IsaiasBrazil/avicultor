@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tcc/models/bd.dart';
 import 'package:tcc/widgets/widget_botao.dart';
-import '../models/lote.dart';
-import '../widgets/widget_caixa_dialog.dart';
-import '../widgets/widget_campo.dart';
+import '../../models/lote.dart';
+import '../../widgets/widget_caixa_dialog.dart';
+import '../../widgets/widget_campo.dart';
 
 class TelaExclusaoLote extends StatefulWidget {
   const TelaExclusaoLote({super.key});

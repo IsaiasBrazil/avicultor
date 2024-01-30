@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import '../widgets/widget_botao.dart';
-import '../widgets/widget_campo.dart';
+import '../../widgets/widget_botao.dart';
+import '../../widgets/widget_campo.dart';
 
 class TelaAlteracaoLote extends StatefulWidget {
   const TelaAlteracaoLote({Key? key}) : super(key: key);
