@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tcc/models/bd.dart';
 import 'package:tcc/models/galpao.dart';
 import 'package:tcc/widgets/widget_botao.dart';
+import '../../controllers/galpao_controller.dart';
+import '../../utils/mostrar_dialog.dart';
 import '../../widgets/widget_campo_texto.dart';
 import '../../widgets/widget_dropdown.dart';
 
@@ -16,6 +17,7 @@ class _TelaExclusaoGalpaoState extends State<TelaExclusaoGalpao> {
   TextEditingController descricaoGalpao = TextEditingController();
   String? itemSelecionado;
   late int atual;
+  final GalpaoController controller = GalpaoController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class _TelaExclusaoGalpaoState extends State<TelaExclusaoGalpao> {
         ),
       ),
       body: FutureBuilder<List<Galpao>> (
-        future: BancoDados.instance.obterGalpoes(),
+        future: controller.obterGalpoes(),
         builder: (BuildContext context, AsyncSnapshot<List<Galpao>> snapshot) {
 
           // o banco de dados está carregando
@@ -137,19 +139,22 @@ class _TelaExclusaoGalpaoState extends State<TelaExclusaoGalpao> {
                           tamanhoFonte: 20.0,
                           corFundo: const Color.fromRGBO(60, 179, 113, 1),
                           corTexto: const Color.fromRGBO(255, 255, 255, 1),
-                          aoSerPressionado: () async {                            
-                            String codigo = opcoes[atual];
-                            String descricao = descricaoGalpao.text;
-        
-                            Galpao galpao = Galpao(codigo: codigo, descricao: descricao);
-                            BancoDados bd = BancoDados.instance;
+                          aoSerPressionado: () async {       
+                            Galpao galp = Galpao(
+                              codigo: opcoes[atual], 
+                              descricao: descricaoGalpao.text
+                            );                     
 
-                            int resultadoExclusao = await bd.excluirGalpao(galpao);
+                            bool sucessoNaExclusao = await controller.excluirGalpao(galp);      
 
                             if (!context.mounted) return;
-                            resultadoExclusao > 0 
-                                              ? mostrarResultado(context, true) 
-                                              : mostrarResultado(context, false);
+
+                            if (sucessoNaExclusao) {
+                              mostrarDialog(context, 'Sucesso', 'Galpão excluído!', 'Ok', const Color.fromRGBO(60, 179, 113, 1), Colors.white);
+                            }
+                            else {
+                              mostrarDialog(context, 'Erro', 'Falha ao excluir galpão!', 'Ok', const Color.fromRGBO(210, 43, 43, 1), Colors.white);
+                            }
 
                             // Ainda há galpões no dropdown? 
                             if (atual < opcoes.length - 1) {
@@ -180,34 +185,4 @@ class _TelaExclusaoGalpaoState extends State<TelaExclusaoGalpao> {
       )
     );
   }
-}
-
-void mostrarResultado(BuildContext context, bool conseguiuExcluir) {
-  String mensagem =
-      conseguiuExcluir ? 'Galpão excluído!' : 'Falha ao excluir galpão!';
-
-  showDialog(
-      context: context,
-      builder: (BuildContext dialogContext) {
-        return AlertDialog(
-            title: conseguiuExcluir
-                ? const Text('Sucesso',
-                    style: TextStyle(fontSize: 32, color: Colors.white))
-                : const Text('Erro',
-                    style: TextStyle(fontSize: 32, color: Colors.white)),
-            content: Text(mensagem,
-                style: const TextStyle(fontSize: 24, color: Colors.white)),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(dialogContext).pop();
-                },
-                child: const Text('OK',
-                    style: TextStyle(fontSize: 24, color: Colors.white)),
-              )
-            ],
-            backgroundColor: conseguiuExcluir
-                ? const Color.fromRGBO(60, 179, 113, 1)
-                : const Color.fromRGBO(210, 43, 43, 1));
-      });
 }

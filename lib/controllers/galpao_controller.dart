@@ -47,4 +47,20 @@ class GalpaoController {
       return null;
     }
   }
+
+  excluirGalpao(Galpao galp) async {
+    try {
+      BancoDados bd = BancoDados.instance;
+      bool resultadoExclusao = await bd.excluirGalpao(galp) > 0 ? true : false;
+
+      return resultadoExclusao;
+    }
+    catch (erro) {
+      developer.log(
+        '$erro',
+        name: 'Avicontrol'
+      );
+      return null;
+    }
+  }
 }
