@@ -20,10 +20,13 @@ class GalpaoController {
 
       return resultadoCadastro;
     } 
-    catch (erro) {
+    catch (erro, stack) {
       developer.log(
         '$erro', 
-        name: 'Avicontrol');
+        name: 'Avicontrol',
+        error: erro.toString(),
+        stackTrace: stack
+      );
       return null;
     }
   }
@@ -40,10 +43,13 @@ class GalpaoController {
 
       return resultadoAtualizacao;
     }
-    catch (erro) {
+    catch (erro, stack) {
       developer.log(
         '$erro', 
-        name: 'Avicontrol');
+        name: 'Avicontrol',
+        error: erro.toString(),
+        stackTrace: stack
+      );
       return null;
     }
   }
@@ -55,10 +61,12 @@ class GalpaoController {
 
       return resultadoExclusao;
     }
-    catch (erro) {
+    catch (erro, stack) {
       developer.log(
-        '$erro',
-        name: 'Avicontrol'
+        '$erro', 
+        name: 'Avicontrol',
+        error: erro.toString(),
+        stackTrace: stack
       );
       return null;
     }
