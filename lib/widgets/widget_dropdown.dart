@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Dropdown extends StatefulWidget {
   final List<String> opcoes;
-  final String? itemSelecionado;
+  final String itemSelecionado;
   final double tamanhoIcone;
   final ValueChanged<String?> aoSerSelecionado;
 
@@ -22,7 +22,7 @@ class _DropdownState extends State<Dropdown> {
   Widget build(BuildContext context) {
     return DropdownButton<String>(
       iconSize: widget.tamanhoIcone,
-      value: widget.itemSelecionado ?? widget.opcoes.first,
+      value: widget.itemSelecionado,
       items: widget.opcoes
           .map((item) => DropdownMenuItem<String>(
                 value: item,

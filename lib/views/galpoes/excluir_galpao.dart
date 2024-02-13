@@ -15,7 +15,7 @@ class TelaExclusaoGalpao extends StatefulWidget {
 
 class _TelaExclusaoGalpaoState extends State<TelaExclusaoGalpao> {
   TextEditingController descricaoGalpao = TextEditingController();
-  String? itemSelecionado;
+  String itemSelecionado = '';
   late int atual;
   final GalpaoController controller = GalpaoController();
 
@@ -60,7 +60,7 @@ class _TelaExclusaoGalpaoState extends State<TelaExclusaoGalpao> {
               opcoes.add(galpao.codigo);
             }
 
-            if (itemSelecionado == null) {
+            if (itemSelecionado.isEmpty) {
               itemSelecionado = opcoes.first;
               atual = 0;
               descricaoGalpao.text = galpoes[atual].descricao.toString();
@@ -89,8 +89,8 @@ class _TelaExclusaoGalpaoState extends State<TelaExclusaoGalpao> {
                                 itemSelecionado: itemSelecionado,
                                 opcoes: opcoes,
                                 aoSerSelecionado: (opcao) => setState(() {
-                                    itemSelecionado = opcao;
-                                    atual = opcoes.indexOf(itemSelecionado!);
+                                    itemSelecionado = opcao.toString();
+                                    atual = opcoes.indexOf(itemSelecionado);
                                     descricaoGalpao.text = galpoes[atual].descricao.toString();
                                     // debugPrint('itemSelecionado = $itemSelecionado');
                                     // debugPrint('atual = $atual');
@@ -168,7 +168,7 @@ class _TelaExclusaoGalpaoState extends State<TelaExclusaoGalpao> {
                             } 
                             else {                      
                               setState(() {
-                                itemSelecionado = null;
+                                itemSelecionado = '';
                                 descricaoGalpao.text = '';
                               });
                             }

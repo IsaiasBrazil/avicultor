@@ -24,7 +24,7 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
   TextEditingController descricao = TextEditingController();
   final GalpaoController galpaoController = GalpaoController(); 
   final LoteController loteController = LoteController();
-  String? itemSelecionado;
+  String itemSelecionado = '';
   late int atual;
 
   @override
@@ -69,7 +69,7 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                 opcoes.add(galpao.codigo);
               }
 
-              if (itemSelecionado == null && opcoes.isNotEmpty) {
+              if (itemSelecionado.isEmpty && opcoes.isNotEmpty) {
                 itemSelecionado = opcoes.first;
                 atual = 0;
               }
@@ -100,8 +100,8 @@ class _TelaCadastroLoteState extends State<TelaCadastroLote> {
                                     itemSelecionado: itemSelecionado,
                                     opcoes: opcoes,
                                     aoSerSelecionado: (opcao) => setState(() {
-                                      itemSelecionado = opcao;
-                                      atual = opcoes.indexOf(itemSelecionado!);
+                                      itemSelecionado = opcao.toString();
+                                      atual = opcoes.indexOf(itemSelecionado);
                                     }),
                                   )
                                 ],

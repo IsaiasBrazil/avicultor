@@ -1,8 +1,8 @@
 class Galpao {
   final String codigo;
-  final String? descricao;
+  final String descricao;
 
-  const Galpao({required this.codigo, this.descricao});
+  const Galpao({required this.codigo, required this.descricao});
 
   @override
   String toString() {
