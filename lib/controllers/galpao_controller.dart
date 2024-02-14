@@ -3,6 +3,19 @@ import '../models/galpao.dart';
 import 'dart:developer' as developer;
 
 class GalpaoController {
+  String? validar({required Galpao galpao}) {
+    if (galpao.codigo.isEmpty) {
+      return 'O código do galpão é obrigatório';
+    }
+
+    final regexCodigoGalpao = RegExp(r'^[a-zA-Z0-9]+$');
+    if (!regexCodigoGalpao.hasMatch(galpao.codigo)) {
+      return 'O código do galpão é inválido';
+    }
+
+    return null;
+  }
+
   bool galpaoValido(Galpao galp) {
     return galp.codigo.isNotEmpty ? true : false;
   }
