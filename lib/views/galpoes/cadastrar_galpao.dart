@@ -108,22 +108,45 @@ Widget _construirTelaMobile(String tituloView, BuildContext context) {
                     corTexto: const Color.fromRGBO(255, 255, 255, 1),
                     aoSerPressionado: () async {
                       Galpao galp = Galpao(
-                        codigo: codigoGalpao.text, 
-                        descricao: descricaoGalpao.text
-                      );
+                          codigo: codigoGalpao.text,
+                          descricao: descricaoGalpao.text);
 
-                      bool sucessoNoCadastro = await controller.cadastrarGalpao(galp);
+                      String? resultadoValidacao =
+                          controller.validar(galpao: galp);
 
-                      if (!context.mounted) return;
+                      // Se a validação não retornou nenhum erro
+                      if (resultadoValidacao == null) {
+                        bool sucessoNoCadastro =
+                            await controller.cadastrarGalpao(galp);
 
-                      if (sucessoNoCadastro) {
-                        mostrarDialog(context, 'Sucesso', 'Galpão cadastrado!', 'Ok', const Color.fromRGBO(60, 179, 113, 1), Colors.white);
-                      }
-                      else if (!sucessoNoCadastro && !controller.galpaoValido(galp)) {
-                        mostrarDialog(context, 'Aviso', 'Preencha o campo código do galpão para realizar o cadastro!', 'Ok', const Color.fromRGBO(227, 200, 18, 1), Colors.white);
-                      }
-                      else {
-                        mostrarDialog(context, 'Erro', 'Falha ao cadastrar galpão!', 'Ok', const Color.fromRGBO(210, 43, 43, 1), Colors.white);
+                        if (!context.mounted) return;
+
+                        if (sucessoNoCadastro) {
+                          mostrarDialog(
+                              context,
+                              'Sucesso',
+                              'Galpão cadastrado!',
+                              'Ok',
+                              const Color.fromRGBO(60, 179, 113, 1),
+                              Colors.white);
+                        }
+                        else {
+                          mostrarDialog(
+                              context,
+                              'Erro',
+                              'Falha ao cadastrar galpão!',
+                              'Ok',
+                              const Color.fromRGBO(210, 43, 43, 1),
+                              Colors.white);
+                        }
+                      } else {
+                        mostrarDialog(
+                            context,
+                            'Erro',
+                            resultadoValidacao,
+                            'Ok',
+                            const Color.fromRGBO(210, 43, 43, 1),
+                            Colors.white);
                       }
                     },
                   ),
