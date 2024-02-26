@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tcc/models/galpao.dart';
 import 'package:tcc/widgets/widget_botao.dart';
-import 'package:tcc/widgets/widget_campo_texto.dart';
 import 'package:tcc/controllers/galpao_controller.dart';
 import '../../utils/mostrar_dialog.dart';
+import '../../widgets/widget_nome_campo.dart';
+import '../../widgets/widget_campo_input.dart';
 
 class ViewGalpao extends StatefulWidget {
   final String tituloView;
@@ -43,54 +44,48 @@ Widget _construirTelaMobile(String tituloView, BuildContext context) {
         children: [
           const Row(
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
-                child: Text(
-                  'Código',
-                  style: TextStyle(fontSize: 24.0),
-                ),
-              )
+              NomeCampo(
+                  texto: 'Código',
+                  tamanhoFonte: 24.0,
+                  paddingSuperior: 8.0,
+                  paddingInferior: 8.0,
+                  paddingEsquerda: 16.0,
+                  paddingDireita: 16.0),
             ],
           ),
           Row(
             children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      bottom: 18.0, left: 16.0, right: 16.0),
-                  child: CampoTexto(
-                    controller: codigoGalpao,
-                    keyboardType: TextInputType.text,
-                  ),
-                ),
-              )
+              CampoInput(
+                controlador: codigoGalpao,
+                tipoTeclado: TextInputType.text,
+                paddingSuperior: 0.0,
+                paddingInferior: 18.0,
+                paddingEsquerda: 16.0,
+                paddingDireita: 16.0,
+              ),
             ],
           ),
           const Row(
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
-                child: Text(
-                  'Descrição:',
-                  style: TextStyle(fontSize: 24.0),
-                ),
-              )
+              NomeCampo(
+                  texto: 'Descrição',
+                  tamanhoFonte: 24.0,
+                  paddingSuperior: 8.0,
+                  paddingInferior: 8.0,
+                  paddingEsquerda: 16.0,
+                  paddingDireita: 16.0),
             ],
           ),
           Row(
             children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      bottom: 18.0, left: 16.0, right: 16.0),
-                  child: CampoTexto(
-                    controller: descricaoGalpao,
-                    keyboardType: TextInputType.text,
-                  ),
-                ),
-              )
+              CampoInput(
+                controlador: descricaoGalpao,
+                tipoTeclado: TextInputType.text,
+                paddingSuperior: 0.0,
+                paddingInferior: 18.0,
+                paddingEsquerda: 16.0,
+                paddingDireita: 16.0,
+              ),
             ],
           ),
           Row(
@@ -129,8 +124,7 @@ Widget _construirTelaMobile(String tituloView, BuildContext context) {
                               'Ok',
                               const Color.fromRGBO(60, 179, 113, 1),
                               Colors.white);
-                        }
-                        else {
+                        } else {
                           mostrarDialog(
                               context,
                               'Erro',
@@ -140,13 +134,8 @@ Widget _construirTelaMobile(String tituloView, BuildContext context) {
                               Colors.white);
                         }
                       } else {
-                        mostrarDialog(
-                            context,
-                            'Erro',
-                            resultadoValidacao,
-                            'Ok',
-                            const Color.fromRGBO(210, 43, 43, 1),
-                            Colors.white);
+                        mostrarDialog(context, 'Erro', resultadoValidacao, 'Ok',
+                            const Color.fromRGBO(210, 43, 43, 1), Colors.white);
                       }
                     },
                   ),
