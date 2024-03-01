@@ -4,7 +4,8 @@ import 'package:tcc/widgets/widget_dropdown.dart';
 import '../../controllers/galpao_controller.dart';
 import '../../models/galpao.dart';
 import '../../utils/mostrar_dialog.dart';
-import '../../widgets/widget_campo_texto.dart';
+import '../../widgets/widget_campo_input.dart';
+import '../../widgets/widget_nome_campo.dart';
 
 class TelaAlteracaoGalpao extends StatefulWidget {
   const TelaAlteracaoGalpao({super.key});
@@ -18,7 +19,7 @@ class _TelaAlteracaoGalpaoState extends State<TelaAlteracaoGalpao> {
   String itemSelecionado = '';
   late int atual;
   final GalpaoController controller = GalpaoController();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,8 +33,8 @@ class _TelaAlteracaoGalpaoState extends State<TelaAlteracaoGalpao> {
         ),
         body: FutureBuilder<List<Galpao>>(
           future: controller.obterGalpoes(),
-          builder: (BuildContext context, AsyncSnapshot<List<Galpao>> snapshot) {
-            
+          builder:
+              (BuildContext context, AsyncSnapshot<List<Galpao>> snapshot) {
             // o banco de dados está carregando
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
@@ -70,11 +71,13 @@ class _TelaAlteracaoGalpaoState extends State<TelaAlteracaoGalpao> {
                 children: [
                   const Row(
                     children: [
-                      Padding(
-                        padding:
-                            EdgeInsets.only(top: 8.0, left: 16.0, right: 16.0),
-                        child: Text('Código', style: TextStyle(fontSize: 24.0)),
-                      )
+                      NomeCampo(
+                          texto: 'Código',
+                          tamanhoFonte: 24.0,
+                          paddingSuperior: 8.0,
+                          paddingInferior: 8.0,
+                          paddingEsquerda: 16.0,
+                          paddingDireita: 16.0),
                     ],
                   ),
                   Row(
@@ -89,39 +92,34 @@ class _TelaAlteracaoGalpaoState extends State<TelaAlteracaoGalpao> {
                                   itemSelecionado: itemSelecionado,
                                   opcoes: opcoes,
                                   aoSerSelecionado: (opcao) => setState(() {
-                                      itemSelecionado = opcao.toString();
-                                      atual = opcoes.indexOf(itemSelecionado);
-                                      descricaoGalpao.text =
-                                      galpoes[atual].descricao.toString();
-                                  })
-                              )
-                            )
-                          )
-                      ],
+                                        itemSelecionado = opcao.toString();
+                                        atual = opcoes.indexOf(itemSelecionado);
+                                        descricaoGalpao.text =
+                                            galpoes[atual].descricao.toString();
+                                      }))))
+                    ],
                   ),
                   const Row(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                            top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
-                        child: Text(
-                          'Descrição',
-                          style: TextStyle(fontSize: 24.0),
-                        ),
-                      )
+                      NomeCampo(
+                          texto: 'Descrição',
+                          tamanhoFonte: 24.0,
+                          paddingSuperior: 8.0,
+                          paddingInferior: 8.0,
+                          paddingEsquerda: 16.0,
+                          paddingDireita: 16.0),
                     ],
                   ),
                   Row(
                     children: [
-                      Expanded(
-                          child: Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: 18.0, left: 16.0, right: 16.0),
-                        child: CampoTexto(
-                          controller: descricaoGalpao,
-                          keyboardType: TextInputType.text,
-                        ),
-                      ))
+                      CampoInput(
+                        controlador: descricaoGalpao,
+                        tipoTeclado: TextInputType.text,
+                        paddingSuperior: 0.0,
+                        paddingInferior: 18.0,
+                        paddingEsquerda: 16.0,
+                        paddingDireita: 16.0,
+                      ),
                     ],
                   ),
                   Row(
@@ -139,19 +137,30 @@ class _TelaAlteracaoGalpaoState extends State<TelaAlteracaoGalpao> {
                             corTexto: const Color.fromRGBO(255, 255, 255, 1),
                             aoSerPressionado: () async {
                               Galpao galp = Galpao(
-                                codigo: opcoes[atual], 
-                                descricao: descricaoGalpao.text
-                              );
+                                  codigo: opcoes[atual],
+                                  descricao: descricaoGalpao.text);
 
-                              bool sucessoNaAtualizacao = await controller.atualizarGalpao(galp);
+                              bool sucessoNaAtualizacao =
+                                  await controller.atualizarGalpao(galp);
 
                               if (!context.mounted) return;
 
                               if (sucessoNaAtualizacao) {
-                                mostrarDialog(context, 'Sucesso', 'Galpão alterado!', 'Ok', const Color.fromRGBO(60, 179, 113, 1), Colors.white);
-                              }
-                              else {
-                                mostrarDialog(context, 'Erro', 'Falha ao alterar galpão!', 'Ok', const Color.fromRGBO(210, 43, 43, 1), Colors.white);
+                                mostrarDialog(
+                                    context,
+                                    'Sucesso',
+                                    'Galpão alterado!',
+                                    'Ok',
+                                    const Color.fromRGBO(60, 179, 113, 1),
+                                    Colors.white);
+                              } else {
+                                mostrarDialog(
+                                    context,
+                                    'Erro',
+                                    'Falha ao alterar galpão!',
+                                    'Ok',
+                                    const Color.fromRGBO(210, 43, 43, 1),
+                                    Colors.white);
                               }
                             },
                           ),
