@@ -55,13 +55,15 @@ Widget _construirTelaMobile(String tituloView, BuildContext context) {
           ),
           Row(
             children: [
-              CampoInput(
-                controlador: codigoGalpao,
-                tipoTeclado: TextInputType.text,
-                paddingSuperior: 0.0,
-                paddingInferior: 18.0,
-                paddingEsquerda: 16.0,
-                paddingDireita: 16.0,
+              Expanded(
+                child: CampoInput(
+                  controlador: codigoGalpao,
+                  tipoTeclado: TextInputType.text,
+                  paddingSuperior: 0.0,
+                  paddingInferior: 18.0,
+                  paddingEsquerda: 16.0,
+                  paddingDireita: 16.0,
+                ),
               ),
             ],
           ),
@@ -78,13 +80,15 @@ Widget _construirTelaMobile(String tituloView, BuildContext context) {
           ),
           Row(
             children: [
-              CampoInput(
-                controlador: descricaoGalpao,
-                tipoTeclado: TextInputType.text,
-                paddingSuperior: 0.0,
-                paddingInferior: 18.0,
-                paddingEsquerda: 16.0,
-                paddingDireita: 16.0,
+              Expanded(
+                child: CampoInput(
+                  controlador: descricaoGalpao,
+                  tipoTeclado: TextInputType.text,
+                  paddingSuperior: 0.0,
+                  paddingInferior: 18.0,
+                  paddingEsquerda: 16.0,
+                  paddingDireita: 16.0,
+                ),
               ),
             ],
           ),

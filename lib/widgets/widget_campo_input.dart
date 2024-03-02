@@ -22,20 +22,18 @@ class CampoInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.only(
-            top: paddingSuperior,
-            bottom: paddingInferior,
-            left: paddingEsquerda,
-            right: paddingDireita),
-        child: TextFormField(
-          controller: controlador,
-          keyboardType: tipoTeclado,
-          inputFormatters: formatadorInput,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-          ),
+    return Padding(
+      padding: EdgeInsets.only(
+          top: paddingSuperior,
+          bottom: paddingInferior,
+          left: paddingEsquerda,
+          right: paddingDireita),
+      child: TextFormField(
+        controller: controlador,
+        keyboardType: tipoTeclado,
+        inputFormatters: formatadorInput,
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(),
         ),
       ),
     );
