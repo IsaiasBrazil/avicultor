@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tcc/widgets/widget_botao.dart';
 import 'package:tcc/widgets/widget_dropdown.dart';
+import 'package:tcc/widgets/widget_future_builder.dart';
 import '../../controllers/galpao_controller.dart';
 import '../../models/galpao.dart';
 import '../../utils/mostrar_dialog.dart';
@@ -31,164 +32,147 @@ class _TelaAlteracaoGalpaoState extends State<TelaAlteracaoGalpao> {
             style: TextStyle(fontSize: 34),
           ),
         ),
-        body: FutureBuilder<List<Galpao>>(
-          future: controller.obterGalpoes(),
-          builder:
-              (BuildContext context, AsyncSnapshot<List<Galpao>> snapshot) {
-            // o banco de dados está carregando
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+
+        body: NovoFutureBuilder<List<Galpao>>(
+          futuro: controller.obterGalpoes(),
+          erro: (erro) {
+            return Center(child: Text('Erro: $erro'));
+          },
+          carregamentoFinalizado: (dados) {
+            List<Galpao> galpoes = dados;
+            List<String> opcoes = [];
+
+            for (var galpao in galpoes) {
+              opcoes.add(galpao.codigo);
             }
 
-            // ou teve algum erro
-            else if (snapshot.hasError) {
-              return Center(child: Text('Erro: ${snapshot.error}'));
+            if (itemSelecionado.isEmpty) {
+              itemSelecionado = opcoes.first;
+              atual = 0;
+              descricaoGalpao.text = galpoes[atual].descricao.toString();
             }
 
-            // ou não teve dados no banco de dados
-            else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(
-                  child: Text('Não há galpões para alterar',
-                      style: TextStyle(fontSize: 30)));
-            }
-
-            // ou os dados foram carregados com sucesso
-            else {
-              List<Galpao> galpoes = snapshot.data!;
-              List<String> opcoes = [];
-
-              for (var galpao in galpoes) {
-                opcoes.add(galpao.codigo);
-              }
-
-              if (itemSelecionado.isEmpty) {
-                itemSelecionado = opcoes.first;
-                atual = 0;
-                descricaoGalpao.text = galpoes[atual].descricao.toString();
-              }
-
-              return Column(
-                children: [
-                  const Row(
-                    children: [
-                      NomeCampo(
-                          texto: 'Código',
-                          tamanhoFonte: 24.0,
-                          paddingSuperior: 8.0,
-                          paddingInferior: 8.0,
-                          paddingEsquerda: 16.0,
-                          paddingDireita: 16.0),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 8.0, left: 16.0, right: 16.0),
-                          child: SizedBox(
-                              width: 80,
-                              child: Dropdown(
-                                  tamanhoIcone: 30.0,
-                                  itemSelecionado: itemSelecionado,
-                                  opcoes: opcoes,
-                                  aoSerSelecionado: (opcao) => setState(() {
-                                        itemSelecionado = opcao.toString();
-                                        atual = opcoes.indexOf(itemSelecionado);
-                                        descricaoGalpao.text =
-                                            galpoes[atual].descricao.toString();
-                                      }))))
-                    ],
-                  ),
-                  const Row(
-                    children: [
-                      NomeCampo(
-                          texto: 'Descrição',
-                          tamanhoFonte: 24.0,
-                          paddingSuperior: 8.0,
-                          paddingInferior: 8.0,
-                          paddingEsquerda: 16.0,
-                          paddingDireita: 16.0),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CampoInput(
-                          controlador: descricaoGalpao,
-                          tipoTeclado: TextInputType.text,
-                          paddingSuperior: 0.0,
-                          paddingInferior: 18.0,
-                          paddingEsquerda: 16.0,
-                          paddingDireita: 16.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
+            return Column(
+              children: [
+                const Row(
+                  children: [
+                    NomeCampo(
+                        texto: 'Código',
+                        tamanhoFonte: 24.0,
+                        paddingSuperior: 8.0,
+                        paddingInferior: 8.0,
+                        paddingEsquerda: 16.0,
+                        paddingDireita: 16.0),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.only(
+                            bottom: 8.0, left: 16.0, right: 16.0),
                         child: SizedBox(
-                          width: 135,
-                          height: 40,
-                          child: Botao(
-                            texto: 'Alterar',
-                            tamanhoFonte: 20.0,
-                            corFundo: const Color.fromRGBO(60, 179, 113, 1),
-                            corTexto: const Color.fromRGBO(255, 255, 255, 1),
-                            aoSerPressionado: () async {
-                              Galpao galp = Galpao(
-                                  codigo: opcoes[atual],
-                                  descricao: descricaoGalpao.text);
+                            width: 80,
+                            child: Dropdown(
+                                tamanhoIcone: 30.0,
+                                itemSelecionado: itemSelecionado,
+                                opcoes: opcoes,
+                                aoSerSelecionado: (opcao) => setState(() {
+                                      itemSelecionado = opcao.toString();
+                                      atual = opcoes.indexOf(itemSelecionado);
+                                      descricaoGalpao.text =
+                                          galpoes[atual].descricao.toString();
+                                    }))))
+                  ],
+                ),
+                const Row(
+                  children: [
+                    NomeCampo(
+                        texto: 'Descrição',
+                        tamanhoFonte: 24.0,
+                        paddingSuperior: 8.0,
+                        paddingInferior: 8.0,
+                        paddingEsquerda: 16.0,
+                        paddingDireita: 16.0),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CampoInput(
+                        controlador: descricaoGalpao,
+                        tipoTeclado: TextInputType.text,
+                        paddingSuperior: 0.0,
+                        paddingInferior: 18.0,
+                        paddingEsquerda: 16.0,
+                        paddingDireita: 16.0,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: 135,
+                        height: 40,
+                        child: Botao(
+                          texto: 'Alterar',
+                          tamanhoFonte: 20.0,
+                          corFundo: const Color.fromRGBO(60, 179, 113, 1),
+                          corTexto: const Color.fromRGBO(255, 255, 255, 1),
+                          aoSerPressionado: () async {
+                            Galpao galp = Galpao(
+                                codigo: opcoes[atual],
+                                descricao: descricaoGalpao.text);
 
-                              bool sucessoNaAtualizacao =
-                                  await controller.atualizarGalpao(galp);
+                            bool sucessoNaAtualizacao =
+                                await controller.atualizarGalpao(galp);
 
-                              if (!context.mounted) return;
+                            if (!context.mounted) return;
 
-                              if (sucessoNaAtualizacao) {
-                                mostrarDialog(
-                                    context,
-                                    'Sucesso',
-                                    'Galpão alterado!',
-                                    'Ok',
-                                    const Color.fromRGBO(60, 179, 113, 1),
-                                    Colors.white);
-                              } else {
-                                mostrarDialog(
-                                    context,
-                                    'Erro',
-                                    'Falha ao alterar galpão!',
-                                    'Ok',
-                                    const Color.fromRGBO(210, 43, 43, 1),
-                                    Colors.white);
-                              }
-                            },
-                          ),
+                            if (sucessoNaAtualizacao) {
+                              mostrarDialog(
+                                  context,
+                                  'Sucesso',
+                                  'Galpão alterado!',
+                                  'Ok',
+                                  const Color.fromRGBO(60, 179, 113, 1),
+                                  Colors.white);
+                            } else {
+                              mostrarDialog(
+                                  context,
+                                  'Erro',
+                                  'Falha ao alterar galpão!',
+                                  'Ok',
+                                  const Color.fromRGBO(210, 43, 43, 1),
+                                  Colors.white);
+                            }
+                          },
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          width: 135,
-                          height: 40,
-                          child: Botao(
-                            texto: 'Limpar tudo',
-                            tamanhoFonte: 20.0,
-                            corFundo: const Color.fromRGBO(60, 179, 113, 1),
-                            corTexto: const Color.fromRGBO(255, 255, 255, 1),
-                            aoSerPressionado: () {
-                              descricaoGalpao.clear();
-                            },
-                          ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: 135,
+                        height: 40,
+                        child: Botao(
+                          texto: 'Limpar tudo',
+                          tamanhoFonte: 20.0,
+                          corFundo: const Color.fromRGBO(60, 179, 113, 1),
+                          corTexto: const Color.fromRGBO(255, 255, 255, 1),
+                          aoSerPressionado: () {
+                            descricaoGalpao.clear();
+                          },
                         ),
                       ),
-                    ],
-                  )
-                ],
-              );
-            }
+                    ),
+                  ],
+                )
+              ],
+            );
           },
         ));
   }
